@@ -1,7 +1,8 @@
 # Welcome to the actionHero wiki!
+
 <img src="https://raw.github.com/evantahler/actionHero/master/public/logo/actionHero.png" height="400"/>
 
-External Links: [NPM](https://npmjs.org/package/actionHero) | [Wiki](https://github.com/evantahler/actionHero/wiki) | [Public Site](http://www.actionherojs.com) | [GitHub](https://github.com/evantahler/actionHero) | [Client](https://github.com/evantahler/actionhero_client)
+External Links: [NPM](https://npmjs.org/package/actionHero) | [Wiki](https://github.com/evantahler/actionHero/wiki) | [Public Site](http://www.actionherojs.com) | [GitHub](https://github.com/evantahler/actionHero) | [Client](https://github.com/evantahler/actionhero_client)]
 
 ---
 
@@ -11,15 +12,15 @@ External Links: [NPM](https://npmjs.org/package/actionHero) | [Wiki](https://git
 
 
 ## Core actionHero Components
-- Actions
-- Tasks
-- Cache
-- Redis
-- Cluster
-- Exceptions
-- Logging
-- Chat Rooms & connection to connection communication
-- Flat File server
+- [Actions](core-actions)
+- [Tasks](core-tasks)
+- [Cache](core-cache)
+- [Redis](core-redis)
+- [Cluster](core-cluster)
+- [Exceptions](core-exceptions)
+- [Logging](core-logging)
+- [Chat Rooms & connection to connection communication](core-chat)
+- [Flat File server](core-file-server)
 
 ## Client Types
 - Web
