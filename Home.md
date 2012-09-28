@@ -6,10 +6,12 @@ External Links: [NPM](https://npmjs.org/package/actionHero) | [Public Site](http
 
 ---
 
-## Core actionHero Components
-- About
+## General
 - [Readme](https://github.com/evantahler/actionHero/blob/master/readme.md)
 - [Version History](https://github.com/evantahler/actionHero/blob/master/versions.md)
+
+
+## Core actionHero Components
 - Actions
 - Tasks
 - Cache
@@ -29,8 +31,8 @@ External Links: [NPM](https://npmjs.org/package/actionHero) | [Public Site](http
 - Internal Methods
 
 ## Templates and Examples
-- Example Actions
-- Example Tasks
+- [[Example Actions]]
+- [[Example Tasks]]
 - [[Custom Initializers]]
 - RESTful routing
 - actionCluster Servers [[1](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_1.js)] [[2](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_2.js)] [[3](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_3.js)]
