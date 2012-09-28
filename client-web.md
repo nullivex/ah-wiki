@@ -117,7 +117,6 @@ You may also enable a HTTPS server with actionHero.  It works exactly the same a
 	};
 ```
 
-
 #### Files and Routes for http and https clients
 
 actionHero can also serve up flat files.  There is an action, `file.js` which is used to do this and a file server is part of the core framework (check out `initFileserver.js` for more information).  actionHero will not cache thees files and each request to `file` will re-read the file from disk (like the nginx web server).
@@ -127,3 +126,21 @@ actionHero can also serve up flat files.  There is an action, `file.js` which is
 * actionHero will serve up flat files (html, images, etc) as well from your ./public folder.  This is accomplished via a `file` action or via the 'file' route as described above. `http://{baseUrl}/public/{pathToFile}` is equivalent to `http://{baseUrl}?action=file&fileName={pathToFile}` and `http://{baseUrl}/file/{pathToFile}`. 
 * Errors will result in a 404 (file not found) with a message you can customize.
 * Proper mime-type headers will be set when possible via the `mime` package.
+
+
+#### Safe Params
+
+Params provided by the user (GET, POST, etc for http and https servers, setParam for TCP clients, and passed to action calls from a web socket client) will be checked against a whitelist.  Variables defined in your actions by `action.inputs.required` and `action.inputs.optional` will be aded to your whitelist.  Special params which the api will always accept are: 
+
+```javascript
+
+	[
+		"callback",
+		"action",
+		"limit",
+		"offset",
+		"outputType"
+	];
+```
+	
+Params are loaded in this order GET -> POST (normal) -> POST (multipart).  This means that if you have {url}?key=getValue and you post a variable `key`=`postValue` as well, the postValue will be the one used.  The only exception to this is if you use the URL method of defining your action.  You can add arbitrary params to the whitelist by adding them to the `api.postVariables` array in you initializers. 
