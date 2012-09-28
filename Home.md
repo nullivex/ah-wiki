@@ -2,7 +2,7 @@
 
 <img src="https://raw.github.com/evantahler/actionHero/master/public/logo/actionHero.png" height="100"/>
 
-External Links: [NPM](https://npmjs.org/package/actionHero) | [Wiki](https://github.com/evantahler/actionHero/wiki) | [Public Site](http://www.actionherojs.com) | [GitHub](https://github.com/evantahler/actionHero) | [Client](https://github.com/evantahler/actionhero_client)]
+Links: [NPM](https://npmjs.org/package/actionHero) | [Wiki](https://github.com/evantahler/actionHero/wiki) | [Public Site](http://www.actionherojs.com) | [GitHub](https://github.com/evantahler/actionHero) | [Client](https://github.com/evantahler/actionhero_client)]
 
 ---
 
@@ -29,6 +29,7 @@ actionHero will also serve static files for you, but actionHero is not meant to 
 - [config](https://github.com/evantahler/actionHero/wiki/core-config)
 - [Exceptions](https://github.com/evantahler/actionHero/wiki/core-exceptions)
 - [Logging](https://github.com/evantahler/actionHero/wiki/core-logging)
+- [Development Mode](https://github.com/evantahler/actionHero/wiki/core-development-mode)
 - [Chat Rooms & connection to connection communication](https://github.com/evantahler/actionHero/wiki/core-chat)
 - [Flat File server](https://github.com/evantahler/actionHero/wiki/core-file-server)
 - [Extending actionHero](https://github.com/evantahler/actionHero/wiki/core-extending-actionHero)
@@ -45,6 +46,6 @@ actionHero will also serve static files for you, but actionHero is not meant to 
 - [Example Actions](https://github.com/evantahler/actionHero/wiki/Example-actions)
 - [Example Tasks](https://github.com/evantahler/actionHero/wiki/Example-tasks)
 - [Custom Initializers](https://github.com/evantahler/actionHero/wiki/Custom-Initializers)
-- RESTful routing
+- [RESTful routing](https://github.com/evantahler/actionHero/wiki/RESTful-routing)
 - actionCluster Servers [[1](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_1.js)] [[2](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_2.js)] [[3](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_3.js)]
 - [Using node.js clusters to manage a node](https://github.com/evantahler/actionHero/blob/master/scripts/actionHeroCluster)
