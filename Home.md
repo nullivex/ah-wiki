@@ -26,7 +26,7 @@ actionHero will also serve static files for you, but actionHero is not meant to 
 - [Cache](https://github.com/evantahler/actionHero/wiki/core-cache)
 - [Redis](https://github.com/evantahler/actionHero/wiki/core-redis)
 - [Cluster](https://github.com/evantahler/actionHero/wiki/core-cluster)
-- [config](https://github.com/evantahler/actionHero/wiki/core-config)
+- [Config](https://github.com/evantahler/actionHero/wiki/core-config)
 - [Exceptions](https://github.com/evantahler/actionHero/wiki/core-exceptions)
 - [Logging](https://github.com/evantahler/actionHero/wiki/core-logging)
 - [Development Mode](https://github.com/evantahler/actionHero/wiki/core-development-mode)
