@@ -39,7 +39,7 @@ actionHero will also serve static files for you, but actionHero is not meant to 
 - [WebSockets](https://github.com/evantahler/actionHero/wiki/client-web-socket)
 
 ## Internal Method Documentation
-- Internal Methods
+- [Internal Methods](https://github.com/evantahler/actionHero/wiki/Internal-Methods)
 
 ## Templates and Examples
 - [Example Actions](https://github.com/evantahler/actionHero/wiki/Example-actions)
