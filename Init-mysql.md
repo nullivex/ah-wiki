@@ -69,55 +69,6 @@
 				});
 			}
 		});
-				
-		////////////////////////////////////////////////////////////////////////////
-		// special tasks for the DB
-		api.tasks.cleanOldLogDB = function(api, next) {
-			var params = {
-				"name" : "Clean Task DB",
-				"desc" : "I will remove old entires from the log DB."
-			};
-			var task = Object.create(api.tasks.Task);
-			task.init(api, params, next);
-			task.run = function() {
-				if(api.models.log != null){
-					api.models.log.findAll({where: ["createdAt < (NOW() - INTERVAL 2 HOUR)"]}).on('success', function(old_logs) {
-						task.log("deleting "+old_logs.length+" old log DB entries");
-						old_logs.forEach(function(log){
-							log.destroy();
-						});
-						task.end();
-					});
-				}else{
-					task.end();
-				}
-			};
-			process.nextTick(function () { task.run() });
-		};
-	
-		api.tasks.cleanOldSessionDB = function(api, next) {
-			var params = {
-				"name" : "Clean session DB",
-				"desc" : "I will clean old sessions from the session DB."
-			};
-			var task = Object.create(api.tasks.Task);
-			task.init(api, params, next);
-			task.run = function() {
-				if(api.models.session != null){
-					api.models.session.findAll({where: ["updatedAt < DATE_SUB(NOW(), INTERVAL " + api.configData.sessionDurationMinutes + " MINUTE)"]}).on('success', function(old_sessions) {
-						task.log("deleting "+old_sessions.length+" old session DB entries");
-						old_sessions.forEach(function(entry){
-							entry.destroy();
-						});
-						task.end();
-					});
-				}else{
-					task.end();
-				}
-			};
-			//
-			process.nextTick(function () { task.run() });
-		};
 		
 		////////////////////////////////////////////////////////////////////////////
 		// DB Seeding
