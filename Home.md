@@ -21,22 +21,22 @@ actionHero will also serve static files for you, but actionHero is not meant to 
 - [Version History](https://github.com/evantahler/actionHero/blob/master/versions.md)
 
 ## Core actionHero Components
-- [Actions](core-actions)
-- [Tasks](core-tasks)
-- [Cache](core-cache)
-- [Redis](core-redis)
-- [Cluster](core-cluster)
-- [config](core-config)
-- [Exceptions](core-exceptions)
-- [Logging](core-logging)
-- [Chat Rooms & connection to connection communication](core-chat)
-- [Flat File server](core-file-server)
-- [Extending actionHero](core-extending-actionHero)
+- [Actions](https://github.com/evantahler/actionHero/wiki/core-getting-started)
+- [Tasks](https://github.com/evantahler/actionHero/wiki/core-tasks)
+- [Cache](https://github.com/evantahler/actionHero/wiki/core-cache)
+- [Redis](https://github.com/evantahler/actionHero/wiki/core-redis)
+- [Cluster](https://github.com/evantahler/actionHero/wiki/core-cluster)
+- [config](https://github.com/evantahler/actionHero/wiki/core-config)
+- [Exceptions](https://github.com/evantahler/actionHero/wiki/core-exceptions)
+- [Logging](https://github.com/evantahler/actionHero/wiki/core-logging)
+- [Chat Rooms & connection to connection communication](https://github.com/evantahler/actionHero/wiki/core-chat)
+- [Flat File server](https://github.com/evantahler/actionHero/wiki/core-file-server)
+- [Extending actionHero](https://github.com/evantahler/actionHero/wiki/core-extending-actionHero)
 
 ## Client Types
-- [Web](client-web)
-- [TCP](client-tcp)
-- [WebSockets](client-web-socket)
+- [Web](https://github.com/evantahler/actionHero/wiki/client-web)
+- [TCP](https://github.com/evantahler/actionHero/wiki/client-tcp)
+- [WebSockets](https://github.com/evantahler/actionHero/wiki/client-web-socket)
 
 ## Internal Method Documentation
 - Internal Methods
