@@ -1,6 +1,6 @@
 # Welcome to the actionHero wiki!
 
-<img src="https://raw.github.com/evantahler/actionHero/master/public/logo/actionHero.png" height="400"/>
+<img src="https://raw.github.com/evantahler/actionHero/master/public/logo/actionHero.png" height="100"/>
 
 External Links: [NPM](https://npmjs.org/package/actionHero) | [Wiki](https://github.com/evantahler/actionHero/wiki) | [Public Site](http://www.actionherojs.com) | [GitHub](https://github.com/evantahler/actionHero) | [Client](https://github.com/evantahler/actionhero_client)]
 
