@@ -42,9 +42,9 @@ actionHero will also serve static files for you, but actionHero is not meant to 
 - Internal Methods
 
 ## Templates and Examples
-- [[Example Actions]]
-- [[Example Tasks]]
-- [[Custom Initializers]]
+- [Example Actions](https://github.com/evantahler/actionHero/wiki/Example-actions)
+- [Example Tasks](https://github.com/evantahler/actionHero/wiki/Example-tasks)
+- [Custom Initializers](https://github.com/evantahler/actionHero/wiki/Custom-Initializers)
 - RESTful routing
 - actionCluster Servers [[1](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_1.js)] [[2](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_2.js)] [[3](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_3.js)]
 - [Using node.js clusters to manage a node](https://github.com/evantahler/actionHero/blob/master/scripts/actionHeroCluster)
