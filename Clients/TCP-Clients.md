@@ -44,7 +44,6 @@ Socket Example:
 	{"cacheTestResults":{"key":"myKey","value":"myValue","saveResp":"new record","loadResp":"myValue","deleteResp":true},"messageCount":7}
 	say hooray!
 	{"context":"response","status":"OK","messageCount":8}
-	{"context":"api","status":"keep-alive","serverTime":"2012-01-03T19:48:40.136Z","messageCount":9}
 ```
 	
 In your actions, you can send a message directly to a TCP client (without relying on chat rooms) like this:`api.sendSocketMessage(api, connection, message)`
@@ -55,3 +54,12 @@ Connections over socket can also use the file action.  There is no 'route' for f
 
 * errors are returned in the normal way `{error: someError}`
 * a successful file transfer will return the raw file data in a single send().  There will be no headers set.
+
+## JSON Mode 
+
+The default method of using actions for TCP clients is to use the methods above to set params to their session and then call actions inline.  However, you can also communication via JSON, passing along params specific to each request.
+
+- `{"action": "myAction", "params": {"key": "value"}}` is also a valid request over TCP
+- params passed within an action's hash will NOT be 'sticky' to the connection, unlike `paramAdd` which remains 'sticky'
+
+
