@@ -1,5 +1,3 @@
-# Example Actions
-
 ## Actions which come bundled with a new actionHero project
 
 **[actionsView](https://github.com/evantahler/actionHero/blob/master/actions/actionsView.js)**: This method shows how to iterate though actionHero's actions and use the metadata to self-describe the capabilities of the API to a client.  This method also crafts responses which describes the special actions for persistent (TCP and webSocket) clients.

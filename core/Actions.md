@@ -1,5 +1,3 @@
-#Actions
-
 The core of actionHero is the Action framework, **actions** are the basic units of a request and work for HTTP and socket responses.  The goal of an action is to set the `connection.response` ( and `connection.error` when needed) value to build the response to the client
 
 Here's an example of a simple action which will return a random number to the client:

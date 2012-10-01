@@ -1,6 +1,5 @@
-# Web Socket Clients
+## General
 
-#### General
 actionHero uses [socket.io](http://socket.io/) for web sockets.  Within actionHero, web sockets are bound to either the http or https server (only one can be used at this time).  Also, if you are using a redis backend store (which is required to use actionHero in a cluster), socket.io will be configured to use this store automatically.
 
 Just like the additional actions added for TCP connection, web socket connections have access to the chat room methods.  A template which exposes them is available in examples and looks like this:

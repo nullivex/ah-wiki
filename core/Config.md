@@ -1,5 +1,3 @@
-# Configuring actionHero
-
 Every actionHero node needs a `config.js` file to set things up.  [Here is a documented an example](https://github.com/evantahler/actionHero/blob/master/config.js).
 
 You can overwrite these settings when you start your actionHero worker pragmatically as well by passing `configChanges` to the initFunction.   

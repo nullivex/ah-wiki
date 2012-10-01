@@ -1,6 +1,4 @@
-# TCP Clients
-
-#### General
+## General
 
 You can also access actionHero's methods via a persistent socket connection rather than http.  The default port for this type of communication is 5000.  There are a few special actions which set and keep parameters bound to your session (so they don't need to be re-posted).  These special methods are:
 
@@ -51,7 +49,7 @@ Socket Example:
 	
 In your actions, you can send a message directly to a TCP client (without relying on chat rooms) like this:`api.sendSocketMessage(api, connection, message)`
 
-#### Files and Routes for TCP clients
+## Files and Routes for TCP clients
 
 Connections over socket can also use the file action.  There is no 'route' for files.
 

@@ -1,6 +1,5 @@
-# HTTP(s) client
+## General
 
-#### General
 You can visit the API in a browser, Curl, etc.  `{url}?action` or `{url}/{action}` is how you would access an action.  For example, using the default ports in `config.js` you could reach the status action with both `http://127.0.0.1:8080/status` or `http://127.0.0.1:8080/?action=status`  The only action which doesn't return the default JSON format would be `file`, as it should return files with the appropriate headers if they are found, and a 404 error if they are not.
 
 HTTP responses follow the format:
@@ -117,7 +116,7 @@ You may also enable a HTTPS server with actionHero.  It works exactly the same a
 	};
 ```
 
-#### Files and Routes for http and https clients
+## Files and Routes for http and https clients
 
 actionHero can also serve up flat files.  There is an action, `file.js` which is used to do this and a file server is part of the core framework (check out `initFileserver.js` for more information).  actionHero will not cache thees files and each request to `file` will re-read the file from disk (like the nginx web server).
 
@@ -128,7 +127,7 @@ actionHero can also serve up flat files.  There is an action, `file.js` which is
 * Proper mime-type headers will be set when possible via the `mime` package.
 
 
-#### Safe Params
+## Safe Params
 
 Params provided by the user (GET, POST, etc for http and https servers, setParam for TCP clients, and passed to action calls from a web socket client) will be checked against a whitelist.  Variables defined in your actions by `action.inputs.required` and `action.inputs.optional` will be aded to your whitelist.  Special params which the api will always accept are: 
 
@@ -145,6 +144,6 @@ Params provided by the user (GET, POST, etc for http and https servers, setParam
 	
 Params are loaded in this order GET -> POST (normal) -> POST (multipart).  This means that if you have {url}?key=getValue and you post a variable `key`=`postValue` as well, the postValue will be the one used.  The only exception to this is if you use the URL method of defining your action.  You can add arbitrary params to the whitelist by adding them to the `api.postVariables` array in you initializers. 
 
-#### XML
+## XML
 
 You may also request XML data rather than JSON from actionHero. To do so, you need to pass `outputType=xml` as a param to your request.  

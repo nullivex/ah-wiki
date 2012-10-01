@@ -1,4 +1,4 @@
-# RESTful-routing
+## Linking URL routes to params
 
 You can extract prams per HTTP(s) request from the route requested by the user via an included utility.
 URL routes remain not being a source of RESTful parameters by default, however, you can opt to parse them: 

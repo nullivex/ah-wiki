@@ -1,5 +1,3 @@
-# Exceptions
-
 **This module only works for node.js >= v0.8.0, as it makes use of domains**
 
 actionHero will catch any uncaught exceptions which take place within actions or tasks.  Theses exceptions will be logged along with any relevant details which can be captured about the connection making the request.

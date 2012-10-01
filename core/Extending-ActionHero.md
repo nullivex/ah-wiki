@@ -1,5 +1,3 @@
-# Extending actionHero
-
 The first thing to do is to make your own ./actions and ./tasks folder.  If you like the default actions, feel free to copy them in.  A common practice to extend the API is to add new classes which are not actions, but useful to the rest of the api.  The api variable is globally accessible to all actions within the API, so if you want to define something everyone can use, add it to the api object.  In the quickstart example, if we wanted to create a method to generate a random number, we could do the following:
 
 ```javascript

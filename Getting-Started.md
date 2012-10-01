@@ -1,5 +1,3 @@
-# Getting Started
-
 ## Requirements
 * node.js ( >= v0.6.0 required but >= v0.8.0 recommended)
 * npm

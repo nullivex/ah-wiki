@@ -1,5 +1,3 @@
-# Cache
-
 actionHero ships with the functions needed for an in-memory key-value cache.  You can cache strings, numbers, arrays and objects (anything that responds to `JSON.stringify`). Cache functions:
 
 * `api.cache.save(api, key, value, expireTimeMS, next)`
