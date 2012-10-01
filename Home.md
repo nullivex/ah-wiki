@@ -46,6 +46,6 @@ actionHero will also serve static files for you, but actionHero is not meant to 
 - [Example Actions](https://github.com/evantahler/actionHero/wiki/Examples:-Actions)
 - [Example Tasks](https://github.com/evantahler/actionHero/wiki/Examples:-Tasks)
 - [Custom Initializers](https://github.com/evantahler/actionHero/wiki/Custom-Initializers)
-- [RESTful routing](https://github.com/evantahler/actionHero/wiki/RESTful-routing)
+- [RESTful routing](https://github.com/evantahler/actionHero/wiki/Examples:-RESTful-routing)
 - actionCluster Servers [[1](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_1.js)] [[2](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_2.js)] [[3](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_3.js)]
 - [Using node.js clusters to manage a node](https://github.com/evantahler/actionHero/blob/master/scripts/actionHeroCluster)
