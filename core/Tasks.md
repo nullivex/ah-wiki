@@ -1,4 +1,6 @@
-Tasks are background jobs meant to be run asynchronously from a request.  With actionHero, there is no need to run a separate job processing/queuing process.  Using the node.js event loop, background tasks can be processed in-line with web requests in a non-blocking way.  Tasks are built like actions, but they can be run as called or periodically.  Tasks can be run on every node in the actionCluster or just one.  There is one task which is core to action hero `runAction`, but there are [a number of example tasks provided](Example-tasks).
+## General
+
+Tasks are background jobs meant to be run asynchronously from a request.  With actionHero, there is no need to run a separate job processing/queuing process.  Using the node.js event loop, background tasks can be processed in-line with web requests in a non-blocking way.  Tasks are built like actions, but they can be run when called or periodically.  Tasks can be run on every node in the actionCluster or just one.  There is one task which is core to action hero (`runAction`), but there are [a number of example tasks provided](Example-tasks).
 
 You can create you own tasks by placing them in a `./tasks/` folder at the root of your application.  Like actions, all tasks have some required metadata:
 
@@ -37,4 +39,16 @@ An example Task:
 	exports.task = task;
 ```
 	
-This task will be run every ~1 second on the first peer to be free after that one second has elapsed.  It is important to note that the `runAt` time is setting the when the task is 'allowed' to be run, not explicitly when it will be run.  Due to this, it is highly likely that your task will be run slightly after the set runAt time.
+This task will be run every ~1 second on the first worker to be available after that one second has elapsed.  
+
+## Timing and Timers
+
+It is important to note that the `runAt` time is setting the when the task is 'allowed' to be run, not explicitly when it will be run.  Due to this, it is highly likely that your task will be run slightly after the set runAt time.
+
+You can set `api.configData.general.workers` to set the number of timers threads actionHero employs.  This means how many simultaneous tasks each node can be working on at a time.  
+
+Remember that each actionHero server uses one thread and one event loop, so that if you have computationally intensive task (like computing Fibonacci numbers), this **will** block tasks, actions, and clients from working.  However, if your tasks are meant to communication with external services (read from a database, send an email), than these are perfect candidates to be run simultaneously.  
+
+## Cluster
+
+If you are running a single actionHero server, all tasks will be run locally.  Once you add more nodes to your acionCluster, the work will be split evenly across all nodes.  It is very likely that your job will be run on different nodes each time.
