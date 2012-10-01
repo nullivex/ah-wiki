@@ -30,7 +30,7 @@ actionHero will also serve static files for you, but actionHero is not meant to 
 - [Exceptions](https://github.com/evantahler/actionHero/wiki/Exceptions)
 - [Logging](https://github.com/evantahler/actionHero/wiki/Logging)
 - [Development Mode](https://github.com/evantahler/actionHero/wiki/Development-Mode)
-- [Chat Rooms & connection to connection communication](https://github.com/evantahler/actionHero/wiki/Chat)
+- [Chat Rooms & connection-to-connection communication](https://github.com/evantahler/actionHero/wiki/Chat)
 - [Flat File server](https://github.com/evantahler/actionHero/wiki/File-Server)
 - [Extending actionHero](https://github.com/evantahler/actionHero/wiki/Extending-actionHero)
 
