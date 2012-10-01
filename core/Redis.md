@@ -53,7 +53,7 @@ A full example to publish a message and catch it would be:
 
 actionHero will create the following stores within your redis database:
 
-** Keys **
+**Keys**
 
 - `actionHero:peers` [] a list of all the peers in the action cluster.  New members add themselves to it
 - `actionHero:peerPings` {} a hash of the last ping time of each peer member.  Useful to check if a peer has gone away
@@ -64,6 +64,6 @@ actionHero will create the following stores within your redis database:
 - `actionHero:stats` [] the common shared stats object
 - `actionHero:roomMembers-{roomName}` [] a list of the folks in a given socket room
 
-** Channels **
+**Channels**
 
 - `actionHero:say:[db]` the pub/sub channel used for the chat sub-system
