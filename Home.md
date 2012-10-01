@@ -1,7 +1,5 @@
 # Welcome to the actionHero wiki!
 
-<img src="https://raw.github.com/evantahler/actionHero/master/public/logo/actionHero.png" height="100"/>
-
 Links: [NPM](https://npmjs.org/package/actionHero) | [Wiki](https://github.com/evantahler/actionHero/wiki) | [Public Site](http://www.actionherojs.com) | [GitHub](https://github.com/evantahler/actionHero) | [Client](https://github.com/evantahler/actionhero_client)
 
 ---
@@ -19,6 +17,7 @@ actionHero will also serve static files for you, but actionHero is not meant to 
 - [Getting Started](https://github.com/evantahler/actionHero/wiki/Getting-Started)
 - [Readme](https://github.com/evantahler/actionHero/blob/master/readme.md)
 - [Version History](https://github.com/evantahler/actionHero/blob/master/versions.md)
+- [Logo](https://raw.github.com/evantahler/actionHero/master/public/logo/actionHero.png)
 
 ## Core actionHero Components
 - [Actions](https://github.com/evantahler/actionHero/wiki/Actions)
