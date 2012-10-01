@@ -41,7 +41,7 @@ or more concisely:
 
 ```javascript
 
-	exports.action{
+	exports.action = {
 	  name: "randomNumber",
 	  description: "I am an API method which will generate a random number",
 	  inputs: { required: [], optional: [] },
