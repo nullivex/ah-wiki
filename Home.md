@@ -35,9 +35,9 @@ actionHero will also serve static files for you, but actionHero is not meant to 
 - [Extending actionHero](https://github.com/evantahler/actionHero/wiki/core-extending-actionHero)
 
 ## Client Types
-- [Web](https://github.com/evantahler/actionHero/wiki/client-web)
-- [TCP](https://github.com/evantahler/actionHero/wiki/client-tcp)
-- [WebSockets](https://github.com/evantahler/actionHero/wiki/client-web-socket)
+- [Web](https://github.com/evantahler/actionHero/wiki/Web-Clients)
+- [TCP](https://github.com/evantahler/actionHero/wiki/TCP-Clients)
+- [WebSockets](https://github.com/evantahler/actionHero/wiki/Web-Socket-Clients)
 
 ## Internal Method Documentation
 - [Internal Methods](https://github.com/evantahler/actionHero/wiki/Internal-Methods)
