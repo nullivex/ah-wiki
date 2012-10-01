@@ -16,4 +16,4 @@
 
 ## Other example Actions
 
-**[[generateProjectZip]]**: This action will generate a template actionHero project by downloading the needed files from nom, zipping them, and passing them on to the client (web only).  This action demonstrates how to shell out to your OS to preform more complex actions while holding the connection in a non-blocking manner. 
+**[[Generate-Project-Zip]]**: This action will generate a template actionHero project by downloading the needed files from nom, zipping them, and passing them on to the client (web only).  This action demonstrates how to shell out to your OS to preform more complex actions while holding the connection in a non-blocking manner. 
