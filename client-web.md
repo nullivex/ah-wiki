@@ -1,4 +1,3 @@
-.
 # HTTP(s) client
 
 #### General
