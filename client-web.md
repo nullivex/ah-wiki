@@ -144,3 +144,7 @@ Params provided by the user (GET, POST, etc for http and https servers, setParam
 ```
 	
 Params are loaded in this order GET -> POST (normal) -> POST (multipart).  This means that if you have {url}?key=getValue and you post a variable `key`=`postValue` as well, the postValue will be the one used.  The only exception to this is if you use the URL method of defining your action.  You can add arbitrary params to the whitelist by adding them to the `api.postVariables` array in you initializers. 
+
+#### XML
+
+You may also request XML data rather than JSON from actionHero. To do so, you need to pass `outputType=xml` as a param to your request.  
