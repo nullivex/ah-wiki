@@ -105,8 +105,6 @@ HTTP Example:
 
 You may also enable a HTTPS server with actionHero.  It works exactly the same as the http server, and you can have both running with little overhead.  The following information should be enabled in your `config.js` file:
 
-```javascript
-
 	configData.httpsServer = {
 		"enable": true,
 		"port": 4443,
@@ -114,7 +112,6 @@ You may also enable a HTTPS server with actionHero.  It works exactly the same a
 		"certFile": "./certs/server-cert.pem",
 		"bindIP": "0.0.0.0"
 	};
-```
 
 ## Files and Routes for http and https clients
 
@@ -126,8 +123,68 @@ actionHero can also serve up flat files.  There is an action, `file.js` which is
 * Errors will result in a 404 (file not found) with a message you can customize.
 * Proper mime-type headers will be set when possible via the `mime` package.
 
+### Routes
 
-## Safe Params
+For web clients (http and https) you can define an optional RESTful mapping to help route requests to actions.  If the client doesn't specify and action in a param, and the base route isn't a named action, the action will attempt to be discerned from this `routes.js` file.
+
+- routes remain optional
+- actions defined in params directly `action=theAction` or hitting the named URL for an action `/api/theAction` will always override RESTful routing 
+- the hierarchy of the routes object is prefix --> REST verb -> data
+- you can mix explicitly defined params with route-defined params.  If there is an overlap, the explicitly defined params win
+- data contains the 'action' to map to, and then an optional urlMap (api.utils.mapParamsFromURL)
+- only single depth routes are supported at this time
+
+An example `routes.js` file:
+
+	exports.routes = {
+		
+		users: {
+			get: {
+				action: "usersList", // (GET) /api/users
+			}
+		},
+	
+		user : {
+			get: {
+				action: "userAdd",
+				urlMap: ["userID"], // (GET) /api/user/123
+			},
+			post: {
+				action: "userEdit",
+				urlMap: ["userID"] // (POST) /api/user/123
+			},
+			put: {
+				action: "userAdd",
+				urlMap: ["type", "screenName"] // (PUT) /api/user/admin/handle123
+			},
+			delete: {
+				action: "userDelete",
+				urlMap: ["userID"] // (DELETE) /api/user/123
+			}
+		}
+	
+	};	
+
+
+### Linking URL routes to params
+
+You can extract prams per HTTP(s) request from the route requested by the user via an included utility.
+URL routes remain not being a source of RESTful parameters by default, however, you can opt to parse them: 
+
+```
+	var urlMap = ['userID', 'gameID'];
+	connection.params = api.utils.mapParamsFromURL(connection, urlMap);
+```
+
+- this is still left up to the action as the choice of which to choose as the default: query params, post params, or RESTful params is a deeply personal mater.
+- if your connection is TCP or webSockets, `api.utils.mapParamsFromURL` will return null
+- map is an array of the param's keys in order (ie: `/:action/:userID/:email/:gameID` => `['userID', 'email', 'gameID']`)
+- the action itself will be omitted from consideration in the mapping
+- these are equivalent: [ `localhost:8080/a/path/and/stuff?action=randomNumber` ] && [ `localhost:8080/randomNumber/a/path/and/stuff` ]
+
+
+
+### Safe Params
 
 Params provided by the user (GET, POST, etc for http and https servers, setParam for TCP clients, and passed to action calls from a web socket client) will be checked against a whitelist.  Variables defined in your actions by `action.inputs.required` and `action.inputs.optional` will be aded to your whitelist.  Special params which the api will always accept are: 
 
