@@ -10,6 +10,7 @@ The special action for persistent connections `say` makes use of `api.chatRoom.s
 * tell a message to all members in a room.
 * `fromQueue` is an internal optional parameter to indicate if the message has come form a peer connected to this server, or another peer in the actionCluster.
 * If you want your API to send messages to all connected clients, you can provide a `null` connection, and `api.configData.general.serverName` will appear as the sender IE `api.chatRoom.socketRoomBroadcast(api, null, "Hello.  The time is " + new Date());`.
+* If you don't want to have messages from from the default room (or want to provide more context about the message sender, perhaps the action or server's name), you can mock the connection object: `var mockConnection = {room: "someOtherRoom", public: {id: 0}};`
 * The `context` of messages sent with `api.chatRoom.socketRoomBroadcast` always be `user` to differentiate these responses from a `response` to a request
  
 ### `api.chatRoom.socketRoomStatus(api, room, next)`
