@@ -16,6 +16,21 @@ The special action for persistent connections `say` makes use of `api.chatRoom.s
 ### `api.chatRoom.socketRoomStatus(api, room, next)`
 * return the status object which contains information about a room and its members
 
-## Examples
 
-To demonstrate how to use `api.chatRoom.socketRoomBroadcast`, [you can craft an action made to be used by HTTP clients to send messages to chat rooms](https://github.com/evantahler/actionHero/blob/master/actions/say.js) (although they can't receive messages back in-line).
+## Chatting with an HTTP(s) client
+
+There are some caveats when chatting with a web client that the other connection methods don't have.  First, there are no chatting primitives, but an example method, [chat.js](https://github.com/evantahler/actionHero/blob/master/actions/chat.js), has been provided.  This action uses the param of `method` to select which chat action to preform.  Examples would be:
+
+- `curl ""localhost:8080/chat/?method=roomView""`
+- `curl "localhost:8080/chat/?method=say&message=hello%20world"`
+- `curl "localhost:8080/chat/?method=messages"`
+
+Other notes about HTTP(S) chatting
+
+- When a web client connected, actionHero will attempt to set it's ID via cookie.  If a cookie cannot be set, than each request will get a new ID.  If you are expecting http(s) clients which cannot accept cookies, than you can toggle on `api.configData.commonWeb.fingerprintOptions.onlyStaticElements`.  This will use only elements from the connection (headers, etc) which will not change to generate the fingerprint at the expense of entropy.
+- Messages sent to http(s) clients can be retrieved with the `api.webServer.getWebChatMessage(api, connection, next)` method
+- Messages sent to http(s) clients will not be kept forever (as this would use an ever increasing amount of memory).  How long messages re kept for is defined by `api.configData.commonWeb.httpClientMessageTTL`
+
+### Examples
+
+To demonstrate how to use these methods, [you can craft an action made to be used by HTTP clients to send messages to chat rooms](https://github.com/evantahler/actionHero/blob/master/actions/chat.js) (although they can't receive messages back in-line).
