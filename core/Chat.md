@@ -25,8 +25,10 @@ There are some caveats when chatting with a web client that the other connection
 - `curl "localhost:8080/chat/?method=say&message=hello%20world"`
 - `curl "localhost:8080/chat/?method=messages"`
 
-Other notes about HTTP(S) chatting
+Other notes about HTTP(S) chatting:
 
+- **We have changed this feature to "opt-in" if you want to use it.**
+- `api.configData.commonWeb.httpClientMessageTTL` will default to null (disable http client http(s) message queues).  Setting it an integer (ms) will enable it again.
 - When a web client connected, actionHero will attempt to set it's ID via cookie.  If a cookie cannot be set, than each request will get a new ID.  If you are expecting http(s) clients which cannot accept cookies, than you can toggle on `api.configData.commonWeb.fingerprintOptions.onlyStaticElements`.  This will use only elements from the connection (headers, etc) which will not change to generate the fingerprint at the expense of entropy.
 - `roomChange` will also store the new room in a cookie.  Cookies are required when changing rooms
 - Messages sent to http(s) clients can be retrieved with the `api.webServer.getWebChatMessage(api, connection, next)` method
