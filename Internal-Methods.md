@@ -2,6 +2,7 @@
 
 A collection of actionHero's internal methods which may be useful to others.
 
+[[_TOC_]]
 
 ## Actions
 
