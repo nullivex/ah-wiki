@@ -25,8 +25,8 @@
 - [TCP](https://github.com/evantahler/actionHero/wiki/TCP-Clients)
 - [WebSockets](https://github.com/evantahler/actionHero/wiki/Web-Socket-Clients)
 
-## Internal Method Documentation
-- [Internal Methods](https://github.com/evantahler/actionHero/wiki/Internal-Methods)
+## API Method Documentation
+- [API Methods](https://github.com/evantahler/actionHero/wiki/API-Methods)
 
 ## Templates and Examples
 - [Example Actions](https://github.com/evantahler/actionHero/wiki/Examples:-Actions)
