@@ -13,17 +13,17 @@
 	  api.session.save = function(api, connection, next){
 	    var key = api.session.prefix + "-" + connection.id;
 	    var value = connection.session;
-	    api.cache.save(api, key, value, api.session.sessionExipreTime, function(){
-	      api.cache.load(api, key, function(savedVal){
+	    api.cache.save(api, key, value, api.session.sessionExipreTime, function(err, didSave){
+	      api.cache.load(api, key, function(err, savedVal){
 	        // console.log(savedVal);
-	        if(typeof next == "function"){ next(); };
+	        if(typeof next == "function"){ next(savedVal); };
 	      });
 	    });
 	  }
 	
 	  api.session.load = function(api, connection, next){
 	    var key = api.session.prefix + "-" + connection.id;
-	    api.cache.load(api, key, function(value){
+	    api.cache.load(api, key, function(err, value){
 	      connection.session = value;
 	      next(value);
 	    });
