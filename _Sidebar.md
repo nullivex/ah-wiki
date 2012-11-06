@@ -1,5 +1,5 @@
 ## General
-- [home](https://github.com/evantahler/actionHero/wiki)
+- [Home](https://github.com/evantahler/actionHero/wiki)
 - [Getting Started](https://github.com/evantahler/actionHero/wiki/Getting-Started)
 - [Readme](https://github.com/evantahler/actionHero/blob/master/readme.md)
 - [Version History](https://github.com/evantahler/actionHero/blob/master/versions.md)
