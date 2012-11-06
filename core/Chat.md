@@ -15,6 +15,7 @@ The special action for persistent connections `say` makes use of `api.chatRoom.s
 * There is no limit to the number of chatRooms that can exist, as they are created on the fly as needed.  Your application may want to keep track of which rooms exist explicitly. 
  
 ### `api.chatRoom.socketRoomStatus(api, room, next)`
+* next(err, data)
 * return the status object which contains information about a room and its members, IE:
 	* `{"room":"defaultRoom","members":["ACRK5UrC-KNQBZs_-n-d","cf1cfdce3a287bf5ac6cc71f6dd70a6f"],"membersCount":2}`
 

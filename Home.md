@@ -22,6 +22,7 @@ actionHero will also serve static files for you, but actionHero is not a 'render
 - [Tasks](https://github.com/evantahler/actionHero/wiki/Tasks)
 - [Cache](https://github.com/evantahler/actionHero/wiki/Cache)
 - [Redis](https://github.com/evantahler/actionHero/wiki/Redis)
+- [Stats](https://github.com/evantahler/actionHero/wiki/Stats)
 - [Cluster](https://github.com/evantahler/actionHero/wiki/actionCluster)
 - [Config](https://github.com/evantahler/actionHero/wiki/Config)
 - [Exceptions](https://github.com/evantahler/actionHero/wiki/Exceptions)
