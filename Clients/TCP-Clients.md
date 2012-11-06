@@ -48,12 +48,25 @@ Socket Example:
 	
 In your actions, you can send a message directly to a TCP client (without relying on chat rooms) like this:`api.sendSocketMessage(api, connection, message)`
 
+## TLS
+
+You can switch your TCP server to use TLS encryption if you desire.  Just toggle the settings in `config.json` and provide valid certificates.  You can test this with the openSSL client rather than telnet `openssl s_client -connect 127.0.0.1:5000`
+
+	configData.tcpServer = {
+		"enable": true,
+		"secure": true,
+		"port": 5000,
+		"bindIP": "0.0.0.0", // which IP to listen on (use 0.0.0.0 for all)
+		"keyFile": "./certs/server-key.pem", // only for secure = true
+		"certFile": "./certs/server-cert.pem", // only for secure = true
+	};
+
 ## Files and Routes for TCP clients
 
 Connections over socket can also use the file action.  There is no 'route' for files.
 
-* errors are returned in the normal way `{error: someError}`
-* a successful file transfer will return the raw file data in a single send().  There will be no headers set.
+* errors are returned in the normal way `{error: someError}` when they exist.
+* a successful file transfer will return the raw file data in a single send().  There will be no headers set, not will the content be JSON.
 
 ## JSON Mode 
 

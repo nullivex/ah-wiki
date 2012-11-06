@@ -1,6 +1,6 @@
 ## General
 
-You can visit the API in a browser, Curl, etc.  `{url}?action=actioName` or `{url}/{actioName}` is how you would access an action.  For example, using the default ports in `config.js` you could reach the status action with both `http://127.0.0.1:8080/status` or `http://127.0.0.1:8080/?action=status`  The only action which doesn't return the default JSON format would be `file`, as it should return files with the appropriate headers if they are found, and a 404 error if they are not.
+You can visit the API in a browser, Curl, etc.  `{url}?action=actioName` or `{url}/api/{actioName}` is how you would access an action.  For example, using the default ports in `config.js` you could reach the status action with both `http://127.0.0.1:8080/status` or `http://127.0.0.1:8080/?action=status`  The only action which doesn't return the default JSON format would be `file`, as it will return raw files with the appropriate headers if they are found, and a 404 error if they are not.
 
 HTTP responses follow the format:
 
@@ -21,8 +21,7 @@ HTTP responses follow the format:
 				limit: 100,
 				offset: 0
 			}
-		},
-		error: "OK"
+		}
 	}
 ```
 
@@ -52,7 +51,6 @@ HTTP Example:
 	* Connection #0 to host localhost left intact
 	* Closing connection #0
 	{
-	    "error": "OK", 
 	    "requestorInformation": {
 	        "recievedParams": {
 	            "action": "status", 
@@ -98,26 +96,27 @@ HTTP Example:
 	}
 ```
 
-* you can provide the `?callback=myFunc` param to initiate a JSONp response which will wrap the returned JSON in your callback function.  
-* unless otherwise provided, the api will set default values of limit and offset to help with paginating long lists of response objects (default: limit=100, offset=0).  These are defined in `config.js`
-* the error if everything is OK will be "OK", otherwise, you should set a string error within your action
+* you can provide the `?callback=myFunc` param to initiate a JSONp response which will wrap the returned JSON in your callback function.  The mime type of the response will change from JSON to Javascript. 
+* unless otherwise provided, the api will set default values of limit and offset to help with paginating long lists of response objects (default: limit=100, offset=0).  These defaults are defined in `config.js`
+* If everything went OK with your request, no error attribute will be set on the response, otherwise, you should set a string error within your action
 * to build the response for "hello" above, the action would have set `connection.response.hello = "world";`
 
-You may also enable a HTTPS server with actionHero.  It works exactly the same as the http server, and you can have both running with little overhead.  The following information should be enabled in your `config.js` file:
+You may also enable a HTTPS server with actionHero.  It works exactly the same as the http server. You cannot have the http and https server running at the same time. The following information should be enabled in your `config.js` file:
 
-	configData.httpsServer = {
+	configData.httpServer = {
 		"enable": true,
-		"port": 4443,
-		"keyFile": "./certs/server-key.pem",
-		"certFile": "./certs/server-cert.pem",
-		"bindIP": "0.0.0.0"
+		"secure": true,
+		"port": 8080,
+		"bindIP": "0.0.0.0", // which IP to listen on (use 0.0.0.0 for all)
+		"keyFile": "./certs/server-key.pem", // only for secure = true
+		"certFile": "./certs/server-cert.pem", // only for secure = true
 	};
 
 ## Files and Routes for http and https clients
 
 actionHero can also serve up flat files.  There is an action, `file.js` which is used to do this and a file server is part of the core framework (check out `initFileserver.js` for more information).  actionHero will not cache thees files and each request to `file` will re-read the file from disk (like the nginx web server).
 
-* /public and /api are  routes which expose the 'directories' of those types.  These top level paths can be configured in `config.js` with `api.configData.commonWeb.urlPathForActions` and `api.configData.commonWeb.urlPathForFiles`.
+* /public and /api are  routes which expose the 'directories' of those types.  These top level path can be configured in `config.js` with `api.configData.commonWeb.urlPathForActions` and `api.configData.commonWeb.urlPathForFiles`.
 * the root of the web server "/" can be toggled to serve the content between /file or /api actions per your needs `api.configData.commonWeb.rootEndpointType`. The default is `api`.
 * actionHero will serve up flat files (html, images, etc) as well from your ./public folder.  This is accomplished via a `file` action or via the 'file' route as described above. `http://{baseUrl}/public/{pathToFile}` is equivalent to `http://{baseUrl}?action=file&fileName={pathToFile}` and `http://{baseUrl}/file/{pathToFile}`. 
 * Errors will result in a 404 (file not found) with a message you can customize.
@@ -125,13 +124,13 @@ actionHero can also serve up flat files.  There is an action, `file.js` which is
 
 ### Routes
 
-For web clients (http and https) you can define an optional RESTful mapping to help route requests to actions.  If the client doesn't specify and action in a param, and the base route isn't a named action, the action will attempt to be discerned from this `routes.js` file.
+Web clients (http and https) you can define an optional RESTful mapping to help route requests to actions.  If the client doesn't specify an action via a param, and the base route isn't a named action, the action will attempt to be discerned from this `routes.js` file.
 
-- routes remain optional
+- routes remain optional, and are off by default
 - actions defined in params directly `action=theAction` or hitting the named URL for an action `/api/theAction` will always override RESTful routing 
 - the hierarchy of the routes object is prefix --> REST verb -> data
 - you can mix explicitly defined params with route-defined params.  If there is an overlap, the explicitly defined params win
-- data contains the 'action' to map to, and then an optional urlMap (api.utils.mapParamsFromURL)
+- data contains the 'action' to map to, and then an optional `urlMap` array (api.utils.mapParamsFromURL)
 - only single depth routes are supported at this time
 
 An example `routes.js` file:

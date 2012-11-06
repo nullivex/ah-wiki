@@ -9,12 +9,15 @@ The special action for persistent connections `say` makes use of `api.chatRoom.s
 ### `api.chatRoom.socketRoomBroadcast(api, connection, message, [fromQueue])`
 * tell a message to all members in a room.
 * `fromQueue` is an internal optional parameter to indicate if the message has come form a peer connected to this server, or another peer in the actionCluster.
-* If you want your API to send messages to all connected clients, you can provide a `null` connection, and `api.configData.general.serverName` will appear as the sender IE `api.chatRoom.socketRoomBroadcast(api, null, "Hello.  The time is " + new Date());`.
+* You can provide a `null` connection, and `api.configData.general.serverName` will appear as the sender IE `api.chatRoom.socketRoomBroadcast(api, null, "Hello.  The time is " + new Date());`.  This message will be sent to folks in the default room.
 * If you don't want to have messages from from the default room (or want to provide more context about the message sender, perhaps the action or server's name), you can mock the connection object: `var mockConnection = {room: "someOtherRoom", public: {id: 0}};`
 * The `context` of messages sent with `api.chatRoom.socketRoomBroadcast` always be `user` to differentiate these responses from a `response` to a request
+* There is no limit to the number of chatRooms that can exist, as they are created on the fly as needed.  Your application may want to keep track of which rooms exist explicitly. 
  
 ### `api.chatRoom.socketRoomStatus(api, room, next)`
-* return the status object which contains information about a room and its members
+* return the status object which contains information about a room and its members, IE:
+	* `{"room":"defaultRoom","members":["ACRK5UrC-KNQBZs_-n-d","cf1cfdce3a287bf5ac6cc71f6dd70a6f"],"membersCount":2}`
+
 
 
 ## Chatting with an HTTP(s) client

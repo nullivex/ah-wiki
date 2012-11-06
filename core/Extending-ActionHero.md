@@ -9,7 +9,7 @@ The first thing to do is to make your own ./actions and ./tasks folder.  If you 
 	};
 	
 	var actionHero = require("actionHero").actionHero;
-	actionHero.start({initFunction: initFunction}, function(api){
+	actionHero.start({initFunction: initFunction}, function(error, api){
 		api.log("Loading complete!", ['green', 'bold']);
 	});
 ```

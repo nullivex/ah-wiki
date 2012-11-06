@@ -2,6 +2,8 @@ The `api.log()` method is available to you throughout the application.  `api.log
 
 There are formatting options you can pass to `api.log(yourMessage, options=[])`.  The options array can be many colors and formatting types, IE: `['blue','bold']`.  
 
+You can disable request logging in your `config.js`
+
 For example:
 
 - `api.log("OMG ERROR", ['red','bold])` is a serious error

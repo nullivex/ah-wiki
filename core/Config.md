@@ -30,7 +30,7 @@ You can overwrite these settings when you start your actionHero worker pragmatic
 	}
 	
 	// start the server!
-	actionHero.start(params, function(api){
+	actionHero.start(params, function(err, api){
 		api.log("Boot Successful!");
 	});
 

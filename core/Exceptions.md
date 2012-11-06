@@ -6,14 +6,14 @@ actionHero will catch any uncaught exceptions which take place within actions or
 
 When this happens:
 
-- All clients will be sent `connection.error` as defined in `api.configData.general.serverErrorMessage`
+- clients will be sent `connection.error` as defined in `api.configData.general.serverErrorMessage`
   - Web clients will also be sent the 500 (server error) header 
 - Exceptions created in tasks will also be logged, and the task will return it's callback
   - If the Exception occurred within a periodic task, the task will be re-enqueued.
 
-Keep in mind that any applicaton-wide settings which may have been modified in this erronious action/task will **not** be rolled-back
+Keep in mind that any application-wide settings which may have been modified in this erroneous action/task will **not** be rolled-back
 
-Other exceptions, perhaps occurring in an initializer, will not be caught.  These are probably serious and should be investigated.
+Other exceptions, perhaps occurring in an initializer, will not be caught.  These are probably serious and should be investigated, and are allowed to crash the server.
 
 # Example
 
