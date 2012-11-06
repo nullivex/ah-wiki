@@ -12,3 +12,5 @@ The actionHero API defines a single access point and accepts GET, POST, PUT and 
 actionHero will also serve static files for you, but actionHero is not a 'rendering' server (like express or rails).
 
 Use the SideBar to get around.
+
+![image](https://raw.github.com/evantahler/actionHero/master/public/logo/actionHero.png)
