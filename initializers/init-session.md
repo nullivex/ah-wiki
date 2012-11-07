@@ -16,7 +16,7 @@
 	    api.cache.save(api, key, value, api.session.sessionExipreTime, function(err, didSave){
 	      api.cache.load(api, key, function(err, savedVal){
 	        // console.log(savedVal);
-	        if(typeof next == "function"){ next(savedVal); };
+	        if(typeof next == "function"){ next(err, savedVal); };
 	      });
 	    });
 	  }
@@ -25,7 +25,7 @@
 	    var key = api.session.prefix + "-" + connection.id;
 	    api.cache.load(api, key, function(err, value){
 	      connection.session = value;
-	      next(value);
+	      next(err, value);
 	    });
 	  }
 	
