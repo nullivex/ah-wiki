@@ -13,6 +13,11 @@ The special action for persistent connections `say` makes use of `api.chatRoom.s
 * If you don't want to have messages from from the default room (or want to provide more context about the message sender, perhaps the action or server's name), you can mock the connection object: `var mockConnection = {room: "someOtherRoom", public: {id: 0}};`
 * The `context` of messages sent with `api.chatRoom.socketRoomBroadcast` always be `user` to differentiate these responses from a `response` to a request
 * There is no limit to the number of chatRooms that can exist, as they are created on the fly as needed.  Your application may want to keep track of which rooms exist explicitly. 
+
+You can also choose which clients recieve messages with `api.chatRoom.socketRoomBroadcast` by configuring `params.roomMatchKey` and `params.roomMatchValue` on the sending client.  This will only broadcast messages to clients (in the same room who match).  Examples include: `&roomMatchKey=id&roomMatchValue=123456` or `&roomMatchKey=auth&roomMatchValue=true`.
+
+Your actions will need to set these params on your clients in other ways.
+
  
 ### `api.chatRoom.socketRoomStatus(api, room, next)`
 * next(err, data)
