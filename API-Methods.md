@@ -37,6 +37,7 @@ A collection of actionHero's internal methods which may be useful to others.
 ### api.chatRoom.socketRoomBroadcast(api, connection, message, fromQueue)
 - fromQueue is to denote if the message originated from this server or another peer (don't use)
 - connection can be null, and defaults will be assigned
+- You can also choose which clients recieve messages with `api.chatRoom.socketRoomBroadcast` by configuring `params.roomMatchKey` and `params.roomMatchValue` on the sending client.  This will only broadcast messages to clients (in the same room who match).  Examples include: `&roomMatchKey=id&roomMatchValue=123456` or `&roomMatchKey=auth&roomMatchValue=true`.
 
 ### api.chatRoom.socketRoomStatus(api, room, next)
 - next(err, roomData)
