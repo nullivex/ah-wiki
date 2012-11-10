@@ -38,6 +38,8 @@ A collection of actionHero's internal methods which may be useful to others.
 - fromQueue is to denote if the message originated from this server or another peer (don't use)
 - connection can be null, and defaults will be assigned
 - You can also choose which clients recieve messages with `api.chatRoom.socketRoomBroadcast` by configuring `params.roomMatchKey` and `params.roomMatchValue` on the sending client.  This will only broadcast messages to clients (in the same room who match).  Examples include: `&roomMatchKey=id&roomMatchValue=123456` or `&roomMatchKey=auth&roomMatchValue=true`.
+- When setting special params on `connection` from within actions, be sure to check for `_originalConnection` (for webSockets and socket clients): `connection.auth = "true";  if(connection._original_connection != null){ connection._original_connection.auth = "true"; }`
+
 
 ### api.chatRoom.socketRoomStatus(api, room, next)
 - next(err, roomData)

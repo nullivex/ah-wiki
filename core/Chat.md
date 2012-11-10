@@ -14,9 +14,16 @@ The special action for persistent connections `say` makes use of `api.chatRoom.s
 * The `context` of messages sent with `api.chatRoom.socketRoomBroadcast` always be `user` to differentiate these responses from a `response` to a request
 * There is no limit to the number of chatRooms that can exist, as they are created on the fly as needed.  Your application may want to keep track of which rooms exist explicitly. 
 
-You can also choose which clients recieve messages with `api.chatRoom.socketRoomBroadcast` by configuring `params.roomMatchKey` and `params.roomMatchValue` on the sending client.  This will only broadcast messages to clients (in the same room who match).  Examples include: `&roomMatchKey=id&roomMatchValue=123456` or `&roomMatchKey=auth&roomMatchValue=true`.
+You can also choose which clients recieve messages with `api.chatRoom.socketRoomBroadcast` by configuring `params.roomMatchKey` and `params.roomMatchValue` on the sending client.  This will only broadcast messages to clients (in the same room who match).  Examples include: `&roomMatchKey=id&roomMatchValue=123456` or `&roomMatchKey=auth&roomMatchValue=true`.  
 
-Your actions will need to set these params on your clients in other ways.
+When setting special params on `connection` from within actions, be sure to check for `_originalConnection` (for webSockets and socket clients):
+
+	... // from userLogin.js
+	connection.auth = "true";
+	if(connection._original_connection != null){
+	  connection._original_connection.auth = "true";
+	}
+	...
 
  
 ### `api.chatRoom.socketRoomStatus(api, room, next)`
