@@ -8,55 +8,85 @@ Just like the additional actions added for TCP connection, web socket connection
 
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
-		var port = window.location.port
-		if(port == "" || port == null){ port = "80"; }
-		var socket = io.connect('http://localhost:'+port+'/');
+
+		var AHsocket = function(connectCallback){
+			var self = this;
+			var e = new io.EventEmitter();
+			for(var i in e){ self[i] = e[i]; }
+			if(connectCallback != null){ self.connectCallback = connectCallback;}		
+			self.messageCount = 1;
+			self.responseTimeout = 30000;
+	  	    self.responseHandlers = {};
+	  	    self.startingTimeStamps = {};
+			self.responseTimesouts = {};
+			self.details = {};
+			
+			self.ws = io.connect('/');
+	
+		  	self.ws.on('error', function(response){
+		  		self.emit('error', "web socket error", response);
+		  	});
 		
-		socket.on('welcome', function(data){
-			console.log("connected!")
-			console.log(JSON.stringify(data));
-		});
-	
-		// responses to action or chat room function
-		socket.on('response', function(data){
-			console.log(JSON.stringify(data));
-		});
-	
-		// responses to chatRoom
-		socket.on('say', function(data){
-			console.log(JSON.stringify(data));
-		})
-	
-		// get my details
-		var getDetails = function(){
-			socket.emit("detailsView");
+		  	self.ws.on('say', function(response){
+		  		self.emit('say', response);
+		  	});
+		
+		  	self.ws.on('welcome', function(response){
+		  		self.registerCallback('detailsView', {}, function(err, response, delta){
+			      self.details = response.details;
+			      self.emit("connected", self.details);
+			      if(typeof self.connectCallback == 'function'){
+			      	connectCallback(self.details);
+			      }
+			    });
+		  	});
+		
+		  	self.ws.on('response', function(response){
+			    if(typeof self.responseHandlers[response.messageCount] == 'function'){
+			    	var delta = new Date().getTime() - self.startingTimeStamps[response.messageCount];
+			      self.responseHandlers[response.messageCount](response.error, response, delta);
+			      delete self.responseTimesouts[response.messageCount];
+			      delete self.startingTimeStamps[response.messageCount];
+			      delete self.responseHandlers[response.messageCount];
+			    }
+		  	});  	
 		}
 	
-		// call an action
-		var action = function(action, params){
-			// params = {key1: 'value_1', key2: 'value2'}
-			if (params == null){ params = {}; }
-			params['action'] = action;
-			socket.emit("action", params);
-		}
+		AHsocket.prototype.registerCallback = function(event, params, next){
+			var self = this;
+		    if (params == null){ params = {}; }
+		    if(typeof next == 'function'){
+		      self.responseHandlers[self.messageCount] = next;
+		      self.startingTimeStamps[self.messageCount] = new Date().getTime();
+		      self.responseTimesouts[self.messageCount] = setTimeout(function(){
+		      	self.emit('timeout', event, params, next);
+		      }, self.responseTimeout, event, params, next);
+		    }
+		    self.messageCount++;
+		    self.ws.emit(event, params);
+	   }
 	
-		// chat room functions
-		var say = function(message){
-			// message = "hello world"
-			socket.emit("say", {message: message});
-		}
-		var roomView = function(){
-			socket.emit("roomView");
-		}
-		var roomChange = function(room){
-			// room = "newRoomName"
-			socket.emit("roomChange", {room: room});
-		}
+	  AHsocket.prototype.action = function(action, params, next){
+	    if (params == null){ params = {}; }
+	    params['action'] = action;
+	    this.registerCallback('action', params, next);
+	  }
 	
-		// disconnect
-		var quit = function(){
-			socket.emit("quit");
-		}
+	  AHsocket.prototype.say = function(message, next){
+	    this.registerCallback('say', {message: message}, next);
+	  }
+	
+	  AHsocket.prototype.roomView = function(next){
+	    this.registerCallback('roomView', {}, next);
+	  }
+	
+	  AHsocket.prototype.roomChange = function(room, next){
+	    this.registerCallback('roomChange', {room: room}, next);
+	  }
+	
+	  AHsocket.prototype.quit = function(){
+	    this.ws.emit("quit");
+	  }
 	
 	</script>
 
@@ -68,13 +98,32 @@ An example session in Chrome's console using the above example might be the foll
 
 ```javascript
 
-	> connected! webSockets.html:8
-	{"welcome":"Hello! Welcome to the actionHero api","room":"defaultRoom","context":"api"} webSockets.html:9
-	> getDetails()
+	> var s = new AHsocket()
 	undefined
-	{"context":"response","status":"OK","details":{"params":{},"public":{"id":"ACRK5UrC-KNQBZs_-n-d","connectedAt":1352176742663},"room":"defaultRoom"},"messageCount":1} webSockets.html:14
-	> action('cacheTest', {key: 'myKey', value: 'myValue'})
+	
+	> s.details
+	Object
+	  params: Object
+	  public: Object
+	    connectedAt: 1352686154534
+	    id: "X2Y1tyeo8AKl0mTKYHfJ"
+	      __proto__: Object
+	    room: "defaultRoom"
+	      __proto__: Object
+	
+	> s.action("cacheTest", {key: "key", value: "value"}, function(err, response, dela){
+		 console.log(response);
+	});
 	undefined
-	{"context":"response","cacheTestResults":{"saveResp":true,"sizeResp":1,"loadResp":{"value":"myValue","expireTimestamp":null,"createdAt":1352176833690,"readAt":1352176833690},"deleteResp":true},"messageCount":2} webSockets.html:14
+	Object {context: "response", cacheTestResults: Object, messageCount: 2}
+
+	> s.on('say', function(message){
+		console.log(message);
+	});
+	AHsocket
+	
+	Object {message: "I have entered the room", room: "defaultRoom", from: "5981c4ccc8347f54d5eec811b76435a2", context: "user", sentAt: 1352686203976}
+	Object {message: ""hello there"", room: "defaultRoom", from: "5981c4ccc8347f54d5eec811b76435a2", context: "user", sentAt: 1352686207062}
+
 
 ```
