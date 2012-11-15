@@ -1,5 +1,18 @@
 Here we will collect example actionHero initializers.
 
+## Format
+
+To use a custom initilizer, create a `initializers` directory in your project.  Ensure that the file name matches the export, IE:
+
+**initStuff.js**
+
+	exports.initStuff = function(api, next){
+	  
+	  api.stuff = {}; // no api.stuff is globally available to my project
+	
+	  next();
+	}
+
 ## Initializers: 
 - [[Init-mysql]] - Use sequilize.js within an initilizer
 - [[Init-session]] - use the cache methods and `connection.id` to easily make some session management helpers.
