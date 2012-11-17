@@ -75,4 +75,10 @@ The default method of using actions for TCP clients is to use the methods above 
 - `{"action": "myAction", "params": {"key": "value"}}` is also a valid request over TCP
 - params passed within an action's hash will NOT be 'sticky' to the connection, unlike `paramAdd` which remains 'sticky'
 
+## Client Suggestions
+The main `trick` to working with TCP/wire connections directly is to remember that you can have many 'pending' requests at the same time.  Also, the order in which you recieve responses back can be variable.  if you request `slowAction` and then `fastAction`, it's fairly likley that you will get a resposne to `fastAction` first.
+
+[The actionHero client library](https://github.com/evantahler/actionhero_client) uses TCP/TLS connections, and makes use of actionHero's `messageCount` paramiter to keep track of requests, and keeps response callbacks for actions in a pending queue.  You can check out the [example here](https://github.com/evantahler/actionhero_client/blob/master/actionhero_client.js)
+
+
 
