@@ -8,7 +8,8 @@ To use a custom initilizer, create a `initializers` directory in your project.  
 
 	exports.initStuff = function(api, next){
 	  
-	  api.stuff = {}; // no api.stuff is globally available to my project
+	  api.stuff = {}; // now api.stuff is globally available to my project
+	  api.stuff.magicNumber = 1234;
 	
 	  next();
 	}
