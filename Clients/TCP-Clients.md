@@ -80,5 +80,5 @@ The main `trick` to working with TCP/wire connections directly is to remember th
 
 [The actionHero client library](https://github.com/evantahler/actionhero_client) uses TCP/TLS connections, and makes use of actionHero's `messageCount` paramiter to keep track of requests, and keeps response callbacks for actions in a pending queue.  You can check out the [example here](https://github.com/evantahler/actionhero_client/blob/master/actionhero_client.js)
 
-
+Note that only requests the client makes contain a `messageCount`, but broadcasts do not (the `say` command, etc)
 
