@@ -14,6 +14,8 @@ To use a custom initilizer, create a `initializers` directory in your project.  
 	  next();
 	}
 
+You can generate a file of this type with `npm run-script actionHero generateInitializer`
+
 ## Initializers: 
 - [[Init-mysql]] - Use sequilize.js within an initilizer
 - [[Init-session]] - use the cache methods and `connection.id` to easily make some session management helpers.
