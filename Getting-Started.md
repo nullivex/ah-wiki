@@ -65,6 +65,9 @@ Actions in /actions will be loaded in automatically, along /initializers and /ta
 	|- log
 	|-- (default location for logs)
 	|
+	|- initilizers
+	|-- (your initilizers, loaded in before project boot)
+	|
 	|- node_modules
 	|-- (your modules, actionHero should be npm installed in here)
 	|
@@ -74,6 +77,5 @@ Actions in /actions will be loaded in automatically, along /initializers and /ta
 	|- tasks
 	|-- (your tasks)
 	|
-	app.js
 	config.js
 	package.json (be sure to include 'actionHero':'x')

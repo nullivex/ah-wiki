@@ -127,3 +127,27 @@ An example session in Chrome's console using the above example might be the foll
 
 
 ```
+
+You can pass options to socket.io via `config.json`.  There are 2 objects: `settings` and `options`.  settings use the `io.enable` method (key), and options use `io.set` method (key, value).  Here's an example to force only Ajax (XHR) requests which would allow websockets to function on Heroku:
+ 
+```javascript
+
+	/////////////////
+	// Web Sockets //
+	/////////////////
+	
+	configData.webSockets = {
+	    // You must have the web server enabled as well
+	    "enable": true,
+	    "logLevel" : 1,
+	    "settings" : [
+	        "browser client minification",
+	        "browser client etag",
+	        "browser client gzip"
+	    ],
+	    "options" : {
+	        "transports": ["xhr-polling"],
+	        "polling duration": 10
+	    }
+	};
+```
