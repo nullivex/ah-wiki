@@ -71,11 +71,16 @@ Actions in /actions will be loaded in automatically, along /initializers and /ta
 	|- node_modules
 	|-- (your modules, actionHero should be npm installed in here)
 	|
+	|- pids
+	|-- (pidfiles for your running servers)
+	|
 	|- public
 	|-- (your static assets to be served by /file)
 	|
 	|- tasks
 	|-- (your tasks)
 	|
+	readme.md
+	routes.js
 	config.js
 	package.json (be sure to include 'actionHero':'x')
