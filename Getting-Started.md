@@ -7,46 +7,16 @@
 
 **Get Started Now:**
 
-	npm install actionHero
-	npm run-script actionHero generate
-	npm start
+	npm install actionHero -g
+	actionHero generate
+	actionHero start
 
 * Create a new directory `mkdir ~/project && cd ~/project`
 * Checkout the actionHero source `npm install actionHero`
-* Use the generator to create a template project `npm run-script actionHero generate`
-* We will be running your new application from the generated `app.js`
-* Start up the server: `npm start`
+* Use the generator to create a template project `./node_modeules/bin/actionHero generate`
+* We will be running your new application, and you can start up the server: `./node_modeules/bin/actionHero start`
 
 Visit `http://127.0.0.1:8080` in your browser and telnet to `telnet localhost 5000` to see the actionHero in action!
-
-You can programmatically control an actionHero server with `actionHero.start(params, callback)`, `actionHero.stop(callback)` and `actionHero.restart(callback)`
-
-```javascript
-
-	var timer = 5000;
-	actionHero.start(params, function(err, api){
-		
-		api.log(" >> Boot Successful!");
-		setTimeout(function(){
-			
-			api.log(" >> restarting server...");
-			actionHero.restart(function(){
-				
-				api.log(" >> Restarted!");
-				setTimeout(function(){
-					
-					api.log(" >> stopping server...");
-					actionHero.stop(function(){
-						
-						api.log(" >> Stopped!");
-						process.exit();
-						
-					});
-				}, timer);
-			})
-		}, timer);
-	});
-```
 	
 ## Application Structure
 

@@ -2,10 +2,12 @@
 - [Home](https://github.com/evantahler/actionHero/wiki)
 - [Getting Started](https://github.com/evantahler/actionHero/wiki/Getting-Started)
 - [Readme](https://github.com/evantahler/actionHero/blob/master/readme.md)
+- [Production Notes](https://github.com/evantahler/actionHero/wiki/Production-Notes)
 - [Version History](https://github.com/evantahler/actionHero/blob/master/versions.md)
 - [Logo](https://raw.github.com/evantahler/actionHero/master/public/logo/actionHero.png)
 
 ## Core actionHero Components
+- [Running actionHero](https://github.com/evantahler/actionHero/wiki/Running-ActionHero)
 - [Actions](https://github.com/evantahler/actionHero/wiki/Actions)
 - [Tasks](https://github.com/evantahler/actionHero/wiki/Tasks)
 - [Cache](https://github.com/evantahler/actionHero/wiki/Cache)
