@@ -2,6 +2,7 @@
 - [Home](https://github.com/evantahler/actionHero/wiki)
 - [Getting Started](https://github.com/evantahler/actionHero/wiki/Getting-Started)
 - [Readme](https://github.com/evantahler/actionHero/blob/master/readme.md)
+- [Production Notes](https://github.com/evantahler/actionHero/blob/master/Production-Notes)
 - [Version History](https://github.com/evantahler/actionHero/blob/master/versions.md)
 - [Logo](https://raw.github.com/evantahler/actionHero/master/public/logo/actionHero.png)
 
