@@ -22,3 +22,13 @@ When choosing the number of workers for your actionHero cluster, choose at least
 You never want more workers than you can run at a time, or else you will actually be slowing dow the execution of all processes
 
 Of course, not going in to swap memory is more important than utilizing all of your CPUs, so if you find yourself running out of ram, reduce the number of workers! 
+
+## Global Packages
+
+It's probably best to never install any global packages.  This way, you won't have to worry about conflicts.  When you use npm to install a local package the package's binaries are always copied into `./node_modules/.bin`. You can run both forever and actionHero locally like so:
+
+`./bin/actionHero/forever ./bin/actionHero/ startCluster [args]`
+
+You can add local references to your $PATH like so to use these local binaries:
+
+`export PATH=$PATH:node_modules/.bin`
