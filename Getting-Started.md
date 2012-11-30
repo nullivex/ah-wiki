@@ -7,14 +7,14 @@
 
 **Get Started Now:**
 
-	npm install actionHero (-g)
+	npm install actionHero -g
 	actionHero generate
-	npm start
+	actionHero start
 
 * Create a new directory `mkdir ~/project && cd ~/project`
 * Checkout the actionHero source `npm install actionHero`
 * Use the generator to create a template project `./node_modeules/bin/actionHero generate`
-* We will be running your new application, and you can start up the server: `npm start`
+* We will be running your new application, and you can start up the server: `./node_modeules/bin/actionHero start`
 
 Visit `http://127.0.0.1:8080` in your browser and telnet to `telnet localhost 5000` to see the actionHero in action!
 	
