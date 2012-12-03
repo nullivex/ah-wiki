@@ -54,6 +54,38 @@ or more concisely:
 
 ```
 
+You can also define more than one action per file if you would like:
+
+```javascript
+
+    var commonInputs = {
+    	required: ['email', 'password'],
+    	optional: []
+    };
+
+    exports.userAdd = {
+    	name: 'userAdd',
+    	description: 'i add a user',
+    	inputs: commonInputs,
+    	outputExample: {},
+    	run: function(api, connection, next){
+    		// your code here
+    		next(connection, true);
+    	}
+    };
+    
+    exports.userDelete = {
+    	name: 'userDelete',
+    	description: 'i delete a user',
+    	inputs: commonInputs,
+    	outputExample: {},
+    	run: function(api, connection, next){
+    		// your code here
+    		next(connection, true);
+    	}
+    }
+```
+
 Notes:
 
 
