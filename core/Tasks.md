@@ -65,7 +65,7 @@ You can also define more than one task in a single file:
     		// your code here
     		next(null, true);
     	}
-};
+    };
 
 ```
 
