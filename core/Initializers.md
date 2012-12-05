@@ -18,6 +18,12 @@ To use a custom initializer, create a `initializers` directory in your project. 
 
 You can generate a file of this type with `actionHero generateInitializer`
 
+## _teardown
+
+If you append an object to `api` (for example `api.stuff`), you can optionally add a `_teardown` method to it which will be called when the server is restart or shutdown.  actionHero uses this internally to turn off the servers and handle pidfiles, but there are many uses.  
+
+`api.{namespace}._teardown = function(api, next)`
+
 ## Initializer Examples: 
 - [[Init-mysql]] - Use sequilize.js within an initializer
 - [[Init-session]] - use the cache methods and `connection.id` to easily make some session management helpers.
