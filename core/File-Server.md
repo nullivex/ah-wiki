@@ -1,6 +1,6 @@
 ## General
 
-actionHero comes with a flat-file server which clients can make use of to request files on the actionHero server.
+actionHero comes with a flat-file server which clients can make use of to request files on the actionHero server.  actionHero is not meant to be a 'rendering' server (like express or rails), but can serve static files.  *It is entirely possible (and recommended!) to create a web application with only client-side rending, but that is a philisophical argument for another time.*
 
 When using the fileserver within an action, be sure to respond with `toContinue` as `false`, as the file server will have already returned to the client (IE: `next(connection, false)`).  Yes, you still need to invoke the callback.
 
