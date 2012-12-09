@@ -41,6 +41,34 @@ An example Task:
 	
 This task will be run every ~1 second on the first worker to be available after that one second has elapsed.  
 
+You can also define more than one task in a single file:
+
+```javascript
+
+    exports.sayHello = {
+    	name: 'sayHello',
+    	description: 'I say hello',
+    	scope: 'any',
+    	frequency: 1000,
+    	run: function(api, params, next){
+    		// your code here
+    		next(null, true);
+    	}
+    };
+    
+    exports.sayGoodbye = {
+    	name: 'sayGoodbye',
+    	description: 'I say goodbye',
+    	scope: 'any',
+    	frequency: 2000,
+    	run: function(api, params, next){
+    		// your code here
+    		next(null, true);
+    	}
+    };
+
+```
+
 ## Timing and Timers
 
 It is important to note that the `runAt` time is setting the when the task is 'allowed' to be run, not explicitly when it will be run.  Due to this, it is highly likely that your task will be run slightly after the set runAt time.

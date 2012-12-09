@@ -45,13 +45,45 @@ or more concisely:
 	  name: "randomNumber",
 	  description: "I am an API method which will generate a random number",
 	  inputs: { required: [], optional: [] },
-	  outputExample: { randomNumber: 123 }.
+	  outputExample: { randomNumber: 123 },
 	  run:function(api, connection, next){
 		connection.response.randomNumber = Math.random();
 		next(connection, true);
 	  }
 	}
 
+```
+
+You can also define more than one action per file if you would like:
+
+```javascript
+
+    var commonInputs = {
+    	required: ['email', 'password'],
+    	optional: []
+    };
+
+    exports.userAdd = {
+    	name: 'userAdd',
+    	description: 'i add a user',
+    	inputs: commonInputs,
+    	outputExample: {},
+    	run: function(api, connection, next){
+    		// your code here
+    		next(connection, true);
+    	}
+    };
+    
+    exports.userDelete = {
+    	name: 'userDelete',
+    	description: 'i delete a user',
+    	inputs: commonInputs,
+    	outputExample: {},
+    	run: function(api, connection, next){
+    		// your code here
+    		next(connection, true);
+    	}
+    }
 ```
 
 Notes:

@@ -1,5 +1,7 @@
 Every actionHero node needs a `config.js` file to set things up.  [Here is a documented an example](https://github.com/evantahler/actionHero/blob/master/config.js).
 
+When launching actionHero you can specify which config file to use with `--config=/path/to/file`, otherwise `confg.js` will be used.  This is how to implement "environments" in actionHero.
+
 You can overwrite these settings when you start your actionHero worker pragmatically as well by passing `configChanges` to the initFunction.   
 
 ```javascript

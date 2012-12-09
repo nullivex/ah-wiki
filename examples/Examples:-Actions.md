@@ -11,7 +11,3 @@
 **[chat](https://github.com/evantahler/actionHero/blob/master/actions/chat.js)**: This action shows how it is possible to use the chatRoom features of actionHero such that a web client can broadcast a message to all persistently connected clients, and use the other chatRoom methods
 
 **[status](https://github.com/evantahler/actionHero/blob/master/actions/status.js)**: This action will render some statistics about this actionHero node, and all nodes in the cluster.  Useful for health checks.
-
-## Other example Actions
-
-**[[Generate-Project-Zip]]**: This action will generate a template actionHero project by downloading the needed files from nom, zipping them, and passing them on to the client (web only).  This action demonstrates how to shell out to your OS to preform more complex actions while holding the connection in a non-blocking manner. 

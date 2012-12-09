@@ -11,6 +11,7 @@
 - [Actions](https://github.com/evantahler/actionHero/wiki/Actions)
 - [Tasks](https://github.com/evantahler/actionHero/wiki/Tasks)
 - [Cache](https://github.com/evantahler/actionHero/wiki/Cache)
+- [Initializers](https://github.com/evantahler/actionHero/wiki/Initializers)
 - [Redis](https://github.com/evantahler/actionHero/wiki/Redis)
 - [Stats](https://github.com/evantahler/actionHero/wiki/Stats)
 - [Cluster](https://github.com/evantahler/actionHero/wiki/actionCluster)
@@ -33,6 +34,5 @@
 ## Templates and Examples
 - [Example Actions](https://github.com/evantahler/actionHero/wiki/Examples:-Actions)
 - [Example Tasks](https://github.com/evantahler/actionHero/wiki/Examples:-Tasks)
-- [Custom Initializers](https://github.com/evantahler/actionHero/wiki/Custom-Initializers)
 - actionCluster Servers [[1](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_1.js)] [[2](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_2.js)] [[3](https://github.com/evantahler/actionHero/blob/master/examples/servers/actionHero_cluster_peer_3.js)]
 - [Using node.js clusters to manage a node](https://github.com/evantahler/actionHero/blob/master/scripts/actionHeroCluster)

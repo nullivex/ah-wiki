@@ -47,30 +47,32 @@ actionHero - a node.js API framework for both tcp sockets, web sockets, and http
       will generate a new initializer in `initializers`
       [name] (required)
     
-    * actionHero start --config=[/path/to/config.js] --title=[processTitle]
+    * actionHero start --config=[/path/to/config.js] --title=[processTitle]  --daemon
       will start a template actionHero server
       this is the respondant to `npm start`
       [config] (optional) path to config.js, defaults to `process.cwd() + "/" + config.js`
       [title] (optional) process title to use for ps and pidFile defaults to (actionHero) Does not work on OSX/Windows
+      [daemon] (optional) to fork and run as a new background process defalts to false
     
-    * actionHero startCluster --exec=[command] --workers=[numWorkers] --pidfile=[path] --log=[path] --silent=[silent] --title=[clusterTitle] --workerTitlePrefix=[prefix] --args=[argsArray] --config=[/path/to/config.js]
+    * actionHero startCluster --exec=[command] --workers=[numWorkers] --pidfile=[path] --log=[path] --silent=[silent] --title=[clusterTitle] --workerTitlePrefix=[prefix] --args=[argsArray] --config=[/path/to/config.js]  --daemon
       will launch a actionHero cluster (using node's cluster module)
       [exec] (optional) command for the custer-master to run to stat the workers
-      [workers] (optional) number of workers (defaults to # CPUs - 1)
+      [workers] (optional) number of workers (defaults to # CPUs - 2)
       [pidfile] (optional) pidfile localtion (defaults to process.cwd() + /pids)
       [log] (optional) logfile (defaults to process.cwd() + /log/cluster.log)
-      [silent] (optional) should worker stdout be sent to cluster master (default false)
+      [silent] (optional) should worker stdout be sent to cluster master (default true)
       [title] (optional) default actionHero-master  Does not work on OSX/Windows
       [workerTitlePrefix] (optional) default actionHero-worker
-      [args] (optional) the args to pass to [exec]  defaults to [start] and [--title=#]
+      [config] (optional) path to config.js, defaults to `process.cwd() + "/" + config.js`
+      [daemon] (optional) to fork and run as a new background process defalts to false
     
     More Help & the actionHero wiki can be found @ http://actionherojs.com
 
 ## Linking the actionHero binary
 
-* If you installed actionHero globally (`nom install actionHero -g`) you should have the `actionHero` binary available to you within your shell at all times.
+* If you installed actionHero globally (`npm install actionHero -g`) you should have the `actionHero` binary available to you within your shell at all times.
 * Otherwise, you can reference the binary from either `./node_modules/.bin/actionHero` or `./node_modules/actionHero/bin/actionHero`.
-* If you installed actionHero locally, you can add a reference to your path (OSX and Linux): `export PATH=$PATH:node_modules/.bin`
+* If you installed actionHero locally, you can add a reference to your path (OSX and Linux): `export PATH=$PATH:node_modules/.bin` to be able to use simpler commands, IE `actionHero start`
 
 NOTE: If you are on windows, you will always need to run `node actionHero`
 
@@ -95,13 +97,13 @@ You can programmatically control an actionHero server with `actionHero.start(par
 		setTimeout(function(){
 			
 			api.log(" >> restarting server...");
-			actionHero.restart(function(){
+			actionHero.restart(function(err, api){
 				
 				api.log(" >> Restarted!");
 				setTimeout(function(){
 					
 					api.log(" >> stopping server...");
-					actionHero.stop(function(){
+					actionHero.stop(function(err, api){
 						
 						api.log(" >> Stopped!");
 						process.exit();
