@@ -4,6 +4,10 @@ All persistent connections (TCP and web socket) are joined to a chat room upon c
 
 The special action for persistent connections `say` makes use of `api.chatRoom.socketRoomBroadcast` tell a message to all other users in the room, IE: `say Hello World`.
 
+To create private chat rooms (or peer-to-peer rooms), it is suggested that you create a randomly named room and provide each client with an authentication token.
+
+Clients can also subscribe to (but not participate in) chatRooms they are not "in" with `listenToRoom ` and `silenceRoom`
+
 ## Methods
 
 ### `api.chatRoom.socketRoomBroadcast(api, connection, message, [fromQueue])`
