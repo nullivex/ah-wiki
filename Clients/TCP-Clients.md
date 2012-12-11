@@ -10,6 +10,8 @@ You can also access actionHero's methods via a persistent socket connection rath
 * `paramsDelete` - deletes all params set to this session
 * `roomChange` - change the `room` you are connected to.  By default all socket connections are in the `api.configData.defaultChatRoom` room.   
 * `roomView` - show you the room you are connected to, and information about the members currently in that room.
+* `listenToRoom` - opt into hearing messages from another chat room
+* `silenceRoom` - stop hearing messages from other chat rooms
 * `detailsView` - show you details about your connection, including your public ID.
 * `say` [message]
 
