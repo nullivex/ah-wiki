@@ -80,6 +80,14 @@ Just like the additional actions added for TCP connection, web socket connection
     this.registerCallback('roomView', {}, next);
   }
 
+  actionHeroWebSocket.prototype.listenToRoom = function(room, next){
+    this.registerCallback('listenToRoom', {room: room}, next);
+  }
+
+  actionHeroWebSocket.prototype.silenceRoom = function(room, next){
+    this.registerCallback('silenceRoom', {room: room}, next);
+  }
+
   AHsocket.prototype.roomChange = function(room, next){
     this.registerCallback('roomChange', {room: room}, next);
   }
