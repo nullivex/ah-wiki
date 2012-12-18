@@ -11,3 +11,5 @@
 **[chat](https://github.com/evantahler/actionHero/blob/master/actions/chat.js)**: This action shows how it is possible to use the chatRoom features of actionHero such that a web client can broadcast a message to all persistently connected clients, and use the other chatRoom methods
 
 **[status](https://github.com/evantahler/actionHero/blob/master/actions/status.js)**: This action will render some statistics about this actionHero node, and all nodes in the cluster.  Useful for health checks.
+
+**[oauth]()**: This file is actually 2 actions which are needed to authenticate a user against twitter's API.  Note the use of `api.cache` to save and load the temporary secret tokens, and how to send custom (redirect) headers with actionHero
