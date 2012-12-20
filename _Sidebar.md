@@ -21,7 +21,6 @@
 - [Development Mode](https://github.com/evantahler/actionHero/wiki/Development-Mode)
 - [Chat Rooms](https://github.com/evantahler/actionHero/wiki/Chat)
 - [Flat File server](https://github.com/evantahler/actionHero/wiki/File-Server)
-- [Extending actionHero](https://github.com/evantahler/actionHero/wiki/Extending-actionHero)
 
 ## Client Types
 - [Web](https://github.com/evantahler/actionHero/wiki/Web-Clients)
