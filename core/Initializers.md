@@ -26,6 +26,20 @@ If you append an object to `api` (for example `api.stuff`), you can optionally a
 
 `api.{namespace}._teardown = function(api, next)`
 
+For Example:
+
+```javascript
+exports.initStuff = function(api, next){
+	  
+  api.stuff = {
+    magicNumber: 1234,
+    _teardown: function(){ api.stuff.magicNumber = null; }
+  };
+
+  next();
+}
+```
+
 ## Initializer Examples: 
 - [[Init-mysql]] - Use sequilize.js within an initializer
 - [[Init-session]] - use the cache methods and `connection.id` to easily make some session management helpers.
