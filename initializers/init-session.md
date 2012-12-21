@@ -3,7 +3,7 @@
 	////////////////////////////////////////////////////////////////////////////
 	// Sessions 
 	
-	var init(api, next){
+	exports.sessions(api, next){
 	
 	  api.session = {
 	    prefix: "__session",
