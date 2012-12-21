@@ -20,6 +20,23 @@ exports.initStuff = function(api, next){
 
 You can generate a file of this type with `actionHero generateInitializer`
 
+## _start
+
+If you have something you need to do at server boot (rather than load time), you can define a `_start(api, next)` method in your object which will be called just before the server boots.
+
+For Example:
+
+```javascript
+exports.initStuff = function(api, next){
+	  
+  api.stuff = {
+    _start: function(api, next){ api.log('hi', 'bold'); next(); }
+  };
+
+  next();
+}
+```
+
 ## _teardown
 
 If you append an object to `api` (for example `api.stuff`), you can optionally add a `_teardown` method to it which will be called when the server is restart or shutdown.  actionHero uses this internally to turn off the servers and handle pidfiles, but there are many uses.  
@@ -33,7 +50,7 @@ exports.initStuff = function(api, next){
 	  
   api.stuff = {
     magicNumber: 1234,
-    _teardown: function(){ api.stuff.magicNumber = null; }
+    _teardown: function(api, next){ api.stuff.magicNumber = null; next(); }
   };
 
   next();
