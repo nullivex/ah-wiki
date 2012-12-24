@@ -41,28 +41,30 @@ Note that we are using the provided actionHeroWebSocket prototype and requiring 
 
 Methods which the provided actionHeroWebSocket object expose are:
 
-- `actionHeroWebSocket.on('error', function(message){})`: string message about the error
-- `actionHeroWebSocket.on('welcome', function(message))`: welcome message from the server.  
+- `actionHeroWebSocket.on('error', function(message){})`
+  - string message about the error
+- `actionHeroWebSocket.on('welcome', function(message))`
+  - welcome message from the server.  
   - Used this to know when you are both connected and able to communicate with the server
-- actionHeroWebSocket.action(action, params, callback)
+- `actionHeroWebSocket.action(action, params, callback)`
   - action: string (like 'login' or 'cacheTest')
   - params: hash of params (like {key: 'a', value: 'b'})
   - callback will be based a response hash from the server
-- actionHeroWebSocket.say(message, callback)
+- `actionHeroWebSocket.say(message, callback)`
   -  say: string message to broadcast to the current chatroom
   - callback will be based a response hash from the server
-- actionHeroWebSocket.roomView(callback)
+- `actionHeroWebSocket.roomView(callback)`
   - callback will be based a response hash from the server
-- actionHeroWebSocket.roomChange(room, callback) 
+- `actionHeroWebSocket.roomChange(room, callback)`
   - room: string
   - callback will be based a response hash from the server
-- actionHeroWebSocket.listenToRoom(room, callback)
+- `actionHeroWebSocket.listenToRoom(room, callback)`
   - room: string
   - callback will be based a response hash from the server
-- actionHeroWebSocket.silenceRoom(room, callback)
+- `actionHeroWebSocket.silenceRoom(room, callback)`
   - room: string
   - callback will be based a response hash from the server
-- actionHeroWebSocket.quit()
+- `actionHeroWebSocket.quit()`
   - instantaneous 
 
 You don't need to use the actionHeroWebSocket client, and can connect to the web socket manually and emit `say` and `action` etc commands as you would expect.
