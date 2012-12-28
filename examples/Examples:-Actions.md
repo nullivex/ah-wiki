@@ -12,4 +12,6 @@
 
 **[status](https://github.com/evantahler/actionHero/blob/master/actions/status.js)**: This action will render some statistics about this actionHero node, and all nodes in the cluster.  Useful for health checks.
 
+**[inspectTasks](https://gist.github.com/4399793)**: This action will retrieve the status of the task queue.
+
 **[oauth](https://gist.github.com/4326070)**: This file is actually 2 actions which are needed to authenticate a user against twitter's API.  Note the use of `api.cache` to save and load the temporary secret tokens, and how to send custom (redirect) headers with actionHero
