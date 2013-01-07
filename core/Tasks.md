@@ -7,12 +7,26 @@ You can create you own tasks by placing them in a `./tasks/` folder at the root 
 * `task.name`: The unique name of your task
 * `task.description`: a description
 * `task.scope`: "**any**" or "**all**".  Should a single actionCluster server (any) run this task, or should all of them? For example, `pingSocketClients` is run by all peers in the action cluster (because we want all clients to be pinged), but if you had a task to clean old sessions from your database or send an email, you would only want a single node to do that.
-* `task.frequency`: In milliseconds, how often should I run?.  Setting me to 0 will cause me not to run automatically, but I can still be run with `api.task.run`
+* `task.frequency`: In milliseconds, how often should I run?.  Setting me to 0 will cause me not to run automatically, but I can still be run with `task.run` or `task.enqueue`
 
-To enqueue a task (the normal way of doing things) use `api.tasks.enqueue(api, taskName, runAtTime, params)`.  To run a task in the future, set runAtTime, otherwise leave it null or set in the past.
+When enqueuing a task from your code (perhaps an action spawns a background task), the steps to do so are:
+
+1) create a new task object: `var task = new api.task(data);`.  `data` is a hash which must contain at least the `name` of the task to be run.  A more involved example is:
 
 
-As stated above, any task can also be called programmatically with `api.tasks.run(api, taskName, params, next)`.
+	var task = new api.task({
+		name: "myTaskName",
+		runAt: new Date().getTime() + 30000, // run 30 seconds from now
+		params: {email: 'evantahler@gmail.com'}, // any optional params to pass to the task
+		toAnnounce: true // to log the run of this task or not
+	});
+	
+Be sure to wrap the constructor in a `try()` block as if your task is improperly defined, it will throw an exception
+	
+2) you can enqueue the task with `task.enqueue(next(err, enqueued))`.  Enqueuing the task will have it be run the future by a worker.
+
+3) you can run the task directly inline with `task.run(next())`. This will run the task in-line wherever it was called, and bypass the queue system.
+
 
 An example Task:
 
@@ -68,6 +82,22 @@ You can also define more than one task in a single file:
     };
 
 ```
+
+## Queue Inspection
+actionHero provides 2 methods to inspect the state of your task queue:
+
+#### `api.tasks.getAllTasks(api, nameToMatch, next)`
+- next(err, results)
+- returns all the details of all enqueued and processing tasks
+
+#### `api.tasks.queueLength(api, queue, next)`
+- next(err, length)
+- length is the length of the queue requested
+- queues include: 
+  - `api.tasks.queues.globalQueue`
+  - `api.tasks.queues.delayedQueue`
+  - `api.tasks.queues.localQueue`
+  - `api.tasks.queues.processingQueue`
 
 ## Timing and Timers
 

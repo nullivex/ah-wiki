@@ -84,7 +84,7 @@ A collection of actionHero's internal methods which may be useful to others.
 ## Socket Server
 
 #### api.socketServer.sendSocketMessage(connection, message)
-- message will be JSON.stringified
+- message will be JSON.stringify'd
 
 ## Stats
 
@@ -92,40 +92,58 @@ A collection of actionHero's internal methods which may be useful to others.
 - next(err, wasSet)
 - key is a string
 - count is a signed integer
+- - this method will work on local and global stats
 
-### api.stats.get(api, key, next)
+### api.stats.set(api, key, count, next)
+- next(err, wasSet)
+- key is a string
+- count is a signed integer
+- this method will only work on local stats
+
+### api.stats.get(api, key, collection, next)
 - next(err, data)
 - key is a string
+- collection is either:
+  - `api.stats.collections.local`
+  - `api.stats.collections.global`
 
-### api.stats.load(api, next)
-- next(err, fullStatsData)
-- i get a predefined collection of stats objects
+### api.stats.getAll(api, next)
+- next(err, stats)
+- stats is a hash of `{global: globalStats, local: localStats}`
 
 
 ## Tasks
 
-### api.tasks.enqueue(api, taskName, runAtTime, params, next, toAnnounce)
-- next(err, wasEnqueued)
-- taskName is  string
-- runAtTime can be null for now
-- params is a 1-dimensional hash of data to be passed to the task
-- toAnnounce denotes if the task queuing should be logged
+### new api.task()
+	var task = new api.task({
+		name: "myTaskName",
+		runAt: new Date().getTime() + 30000, // run 30 seconds from now
+		params: {email: 'evantahler@gmail.com'}, // any optional params to pass to the task
+		toAnnounce: true // to log the run of this task or not
+	});
 
-### api.tasks.inspect(api, next)
-- next(err, tasksArray)
-- tasksArray shows all tasks in the global, local, and workingOn queues
+### task.enqueue(next)
+- run on a task object
+- next(err, enqueued)
+- adds it to the proper queue
+
+### task.run(next())
+- run on a task object
+- runs the task in-line, bypassing the task queue(s)
+
+
+### api.tasks.getAllTasks(api, nameToMatch, next)
+- next(err, results)
+- returns all the details of all enqueued and processing tasks
 
 ### api.tasks.queueLength(api, queue, next)
 - next(err, length)
-- length is the length of the global queue
-
-### api.tasks.getNextTask(api, next, queue)
-- next(err, nextTask)
-- nextTask might null if there are no tasks in the queues (both global and local)
-- queue can be null, and the global queue will be assumed
-- nextTask looks like: `{ taskName: taskName, runAtTime: runAtTime, params: params }`
-- this will remove this task from the queue, so be sure to put it back if you don't run it
-
+- length is the length of the queue requested
+- queues include: 
+  - `api.tasks.queues.globalQueue`
+  - `api.tasks.queues.delayedQueue`
+  - `api.tasks.queues.localQueue`
+  - `api.tasks.queues.processingQueue`
 
 ## WebServer
 
