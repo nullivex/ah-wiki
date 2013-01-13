@@ -46,6 +46,8 @@ Methods which the provided actionHeroWebSocket object expose are:
 - `actionHeroWebSocket.on('welcome', function(message))`
   - welcome message from the server.  
   - Used this to know when you are both connected and able to communicate with the server
+- `actionHeroWebSocket.on('disconnected', function(message))`
+  - you are disconnected
 - `actionHeroWebSocket.action(action, params, callback)`
   - action: string (like 'login' or 'cacheTest')
   - params: hash of params (like {key: 'a', value: 'b'})

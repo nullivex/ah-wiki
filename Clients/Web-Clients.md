@@ -111,10 +111,20 @@ You may also enable a HTTPS server with actionHero.  It works exactly the same a
 		"keyFile": "./certs/server-key.pem", // only for secure = true
 		"certFile": "./certs/server-cert.pem", // only for secure = true
 	};
+	
+## The `connection` object
+
+when inspecting `connection` in actions from web client, a few additional elements are added for convenience:
+
+- `connection.responseHeaders`: array of headers which can be built up in the action.  Headers will be made unique, and latest header will be used (except setting cookies)
+- `connection.method`: A string, GET, POST, etc
+- `connection.cookies`: Hash representation of the connection's cookies
+- `connection.responseHttpCode`: the status code to be rendered to the user.  Defaults to 200
+
 
 ## Files and Routes for http and https clients
 
-actionHero can also serve up flat files.  There is an action, `file.js` which is used to do this and a file server is part of the core framework (check out `initFileserver.js` for more information).  actionHero will not cache thees files and each request to `file` will re-read the file from disk (like the nginx web server).
+actionHero can also serve up flat files (check out `inititilzsers/fileserver.js` for more information).  actionHero will not cache thees files and each request to `file` will re-read the file from disk (like the nginx web server).
 
 * /public and /api are  routes which expose the 'directories' of those types.  These top level path can be configured in `config.js` with `api.configData.commonWeb.urlPathForActions` and `api.configData.commonWeb.urlPathForFiles`.
 * the root of the web server "/" can be toggled to serve the content between /file or /api actions per your needs `api.configData.commonWeb.rootEndpointType`. The default is `api`.
@@ -130,7 +140,7 @@ Web clients (http and https) you can define an optional RESTful mapping to help 
 - actions defined in params directly `action=theAction` or hitting the named URL for an action `/api/theAction` will always override RESTful routing 
 - the hierarchy of the routes object is prefix --> REST verb -> data
 - you can mix explicitly defined params with route-defined params.  If there is an overlap, the explicitly defined params win
-- data contains the 'action' to map to, and then an optional `urlMap` array (api.utils.mapParamsFromURL)
+- data contains the 'action' to map to, and then an optional `urlMap` array (api.params.mapParamsFromURL)
 - only single depth routes are supported at this time
 
 An example `routes.js` file:
@@ -172,11 +182,11 @@ URL routes remain not being a source of RESTful parameters by default, however, 
 
 ```
 	var urlMap = ['userID', 'gameID'];
-	connection.params = api.utils.mapParamsFromURL(connection, urlMap);
+	connection.params = api.params.mapParamsFromURL(connection, urlMap);
 ```
 
 - this is still left up to the action as the choice of which to choose as the default: query params, post params, or RESTful params is a deeply personal mater.
-- if your connection is TCP or webSockets, `api.utils.mapParamsFromURL` will return null
+- if your connection is TCP or webSockets, `api.params.mapParamsFromURL` will return null
 - map is an array of the param's keys in order (ie: `/:action/:userID/:email/:gameID` => `['userID', 'email', 'gameID']`)
 - the action itself will be omitted from consideration in the mapping
 - these are equivalent: [ `localhost:8080/a/path/and/stuff?action=randomNumber` ] && [ `localhost:8080/randomNumber/a/path/and/stuff` ]

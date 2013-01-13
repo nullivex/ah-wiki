@@ -1,6 +1,8 @@
-initializers are run before your server boots.  Here is where you include any new modules or add custom code which you want to be availalbe to all the rest of your actionHero server. 
+# Initializers
 
-Initializers are loaded alpabetically. 
+initializers are run before your server boots.  Here is where you include any new modules or add custom code which you want to be available to all the rest of your actionHero server. 
+
+Initializers are loaded alphabetically on most systems, but by paste-updated on some `*nixes`. 
 
 ## Format
 

@@ -1,3 +1,5 @@
+# Action Cluster
+
 actionHero can be run either as a stand-alone server or as part of a cluster.  The goal of actionCluster is to allow you to create a group of servers which will share memory state and all be able to handle requests and run tasks.  You can also add and remove nodes from the cluster without fear of data loss or task duplication.  You can run many instances of actionHero using node.js' cluster methods.
 
 Using a [redis](http://redis.io/) backend, actionHero nodes share memory objects (using the api.cache methods) and have a common queue for tasks.  Philosophically, we have changed from a mesh network (actionHero versions prior to v2) to a queue-based network (action hero after version 2).

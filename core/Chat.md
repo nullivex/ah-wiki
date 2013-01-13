@@ -1,3 +1,5 @@
+# Chat
+
 ## General
 
 All persistent connections (TCP and web socket) are joined to a chat room upon connection.  This room is defined in `api.configData.general.defaultChatRoom`.  Rooms are used to broadcast messages from the system or other users.  Rooms can be created on the fly and don't require any special setup.  In this way. you can push messages to your users with a special functions. 
@@ -10,11 +12,11 @@ Clients can also subscribe to (but not participate in) chatRooms they are not "i
 
 ## Methods
 
-### `api.chatRoom.socketRoomBroadcast(api, connection, message, [fromQueue])`
+### `api.chatRoom.socketRoomBroadcast(connection, message, [fromQueue])`
 * tell a message to all members in a room.
 * `fromQueue` is an internal optional parameter to indicate if the message has come form a peer connected to this server, or another peer in the actionCluster.
 * You can provide a `null` connection, and `api.configData.general.serverName` will appear as the sender IE `api.chatRoom.socketRoomBroadcast(api, null, "Hello.  The time is " + new Date());`.  This message will be sent to folks in the default room.
-* If you don't want to have messages from from the default room (or want to provide more context about the message sender, perhaps the action or server's name), you can mock the connection object: `var mockConnection = {room: "someOtherRoom", public: {id: 0}};`
+* If you don't want to have messages from from the default room (or want to provide more context about the message sender, perhaps the action or server's name), you can mock the connection object: `var mockConnection = {room: "someOtherRoom"};`
 * The `context` of messages sent with `api.chatRoom.socketRoomBroadcast` always be `user` to differentiate these responses from a `response` to a request
 * There is no limit to the number of chatRooms that can exist, as they are created on the fly as needed.  Your application may want to keep track of which rooms exist explicitly. 
 
@@ -30,7 +32,7 @@ When setting special params on `connection` from within actions, be sure to chec
 	...
 
  
-### `api.chatRoom.socketRoomStatus(api, room, next)`
+### `api.chatRoom.socketRoomStatus(room, next)`
 * next(err, data)
 * return the status object which contains information about a room and its members, IE:
 	* `{"room":"defaultRoom","members":["ACRK5UrC-KNQBZs_-n-d","cf1cfdce3a287bf5ac6cc71f6dd70a6f"],"membersCount":2}`
@@ -51,7 +53,7 @@ Other notes about HTTP(S) chatting:
 - `api.configData.commonWeb.httpClientMessageTTL` will default to null (disable http client http(s) message queues).  Setting it an integer (ms) will enable it again.
 - When a web client connected, actionHero will attempt to set it's ID via cookie.  If a cookie cannot be set, than each request will get a new ID.  If you are expecting http(s) clients which cannot accept cookies, than you can toggle on `api.configData.commonWeb.fingerprintOptions.onlyStaticElements`.  This will use only elements from the connection (headers, etc) which will not change to generate the fingerprint at the expense of entropy.
 - `roomChange` will also store the new room in a cookie.  Cookies are required when changing rooms
-- Messages sent to http(s) clients can be retrieved with the `api.webServer.getWebChatMessage(api, connection, next)` method
+- Messages sent to http(s) clients can be retrieved with the `api.webServer.getWebChatMessage(connection, next)` method
 - Messages sent to http(s) clients will not be kept forever (as this would use an ever increasing amount of memory).  How long messages re kept for is defined by `api.configData.commonWeb.httpClientMessageTTL`
 
 ### Examples

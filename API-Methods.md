@@ -4,64 +4,97 @@ A collection of actionHero's internal methods which may be useful to others.
 
 ## Actions
 
-### api.processAction(api, connection, messageID, next)
+### new api.actionProcessor(data)
+
+    new api.actionProcessor({
+      connection: connection,
+      callback: next,
+    })
+
 - `next(connection, toContinue)`
 - process an action in-line
 - connection must be a properly formatted connection object (best to use `api.utils.setupConnection`)
 
+### actionProcessor.processAction(messageId)
+- process the action pending `this.commection`
+- messageID is optional, and used for clients which can have more than one pending action (TCP, webSocket)
+
+## Connection
+
+### new api.connection(data)
+
+    connection = new api.connection({
+        type "web",
+        remoteIp: '123.123.123.123',
+        remorePort: 80,
+        rawConnection: {
+          req: req,
+          res: res,
+        },
+    });
+- data is required, and must contain: `{type: type, remotePort: remotePort, remoteIP: remoteIP, rawConnection: rawConnection}`
+- If your connection already has an ID (from socket.io or browser_fingerprint), you can also pass `data.id`, otherwise a new id will be generated.
+- When connections are built, they are added automatically to `api.connections`
+- `.connection.params`, `connection.response`, etc are automatically built into the connection object
+
+### api.connection.destroy()
+- The proper way to disconnect a client.  This will remove the connection from any chatrooms and global lists.
+
+### api.connections.connections
+- the array of all active connections for this server
 
 ## Cache
 
-### api.cache.size(api, next)
+### api.cache.size(next)
 - `next(error, count)`
 - counts the number of elements in the cache
 
-### api.cache.save(api, key, value, expireTimeMS, next)
+### api.cache.save(key, value, expireTimeMS, next)
 - `next(error, didSave)`
 - expireTimeMS can be null if you don't want it to expire
 - key must be a string
 - value must be able to be JSON.stringify'd
 
 
-### api.cache.load(api, key, next)
+### api.cache.load(key, next)
 - `next(error, cacheObj.value, cacheObj.expireTimestamp, cacheObj.createdAt, cacheObj.readAt)`
 - all callback values will be null if the object doesn't exist or has expired
 
-### api.cache.destroy(api, key, next)
+### api.cache.destroy(key, next)
 - `next(error, didDelete)`
 - didDelete will be true if the object existed and was deleted.
 
 
 ## Chat Rooms
 
-### api.chatRoom.socketRoomBroadcast(api, connection, message, fromQueue)
+### api.chatRoom.socketRoomBroadcast(connection, message, fromQueue)
 - fromQueue is to denote if the message originated from this server or another peer (don't use)
 - connection can be null, and defaults will be assigned
-- You can also choose which clients recieve messages with `api.chatRoom.socketRoomBroadcast` by configuring `params.roomMatchKey` and `params.roomMatchValue` on the sending client.  This will only broadcast messages to clients (in the same room who match).  Examples include: `&roomMatchKey=id&roomMatchValue=123456` or `&roomMatchKey=auth&roomMatchValue=true`.
+- You can also choose which clients receive messages with `api.chatRoom.socketRoomBroadcast` by configuring `params.roomMatchKey` and `params.roomMatchValue` on the sending client.  This will only broadcast messages to clients (in the same room who match).  Examples include: `&roomMatchKey=id&roomMatchValue=123456` or `&roomMatchKey=auth&roomMatchValue=true`.
 - When setting special params on `connection` from within actions, be sure to check for `_originalConnection` (for webSockets and socket clients): `connection.auth = "true";  if(connection._original_connection != null){ connection._original_connection.auth = "true"; }`
 
 
-### api.chatRoom.socketRoomStatus(api, room, next)
+### api.chatRoom.socketRoomStatus(room, next)
 - next(err, roomData)
 - roomData = {room: roomName, members: [], membersCount: 3}
 
-### api.chatRoom.roomAddMember(api, connection, next)
+### api.chatRoom.roomAddMember(connection, next)
 - next(err, wasAdded)
 
-### api.chatRoom.roomRemoveMember(api, connection, next)
+### api.chatRoom.roomRemoveMember(connection, next)
 - next(err, wasRemoved)
 
-### api.chatRoom.announceMember(api, connection, direction)
+### api.chatRoom.announceMember(connection, direction)
 
 - direction can be true (member added) or false (member leaving)
 
 ## File Server
 
-### api.fileServer.sendFile(api, file, connection, next)
+### api.fileServer.deliver(connection, next)
 - next(connection, false)
 - file is the full path to the file to send
 
-### api.fileServer.sendFileNotFound(api, connection, next)
+### api.fileServer.sendFileNotFound(connection, next)
 - next(connection, true)
 
 
@@ -71,11 +104,11 @@ A collection of actionHero's internal methods which may be useful to others.
 - the connected redis client
 - use this redis instance to make queries, etc
 
-### api.redis.registerChannel(api, channel, handler)
+### api.redis.registerChannel(channel, handler)
 - subscribe to redis pub/sub messages
 - channel is a string
 - handler is the callback to be fired on messages
-- handler will be send next(channel, message)
+  - handler will be send next(channel, message)
 
 ### api.redis.client.publish(channel, message);
 - channel and message should be strings
@@ -88,26 +121,26 @@ A collection of actionHero's internal methods which may be useful to others.
 
 ## Stats
 
-### api.stats.increment(api, key, count, next)
+### api.stats.increment(key, count, next)
 - next(err, wasSet)
 - key is a string
 - count is a signed integer
 - - this method will work on local and global stats
 
-### api.stats.set(api, key, count, next)
+### api.stats.set(key, count, next)
 - next(err, wasSet)
 - key is a string
 - count is a signed integer
 - this method will only work on local stats
 
-### api.stats.get(api, key, collection, next)
+### api.stats.get(key, collection, next)
 - next(err, data)
 - key is a string
 - collection is either:
   - `api.stats.collections.local`
   - `api.stats.collections.global`
 
-### api.stats.getAll(api, next)
+### api.stats.getAll(next)
 - next(err, stats)
 - stats is a hash of `{global: globalStats, local: localStats}`
 
@@ -132,11 +165,11 @@ A collection of actionHero's internal methods which may be useful to others.
 - runs the task in-line, bypassing the task queue(s)
 
 
-### api.tasks.getAllTasks(api, nameToMatch, next)
+### api.tasks.getAllTasks(nameToMatch, next)
 - next(err, results)
 - returns all the details of all enqueued and processing tasks
 
-### api.tasks.queueLength(api, queue, next)
+### api.tasks.queueLength(queue, next)
 - next(err, length)
 - length is the length of the queue requested
 - queues include: 
@@ -150,15 +183,15 @@ A collection of actionHero's internal methods which may be useful to others.
 ### api.webServer.respondToWebClient(connection, toRender)
 - this renders the connection.response to the client
 
-### api.webServer.storeWebChatMessage(api, connection, messagePayload, next)
+### api.webServer.storeWebChatMessage(connection, messagePayload, next)
 - next(null)
 - stores a message for a web client
 
-### api.webServer.changeChatRoom(api, connection, next)
+### api.webServer.changeChatRoom(connection, next)
 - next(null)
 - helper to change the chat room of the virtual connection for a web client
 
-### api.webServer.getWebChatMessage(api, connection, next)
+### api.webServer.getWebChatMessage(connection, next)
 - next(err, message)
 - this will only return one message
 - message might be null if there are not message for this client
@@ -210,14 +243,3 @@ A collection of actionHero's internal methods which may be useful to others.
 
 ### api.utils.parseCookies(req)
 - a helper to parse the request object's headers and returns a hash of the client's cookies
-
-### api.utils.setupConnection(api, connection, type, remotePort, remoteIP)
-- create a new connection object appropriate for actions, or modify an existing one to add needed fields
-- connection can be null or any object
-- type should be 'web', 'tcp', etc
-- the connection, if new, will be added to chat rooms
-
-### api.utils.destroyConnection(api, connection, next)
-- remove all tendrils of a connection
-- will be removed from any chat rooms
-- will be removed from `api.connections`

@@ -1,3 +1,5 @@
+# Development Mode
+
 Development mode, when enabled, will poll for changes in your actions and tasks, and reload them on the fly.
 
 - this uses fs.watchFile() and doesn't work on all OSs / file systems.

@@ -1,3 +1,5 @@
+# Exceptions
+
 **This module only works for node.js >= `v0.8.0`, as it makes use of [domains](http://nodejs.org/api/domain.html)**
 
 ## General

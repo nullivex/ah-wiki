@@ -21,7 +21,7 @@ When enqueuing a task from your code (perhaps an action spawns a background task
 		toAnnounce: true // to log the run of this task or not
 	});
 	
-Be sure to wrap the constructor in a `try()` block as if your task is improperly defined, it will throw an exception
+Be sure to wrap the constructor in a `try(){ }catch(e){ }` block as if your task is improperly defined, it will throw an exception
 	
 2) you can enqueue the task with `task.enqueue(next(err, enqueued))`.  Enqueuing the task will have it be run the future by a worker.
 
