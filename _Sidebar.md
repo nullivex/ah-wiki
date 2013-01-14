@@ -28,7 +28,7 @@
 - [WebSockets](https://github.com/evantahler/actionHero/wiki/Web-Socket-Clients)
 
 ## API Method Documentation
-- [API Methods](https://github.com/evantahler/actionHero/wiki/API-Methods)
+- **[API Methods](https://github.com/evantahler/actionHero/wiki/API-Methods)**
 
 ## Templates and Examples
 - [Example Actions](https://github.com/evantahler/actionHero/wiki/Examples:-Actions)
