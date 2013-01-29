@@ -2,7 +2,7 @@
 
 ActionHero now uses the [Winston logger](https://github.com/flatiron/winston).  This will allow for better, more customizable logging.  
 
-In your `config.js`, you can customize which `transports` you would like the logger to use. If none are provided, a default logger which only will print to stdout woull be used.  See winston's documentation for all the logger types, but know that they include console, file, s3, raik, and more.
+In your `config.js`, you can customize which `transports` you would like the logger to use. If none are provided, a default logger which only will print to stdout will be used.  See winston's documentation for all the logger types, but know that they include console, file, s3, raik, and more.
 
 The default loggers are:
 
@@ -26,6 +26,7 @@ configData.logger = {
   ]
 };
 ```
+You can set a transport directly, IE `new (winston.transports.Console)()` or in a function which will be passed the `api` object like the examples above.  The benefit of using the function invocation is you will have access to other methods and configuration options (like the title of the process).
 
 Note that you can set a `level` which indicates which level (and those above it) you wish to log per transport.  The log levels are:
 
