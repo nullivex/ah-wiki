@@ -1,23 +1,53 @@
 # Logging
 
-The `api.log()` method is available to you throughout the application.  `api.log()` will both write these log messages to file, but also display them on the console.  
+ActionHero now uses the [Winston logger](https://github.com/flatiron/winston).  This will allow for better, more customizable logging.  
 
-There are formatting options you can pass to `api.log(yourMessage, options=[])`.  The options array can be many colors and formatting types, IE: `['blue','bold']`.  
+In your `config.js`, you can customize which `transports` you would like the logger to use. If none are provided, a default logger which only will print to stdout woull be used.  See winston's documentation for all the logger types, but know that they include console, file, s3, raik, and more.
 
-You can disable request logging in your `config.js`
+The default loggers are:
 
-For example:
+``` javascript
+configData.logger = {
+  transports: [
+    function(api){
+      return new (winston.transports.Console)({
+        colorize: true, 
+        level: "debug", 
+        timestamp: api.utils.sqlDateTime,
+      });
+    },
+    function(api){
+      return new (winston.transports.File)({
+        filename: './log/' + api.pids.title + '.log',
+        level: "info",
+        timestamp: true,
+      });
+    }
+  ]
+};
+```
 
-- `api.log("OMG ERROR", ['red','bold])` is a serious error
-- `api.log("ActionHero booted", "green")` is a happy boot message.
+Note that you can set a `level` which indicates which level (and those above it) you wish to log per transport.  The log levels are:
 
-There is also a helper to log a complex JSON string: `api.logJSON(hash, color)`. This is often used by actionHero to log connection information: 
+- 0=debug
+- 1=info
+- 2=notice
+- 3=warning
+- 4=error
+- 5=crit
+- 6=alert
+- 7=emerg
 
-    api.logJSON({
-      label: "action @ web",
-      to: connection.remoteIP,
-      action: connection.action,
-      request: full_url,
-      params: JSON.stringify(connection.params),
-      duration: connection.response.serverInformation.requestDuration
-    });
+For example, if you set the logger's level to "notice", you would also see "crit" messages, but not "debug" messages.
+
+To invoke the logger from your code, use:
+
+### api.log(message, severity, metadata)
+- message is a string
+- severity is a string, and should match the log-level (IE: 'info' or 'warning')
+- the default severity level is 'info'
+- (optional) metadata is anything that can be stringified with `JSON.stringify`
+
+`api.logger.log` and `api.logger[severity]` also exist which allow you to call and modify the Winston instance directly.
+
+`api.log` will pass your message to all transports.

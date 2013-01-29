@@ -199,9 +199,14 @@ A collection of actionHero's internal methods which may be useful to others.
 
 ## Log
 
-### api.log(original_message, styles)
-- original_message is a string
-- styles is an array of styles like ["bold", "red"] or just one style as a string "green"
+### api.log(message, severity, metadata)
+- message is a string
+- severity is a string, and should match the log-level (IE: 'info' or 'warning')
+- the default severity level is 'info'
+- (optional) metadata is anything that can be stringified with `JSON.stringify`
+
+api.logger.log and api.logger[severity] also exist
+
 
 ## Utils
 
