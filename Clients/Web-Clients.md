@@ -215,3 +215,84 @@ File uploads from forms will also appear in `connection.params`, but will be an 
 ## XML
 
 You may also request XML data rather than JSON from actionHero. To do so, you need to pass `outputType=xml` as a param to your request.  
+
+## Uploading FIles
+
+actionHero uses the [formidable](https://github.com/felixge/node-formidable) form parsing library.  You can set options for it via `api.configData.commonWeb.formOptions`.  You can upload multiple files to an action and they will be available within `connection.params` as formidable response objects containing references to the original file name, where the uploaded file was stored temporarily, etc.   Here's an example:
+
+#### uploader.js (action)
+
+```javascript
+exports.action = {
+  name: 'uploader',
+  description: 'uploader',
+  inputs: {
+    required: [], optional: ['file1', 'file2', 'key1', 'key2']
+  }, 
+  outputExample: null,
+  run: function(api, connection, next){
+    console.log("\r\n\r\n")
+    console.log(connection.params);
+    console.log("\r\n\r\n")
+    next(connection, true);
+  }
+};
+```
+
+#### uploader.html (public)
+
+```html
+<html>
+    <head></head>
+    <body>
+        <form method="post" enctype="multipart/form-data" action="http://localhost:8080/api/uploader">
+            <input type="file" multiple />
+            <br><br>
+            <input type="file" name="file1" />
+            <input type="file" name="file2" />
+            <br><br>
+            <input type='text' name="key1" />
+            <input type='text' name="key2" />
+            <br><br>
+            <input type="submit" value="send" />
+        </form>
+    </body>
+</html>
+```
+
+.. and an example `connections.params` with 2 uploaded files and string values:
+
+```
+{ action: 'uploader',
+  file1: 
+   { domain: null,
+     _events: null,
+     _maxListeners: 10,
+     size: 5477608,
+     path: '/Users/evantahler/PROJECTS/actionHero/tmp/86b2aa018a9785e20b3f6cea95babcca',
+     name: '1-02 Concentration Enhancing Menu Initialiser.mp3',
+     type: 'audio/mp3',
+     hash: false,
+     lastModifiedDate: Wed Feb 13 2013 20:32:49 GMT-0800 (PST),
+     _writeStream: 
+      { ... },
+     length: [Getter],
+     filename: [Getter],
+     mime: [Getter] },
+  file2: 
+   { domain: null,
+     _events: null,
+     _maxListeners: 10,
+     size: 10439802,
+     path: '/Users/evantahler/PROJECTS/actionHero/tmp/6052010f1d75ceaeb9197a9a759124dc',
+     name: '1-10 There She Is.mp3',
+     type: 'audio/mp3',
+     hash: false,
+     lastModifiedDate: Wed Feb 13 2013 20:32:49 GMT-0800 (PST),
+     _writeStream: 
+      { ... },
+  key1: '123',
+  key2: '456',
+  limit: 100,
+  offset: 0 }
+```
