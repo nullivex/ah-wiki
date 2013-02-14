@@ -246,8 +246,6 @@ exports.action = {
     <head></head>
     <body>
         <form method="post" enctype="multipart/form-data" action="http://localhost:8080/api/uploader">
-            <input type="file" multiple />
-            <br><br>
             <input type="file" name="file1" />
             <input type="file" name="file2" />
             <br><br>
