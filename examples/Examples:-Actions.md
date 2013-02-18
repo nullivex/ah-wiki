@@ -1,4 +1,4 @@
-## Actions which come bundled with a new actionHero project
+## Example Actions
 
 **[actionsView](https://github.com/evantahler/actionHero/blob/master/actions/actionsView.js)**: This method shows how to iterate though actionHero's actions and use the metadata to self-describe the capabilities of the API to a client.  This method also crafts responses which describes the special actions for persistent (TCP and webSocket) clients.
 
@@ -15,3 +15,5 @@
 **[inspectTasks](https://gist.github.com/4399793)**: This action will retrieve the status of the task queue.
 
 **[oauth](https://gist.github.com/4326070)**: This file is actually 2 actions which are needed to authenticate a user against twitter's API.  Note the use of `api.cache` to save and load the temporary secret tokens, and how to send custom (redirect) headers with actionHero
+
+** [A database-backed user system](https://gist.github.com/evantahler/4981408): This example contains a working user system (auth, login, user creation, sessions, etc) using a mySQL backend and the sequelize ORM. 
