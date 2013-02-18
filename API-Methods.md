@@ -37,8 +37,14 @@ A collection of actionHero's internal methods which may be useful to others.
 - When connections are built, they are added automatically to `api.connections`
 - `.connection.params`, `connection.response`, etc are automatically built into the connection object
 
-### api.connection.destroy()
+### connection.destroy()
 - The proper way to disconnect a client.  This will remove the connection from any chatrooms and global lists.
+
+### connection.sendMessage(message, type)
+* You may use this method to send a message to a specific client which exists in `api.connections.connections`.  
+* `sendMessage` abstracts the type of connection so you don't need to use `write` (socket clients) or `emit` (websockets).  
+* message is a JSON block which will be serialized and type is optional, and used as the type name of the event to emit (if relevent)
+
 
 ### api.connections.connections
 - the array of all active connections for this server

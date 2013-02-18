@@ -45,6 +45,11 @@ When setting special params on `connection` from within actions, be sure to chec
 	}
 	...
 
+
+### `connection.sendMessage(message, type)`
+* You may use this method to send a message to a specific client which exists in `api.connections.connections`.  
+* `sendMessage` abstracts the type of connection so you don't need to use `write` (socket clients) or `emit` (websockets).  
+* message is a JSON block which will be serialized and type is optional, and used as the type name of the event to emit (if relevent)
  
 ### `api.chatRoom.socketRoomStatus(room, next)`
 * next(err, data)
