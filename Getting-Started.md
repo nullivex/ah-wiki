@@ -1,7 +1,7 @@
 ## Requirements
-* node.js ( >= v0.6.0 required but >= v0.8.0 recommended)
+* node.js ( >= v0.8.0)
 * npm
-* redis (for actionCluster)
+* redis (for actionCluster, cache, stats, and tasks)
 
 ## Install & Quickstart
 
