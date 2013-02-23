@@ -62,4 +62,4 @@ exports.initStuff = function(api, next){
 ## Initializer Examples: 
 - [[Init-mysql]] - Use sequilize.js within an initializer
 - [[Init-session]] - use the cache methods and `connection.id` to easily make some session management helpers.
-- [Init-mongo](https://github.com/evantahler/actionHero/blob/master/bin/include/startCluster.js) - a MongoDB initializer 
+- [Init-mongo](https://github.com/evantahler/actionHero/issues/117) - a MongoDB initializer 
