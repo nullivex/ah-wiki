@@ -13,13 +13,14 @@ When enqueuing a task from your code (perhaps an action spawns a background task
 
 1) create a new task object: `var task = new api.task(data);`.  `data` is a hash which must contain at least the `name` of the task to be run.  A more involved example is:
 
-
-	var task = new api.task({
-		name: "myTaskName",
-		runAt: new Date().getTime() + 30000, // run 30 seconds from now
-		params: {email: 'evantahler@gmail.com'}, // any optional params to pass to the task
-		toAnnounce: true // to log the run of this task or not
-	});
+```javascript
+var task = new api.task({
+	name: "myTaskName",
+	runAt: new Date().getTime() + 30000, // run 30 seconds from now
+	params: {email: 'evantahler@gmail.com'}, // any optional params to pass to the task
+	toAnnounce: true // to log the run of this task or not
+});
+```
 	
 Be sure to wrap the constructor in a `try(){ }catch(e){ }` block as if your task is improperly defined, it will throw an exception
 	
