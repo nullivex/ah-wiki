@@ -12,7 +12,6 @@
 - [Tasks](https://github.com/evantahler/actionHero/wiki/Tasks)
 - [Cache](https://github.com/evantahler/actionHero/wiki/Cache)
 - [Initializers](https://github.com/evantahler/actionHero/wiki/Initializers)
-- [Redis](https://github.com/evantahler/actionHero/wiki/Redis)
 - [Stats](https://github.com/evantahler/actionHero/wiki/Stats)
 - [Cluster](https://github.com/evantahler/actionHero/wiki/actionCluster)
 - [Config](https://github.com/evantahler/actionHero/wiki/Config)

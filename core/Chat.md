@@ -12,7 +12,7 @@ Clients can also subscribe to (but not participate in) chatRooms they are not "i
 
 ## Methods
 
-### `api.chatRoom.socketRoomBroadcast(connection, message, [fromQueue])`
+### `api.chatRoom.socketRoomBroadcast(connection, message)`
 * tell a message to all members in a room.
 * `fromQueue` is an internal optional parameter to indicate if the message has come form a peer connected to this server, or another peer in the actionCluster.
 * You can provide a `null` connection, and `api.configData.general.serverName` will appear as the sender IE `api.chatRoom.socketRoomBroadcast(api, null, "Hello.  The time is " + new Date());`.  This message will be sent to folks in the default room.
@@ -22,7 +22,7 @@ Clients can also subscribe to (but not participate in) chatRooms they are not "i
 
 ### Specific Clients
 
-You can also choose which clients recieve messages with `api.chatRoom.socketRoomBroadcast` by configuring `params.roomMatchKey` and `params.roomMatchValue` on the sending client.  This will only broadcast messages to clients (in the same room who match).  Examples include: `&roomMatchKey=id&roomMatchValue=123456` or `&roomMatchKey=auth&roomMatchValue=true`.  For example, you can send a message to a single connection by ID:
+You can also choose which clients receive messages with `api.chatRoom.socketRoomBroadcast` by configuring `params.roomMatchKey` and `params.roomMatchValue` on the sending client.  This will only broadcast messages to clients (in the same room who match).  Examples include: `&roomMatchKey=id&roomMatchValue=123456` or `&roomMatchKey=auth&roomMatchValue=true`.  For example, you can send a message to a single connection by ID:
 
 ```javascript
 var mockConnection = {room: 'lobby', roomMatchKey: 'id', roomMatchValue: 123};

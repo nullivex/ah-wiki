@@ -41,3 +41,5 @@ When running in a cluster, the cache system upgrades to be shared across all pee
 ](https://github.com/evantahler/actionHero/wiki/Redis)
 
 The timestamps regarding `api.cahce.load` are to help clients understand if they are working with data which has been modified by another peer (when running in an actionCluster).  There are more details on [how redis works with actionHero here.](https://github.com/evantahler/actionHero/wiki/Redis)
+
+Keep in mind that many clients/server can access a cache's value simultaneously, so build your actions carefully not to have conflicting state.

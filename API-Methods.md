@@ -42,8 +42,8 @@ A collection of actionHero's internal methods which may be useful to others.
 
 ### connection.sendMessage(message, type)
 * You may use this method to send a message to a specific client which exists in `api.connections.connections`.  
-* `sendMessage` abstracts the type of connection so you don't need to use `write` (socket clients) or `emit` (websockets).  
-* message is a JSON block which will be serialized and type is optional, and used as the type name of the event to emit (if relevent)
+* `sendMessage` abstracts the type of connection so you don't need to use `write` (socket clients) or `publish` (websockets).  
+* message is a JSON block which will be serialized and type is optional, and used as the type name of the event to emit (optional, depends on transport)
 
 
 ### api.connections.connections
@@ -73,12 +73,11 @@ A collection of actionHero's internal methods which may be useful to others.
 
 ## Chat Rooms
 
-### api.chatRoom.socketRoomBroadcast(connection, message, fromQueue)
-- fromQueue is to denote if the message originated from this server or another peer (don't use)
+### api.chatRoom.socketRoomBroadcast(connection, message)
 - connection can be null, and defaults will be assigned
 - You can also choose which clients receive messages with `api.chatRoom.socketRoomBroadcast` by configuring `params.roomMatchKey` and `params.roomMatchValue` on the sending client.  This will only broadcast messages to clients (in the same room who match).  Examples include: `&roomMatchKey=id&roomMatchValue=123456` or `&roomMatchKey=auth&roomMatchValue=true`.
 - When setting special params on `connection` from within actions, be sure to check for `_originalConnection` (for webSockets and socket clients): `connection.auth = "true";  if(connection._original_connection != null){ connection._original_connection.auth = "true"; }`
-
+ 
 
 ### api.chatRoom.socketRoomStatus(room, next)
 - next(err, roomData)
@@ -110,14 +109,16 @@ A collection of actionHero's internal methods which may be useful to others.
 - the connected redis client
 - use this redis instance to make queries, etc
 
-### api.redis.registerChannel(channel, handler)
-- subscribe to redis pub/sub messages
-- channel is a string
-- handler is the callback to be fired on messages
-  - handler will be send next(channel, message)
 
-### api.redis.client.publish(channel, message);
-- channel and message should be strings
+## Faye
+
+#### api.faye.client.subscribe(channel, callback)
+- channel is a string of the form "/my/channel"
+- callback will be passed `message` which is an object
+
+#### api.faye.client.publish(channel, message);
+- channel is a string of the form "/my/channel"
+- message is an object
 
 
 ## Socket Server
@@ -125,23 +126,24 @@ A collection of actionHero's internal methods which may be useful to others.
 #### api.socketServer.sendSocketMessage(connection, message)
 - message will be JSON.stringify'd
 
+
 ## Stats
 
 ### api.stats.increment(key, count, next)
 - next(err, wasSet)
-- key is a string
+- key is a string of the form ("thing:stuff")
 - count is a signed integer
 - - this method will work on local and global stats
 
 ### api.stats.set(key, count, next)
 - next(err, wasSet)
-- key is a string
+- key is a string of the form ("thing:stuff")
 - count is a signed integer
 - this method will only work on local stats
 
 ### api.stats.get(key, collection, next)
 - next(err, data)
-- key is a string
+- key is a string of the form ("thing:stuff")
 - collection is either:
   - `api.stats.collections.local`
   - `api.stats.collections.global`
@@ -149,6 +151,7 @@ A collection of actionHero's internal methods which may be useful to others.
 ### api.stats.getAll(next)
 - next(err, stats)
 - stats is a hash of `{global: globalStats, local: localStats}`
+- keys will be collapsed into a hash 
 
 
 ## Tasks
@@ -254,3 +257,6 @@ api.logger.log and api.logger[severity] also exist
 
 ### api.utils.parseCookies(req)
 - a helper to parse the request object's headers and returns a hash of the client's cookies
+
+### api.utils.hasifyNestedString = function(string, value, hash, seperator)
+- used to collapse a string like "thing:stff" and value "val" into an object like `{thing: { stuff: val }}`

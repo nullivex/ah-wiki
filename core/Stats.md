@@ -1,24 +1,24 @@
 ## Stats
 
-actionHero ships with helper functions for you to store and retrieve stats about your application. When running in an actionCluster (redis enabled), 2 collections of stats will be built: global and local.  This means you can count up the requests a single actionHero node has been processing, and the total for the cluster, etc.  
+actionHero ships with helper functions for you to store and retrieve stats about your application. When running in an actionCluster, 2 collections of stats will be built: `global` and `local`.  This means you can count up the requests a single actionHero node has been processing, and the total for the cluster, etc.  
 
 Many of the core actionHero features (cache, web/tcp/websocket servers, etc) are instrumented with stats, but you are encouraged to add more!
 
 ### api.stats.increment(api, key, count, next)
 - next(err, wasSet)
-- key is a string
+- key is a string of the form ("thing:stuff")
 - count is a signed integer
 - - this method will work on local and global stats
 
 ### api.stats.set(api, key, count, next)
 - next(err, wasSet)
-- key is a string
+- key is a string of the form ("thing:stuff")
 - count is a signed integer
 - this method will only work on local stats
 
 ### api.stats.get(api, key, collection, next)
 - next(err, data)
-- key is a string
+- key is a string of the form ("thing:stuff")
 - collection is either:
   - `api.stats.collections.local`
   - `api.stats.collections.global`
@@ -26,6 +26,7 @@ Many of the core actionHero features (cache, web/tcp/websocket servers, etc) are
 ### api.stats.getAll(api, next)
 - next(err, stats)
 - stats is a hash of `{global: globalStats, local: localStats}`
+- keys will be collapsed into a hash 
 
 ## Notes
 - in `api.stats.increment`, the count can be negative or positive
