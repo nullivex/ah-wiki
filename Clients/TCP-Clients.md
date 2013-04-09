@@ -50,6 +50,8 @@ Socket Example:
 	
 In your actions, you can send a message directly to a TCP client (without relying on chat rooms) like this:`api.sendSocketMessage(api, connection, message)`
 
+`connection.type` for a TCP/Socket client is "socket"
+
 ## TLS
 
 You can switch your TCP server to use TLS encryption if you desire.  Just toggle the settings in `config.json` and provide valid certificates.  You can test this with the openSSL client rather than telnet `openssl s_client -connect 127.0.0.1:5000`
@@ -62,8 +64,6 @@ You can switch your TCP server to use TLS encryption if you desire.  Just toggle
 		"keyFile": "./certs/server-key.pem", // only for secure = true
 		"certFile": "./certs/server-cert.pem", // only for secure = true
 	};
-
-`connection.type` for a TCP/Socket client is "socket"
 
 ## Files and Routes for TCP clients
 
@@ -85,4 +85,3 @@ The main `trick` to working with TCP/wire connections directly is to remember th
 [The actionHero client library](https://github.com/evantahler/actionhero_client) uses TCP/TLS connections, and makes use of actionHero's `messageCount` paramiter to keep track of requests, and keeps response callbacks for actions in a pending queue.  You can check out the [example here](https://github.com/evantahler/actionhero_client/blob/master/actionhero_client.js)
 
 Note that only requests the client makes contain a `messageCount`, but broadcasts do not (the `say` command, etc)
-
