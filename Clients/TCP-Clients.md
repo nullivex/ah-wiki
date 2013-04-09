@@ -63,6 +63,8 @@ You can switch your TCP server to use TLS encryption if you desire.  Just toggle
 		"certFile": "./certs/server-cert.pem", // only for secure = true
 	};
 
+`connection.type` for a TCP/Socket client is "socket"
+
 ## Files and Routes for TCP clients
 
 Connections over socket can also use the file action.  There is no 'route' for files.
