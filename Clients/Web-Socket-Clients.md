@@ -4,6 +4,8 @@ actionHero uses [faye](http://faye.jcoglan.com/) for web sockets.  Faye provides
 
 Just like the additional actions added for TCP connection, web socket connections have access to the chat room methods.  A suggested template which exposes them is [provided in actionHero and you can view it here](https://github.com/evantahler/actionHero/blob/master/examples/clients/web/actionHeroWebSocket.js).  You will note that there are methods provided to use the chat methods and acquire metadata.
 
+`connection.type` for a webSocket client is "webSocket".  This type will not change regardless of if the client has fallen back to another protocol. 
+
 Data is always returned as JSON objects to the webSocket client.  
 
 An example web socket session might be the following:
