@@ -121,6 +121,7 @@ when inspecting `connection` in actions from web client, a few additional elemen
 - `connection.cookies`: Hash representation of the connection's cookies
 - `connection.responseHttpCode`: the status code to be rendered to the user.  Defaults to 200
 
+`connection.type` for a HTTP client is "web"
 
 ## Files and Routes for http and https clients
 
