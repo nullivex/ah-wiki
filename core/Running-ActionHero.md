@@ -74,9 +74,6 @@ actionHero - a node.js API framework for both tcp sockets, web sockets, and http
 * Otherwise, you can reference the binary from either `./node_modules/.bin/actionHero` or `./node_modules/actionHero/bin/actionHero`.
 * If you installed actionHero locally, you can add a reference to your path (OSX and Linux): `export PATH=$PATH:node_modules/.bin` to be able to use simpler commands, IE `actionHero start`
 
-NOTE: If you are on windows, you will always need to run `node actionHero`
-
-
 ## Programatic Use of actionHero
 
 While NOT encouraged, you can always instantiate an actionHero server yourself.  Perhaps you wish to combine actionHero with an existing (express?) project.  Here's how!  Take note that using these methods will not work for actionCluster, and only a single instance will be started within your project.  
@@ -114,3 +111,8 @@ You can programmatically control an actionHero server with `actionHero.start(par
 		}, timer);
 	});
 ```
+
+## Windows Notes
+
+- Sometimes actionHero may require a git-based module (rather than a NPM module).  You will need to have git installed.  Depending on how you installed git, it may not be available to the node shell.  Be sure to have also installed references to git.  You can also run node/npm install from the git shell. 
+- sometimes, npm will not install the actionHero binary @ `/node_modules/.bin/actionHero`, but rather it will attempt to create a windows executable and wrapper.  You can launch actionHero directly with `./node_modules/actionHero/bin/actionHero`
