@@ -88,8 +88,18 @@ You can also define more than one action per file if you would like:
     }
 ```
 
-Notes:
+## Preprocessing
 
+You can overwrite the stub method `api.actionProcessor.prototype.preProcessAction` which will be called before every action.  You can use this to do things like authentication before allowing a connection into an action.  The arguments to `preProcessAction` are:
+`function(api, connection, actionTemplate, callback)`.
+
+`actionTemplate` is the literal action definition, so you can inspect `actionTemplate.name`, `actionTemplate.description`, etc.  You can feel free to add additional parameters to your action definitions like `actionTemplate.secure` which you can inspect in the `preProcessAction` method.
+
+The goal of `preProcessAction` is to return either `true` or `false` to the callback, where `true` will move on to the action proper, and `false` will render the connection types default return to the client.  It would be best to set `connection.error` if you are returning false to `preProcessAction`'s callback so the client has an idea of why they were denied.
+
+It is best to define `preProcessAction` in an [initializer](https://github.com/evantahler/actionHero/wiki/Initializers). 
+
+## Notes:
 
 * Actions are asynchronous, and require in the API object, the connection object, and the callback function.  Completing an action is as simple as calling `next(connection, toRender)`.  The second param in the callback is a boolean to let the framework know if it needs to render anything else to the client.  There are some actions where you may have already sent the user output (see the `file.js` action for an example) where you would not want to render the default messages.
 * The metadata is used in reflexive and self-documenting actions in the API, such as `actionsView`.  
@@ -98,5 +108,4 @@ Notes:
 * actionHero strives to keep the `connection` object uniform among various client types.  All connections have the `connection.response` and `connection.error` objects.  You can inspect `connection.type` to learn more about the connection.  The gory details of the connection (which vary on its type) are stored in `connection.rawConnection` which will contain the websoctket, tcp connection, etc.  For web clients, `connection.rawConnection = {req: req, res: res}`  
 * For web connections, you do have `connection.method` which will be "GET", "POST", etc and `connection.cookies`.  
 
-[
-You can learn more about handling HTTP verbs and file uploads here](https://github.com/evantahler/actionHero/wiki/Web-Clients) and [TCP Clients](https://github.com/evantahler/actionHero/wiki/TCP-Clients) and [Web-Socket Clients](https://github.com/evantahler/actionHero/wiki/Web-Socket-Clients)
+[You can learn more about handling HTTP verbs and file uploads here](https://github.com/evantahler/actionHero/wiki/Web-Clients) and [TCP Clients](https://github.com/evantahler/actionHero/wiki/TCP-Clients) and [Web-Socket Clients](https://github.com/evantahler/actionHero/wiki/Web-Socket-Clients)
