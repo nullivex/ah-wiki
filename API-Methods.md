@@ -62,9 +62,10 @@ A collection of actionHero's internal methods which may be useful to others.
 - value must be able to be JSON.stringify'd
 
 
-### api.cache.load(key, next)
+### api.cache.load(key, next) | api.cache.load(key, options, next)
 - `next(error, cacheObj.value, cacheObj.expireTimestamp, cacheObj.createdAt, cacheObj.readAt)`
 - all callback values will be null if the object doesn't exist or has expired
+- options can be `{expireTime: 1234}` where the act of reading the key will reset the key's expire time
 
 ### api.cache.destroy(key, next)
 - `next(error, didDelete)`
