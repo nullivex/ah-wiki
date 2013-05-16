@@ -18,12 +18,14 @@ actionHero ships with the functions needed for an in-memory key-value cache.  If
 
 ### `api.cache.load`
 
-* Invoke: `api.cache.load(key, next)`
+* Invoke: `api.cache.load(key, next)` | `api.cache.load(key, options, next)`
 * Callback: `next(value, expireTimestamp, createdAt, readAt)`
 	* value will be the object which was saved and `null` if the object cannot be found or is expired
 	* expireTimestamp(ms) is when the object is set to expire in system time
 	* createdAt(ms) is when the object was created
 	* readAt(ms) is the timestamp at which the object was last read with `api.cache.load`.  Useful for telling if another worker has consumed the object recently
+
+        Options can be {expireTime: 1234} where the act of reading the key will reset the key's expire time
 	
 	If the key requested is not found (or expired), all values returned will be null.
 
