@@ -64,6 +64,30 @@ You can switch your TCP server to use TLS encryption if you desire.  Just toggle
 		"keyFile": "./certs/server-key.pem", // only for secure = true
 		"certFile": "./certs/server-cert.pem", // only for secure = true
 	};
+	
+You can connect like:
+
+	openssl s_client -connect 127.0.0.1:5000
+	
+or from node:
+
+	var tls = require('tls');
+	var fs = require('fs');
+	
+	var options = {
+	  key: fs.readFileSync('certs/server-key.pem'),
+	  cert: fs.readFileSync('certs/server-cert.pem')
+	};
+	
+	var cleartextStream = tls.connect(5000, options, function() {
+	  console.log('client connected', cleartextStream.authorized ? 'authorized' : 'unauthorized');
+	  process.stdin.pipe(cleartextStream);
+	  process.stdin.resume();
+	});
+	cleartextStream.setEncoding('utf8');
+	cleartextStream.on('data', function(data) {
+	  console.log(data);
+	});
 
 ## Files and Routes for TCP clients
 
