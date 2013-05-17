@@ -2,6 +2,8 @@
 
 **[runAction](https://github.com/evantahler/actionHero/blob/master/tasks/runAction.js)**: This (non periodic) task is used to call an action in the background.  For example, you might have an action to `sendEmail` which can be called synchronously by a client, but you also might want to call it in a delayed manner.  This is the task for you!
 
-**[cleanLogFiles](https://github.com/evantahler/actionHero/blob/master/examples/tasks/cleanLogFiles.js)**: This periodic task will run on all servers and inspect actionHero's `log` directly for large log files, and delete them
+**[sayHi](https://gist.github.com/evantahler/5597068)** A very simple example which will just log 'HELLO' to the command line every 5 seconds.
 
-**[pingSocketClients](https://github.com/evantahler/actionHero/blob/master/examples/tasks/pingSocketClients.js)**: This periodic task will run on all servers and send a 'ping' to any connected TCP clients to help them keep their 
+**[cleanLogFiles](https://gist.github.com/evantahler/5597071)**: This periodic task will run on all servers and inspect actionHero's `log` directly for large log files, and delete them
+
+**[pingSocketClients](https://gist.github.com/evantahler/5597070)**: This periodic task will run on all servers and send a 'ping' to any connected TCP clients to help them keep their 
