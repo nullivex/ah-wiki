@@ -24,7 +24,7 @@
 
 ## Servers
 - [Web](https://github.com/evantahler/actionHero/wiki/web)
-- [TCP](https://github.com/evantahler/actionHero/wiki/socket)
+- [Socket](https://github.com/evantahler/actionHero/wiki/socket)
 - [WebSockets](https://github.com/evantahler/actionHero/wiki/websocket)
 
 ## API Method Documentation
