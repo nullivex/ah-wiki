@@ -33,4 +33,3 @@
 ## Templates and Examples
 - [Example Actions](https://github.com/evantahler/actionHero/wiki/Examples:-Actions)
 - [Example Tasks](https://github.com/evantahler/actionHero/wiki/Examples:-Tasks)
-- [Using node.js clusters to manage a node](https://github.com/evantahler/actionHero/blob/master/bin/include/startCluster.js)
