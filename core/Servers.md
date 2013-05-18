@@ -156,7 +156,7 @@ var parseRequest = function(connection, line){
      });
    }
  }
-``
+```
 
 ## Chat
 
