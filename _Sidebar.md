@@ -10,6 +10,7 @@
 - [Running actionHero](https://github.com/evantahler/actionHero/wiki/Running-ActionHero)
 - [Actions](https://github.com/evantahler/actionHero/wiki/Actions)
 - [Tasks](https://github.com/evantahler/actionHero/wiki/Tasks)
+- [Servers](https://github.com/evantahler/actionHero/wiki/Servers)
 - [Cache](https://github.com/evantahler/actionHero/wiki/Cache)
 - [Initializers](https://github.com/evantahler/actionHero/wiki/Initializers)
 - [Stats](https://github.com/evantahler/actionHero/wiki/Stats)
@@ -21,7 +22,7 @@
 - [Chat Rooms](https://github.com/evantahler/actionHero/wiki/Chat)
 - [Flat File server](https://github.com/evantahler/actionHero/wiki/File-Server)
 
-## Client Types
+## Servers
 - [Web](https://github.com/evantahler/actionHero/wiki/Web-Clients)
 - [TCP](https://github.com/evantahler/actionHero/wiki/TCP-Clients)
 - [WebSockets](https://github.com/evantahler/actionHero/wiki/Web-Socket-Clients)
