@@ -1,6 +1,8 @@
+# Web Server
+
 ## General
 
-You can visit the API in a browser, Curl, etc.  `{url}?action=actioName` or `{url}/api/{actioName}` is how you would access an action.  For example, using the default ports in `config.js` you could reach the status action with both `http://127.0.0.1:8080/status` or `http://127.0.0.1:8080/?action=status`  The only action which doesn't return the default JSON format would be `file`, as it will return raw files with the appropriate headers if they are found, and a 404 error if they are not.
+The web server exposes actions and files over http or https.  You can visit the API in a browser, Curl, etc. `{url}?action=actioName` or `{url}/api/{actioName}` is how you would access an action.  For example, using the default ports in `config.js` you could reach the status action with both `http://127.0.0.1:8080/status` or `http://127.0.0.1:8080/?action=status`  
 
 HTTP responses follow the format:
 
@@ -103,45 +105,54 @@ HTTP Example:
 
 You may also enable a HTTPS server with actionHero.  It works exactly the same as the http server. You cannot have the http and https server running at the same time. The following information should be enabled in your `config.js` file:
 
-	configData.httpServer = {
-		"enable": true,
-		"secure": true,
-		"port": 8080,
-		"bindIP": "0.0.0.0", // which IP to listen on (use 0.0.0.0 for all)
-		"keyFile": "./certs/server-key.pem", // only for secure = true
-		"certFile": "./certs/server-cert.pem", // only for secure = true
-	};
+```javascript
+configData.severs.web = {
+	secure: false,                       // HTTP or HTTPS?
+    port: 8080,                          // Port or Socket
+    bindIP: "0.0.0.0",                   // which IP to listen on (use 0.0.0.0 for all)
+    keyFile: "./certs/server-key.pem",   // only for secure = true
+    certFile: "./certs/server-cert.pem", // only for secure = true
+    httpHeaders : { },                   // Any additional headers you want actionHero to respond with
+    urlPathForActions : "api",           // route which actions will be served from; secondary route against this route will be treated as actions, IE: /api/?action=test == /api/test/
+    urlPathForFiles : "public",          // route which static files will be served from; path (relitive to your project root) to server static content from
+    rootEndpointType : "api",            // when visiting the root URL, should visitors see "api" or "file"? visitors can always visit /api and /public as normal
+    directoryFileType : "index.html",    // the default filetype to server when a user requests a directory
+    flatFileCacheDuration : 60,          // the header which will be returend for all flat file served from /public; defiend in seconds
+    fingerprintOptions : {               // settings for determining the id of an http(s) requset (browser-fingerprint)
+      cookieKey: "sessionID",
+      toSetCookie: true,
+      onlyStaticElements: false
+       }
+};
+```
 	
 ## The `connection` object
 
 when inspecting `connection` in actions from web client, a few additional elements are added for convenience:
 
-- `connection.responseHeaders`: array of headers which can be built up in the action.  Headers will be made unique, and latest header will be used (except setting cookies)
-- `connection.method`: A string, GET, POST, etc
-- `connection.cookies`: Hash representation of the connection's cookies
-- `connection.responseHttpCode`: the status code to be rendered to the user.  Defaults to 200
+- `connection.rawConnection.responseHeaders`: array of headers which can be built up in the action.  Headers will be made unique, and latest header will be used (except setting cookies)
+- `connection.rawConnection.method`: A string, GET, POST, etc
+- `connection.rawConnection.cookies`: Hash representation of the connection's cookies
+- `connection.rawConnection.responseHttpCode`: the status code to be rendered to the user.  Defaults to 200
+- `connection.type` for a HTTP client is "web"
 
-`connection.type` for a HTTP client is "web"
+## Files
 
-## Files and Routes for http and https clients
+actionHero can also serve up flat files.  actionHero will not cache these files and each request to `file` will re-read the file from disk (like the nginx web server).
 
-actionHero can also serve up flat files (check out `inititilzsers/fileserver.js` for more information).  actionHero will not cache thees files and each request to `file` will re-read the file from disk (like the nginx web server).
-
-* /public and /api are  routes which expose the 'directories' of those types.  These top level path can be configured in `config.js` with `api.configData.commonWeb.urlPathForActions` and `api.configData.commonWeb.urlPathForFiles`.
-* the root of the web server "/" can be toggled to serve the content between /file or /api actions per your needs `api.configData.commonWeb.rootEndpointType`. The default is `api`.
-* actionHero will serve up flat files (html, images, etc) as well from your ./public folder.  This is accomplished via a `file` action or via the 'file' route as described above. `http://{baseUrl}/public/{pathToFile}` is equivalent to `http://{baseUrl}?action=file&fileName={pathToFile}` and `http://{baseUrl}/file/{pathToFile}`. 
+* /public and /api are  routes which expose the 'directories' of those types.  These top level path can be configured in `config.js` with `api.configData.servers.web.urlPathForActions` and `api.configData.servers.web.urlPathForFiles`.
+* the root of the web server "/" can be toggled to serve the content between /file or /api actions per your needs `api.configData.servers.web.rootEndpointType`. The default is `api`.
+* actionHero will serve up flat files (html, images, etc) as well from your ./public folder.  This is accomplished via the 'file' route as described above. `http://{baseUrl}/public/{pathToFile}` is equivalent to `http://{baseUrl}?action=file&fileName={pathToFile}` and `http://{baseUrl}/file/{pathToFile}`. 
 * Errors will result in a 404 (file not found) with a message you can customize.
 * Proper mime-type headers will be set when possible via the `mime` package.
 
-### Routes
+## Routes
 
 Web clients (http and https) you can define an optional RESTful mapping to help route requests to actions.  If the client doesn't specify an action via a param, and the base route isn't a named action, the action will attempt to be discerned from this `routes.js` file.
 
-- routes remain optional
-- actions defiend in params directly `action=theAction` or hitting the named URL for an action `/api/theAction` will always override RESTful routing 
+- actions defined in params directly `action=theAction` or hitting the named URL for an action `/api/theAction` will never override RESTful routing 
 - you can mix explicitly defined params with route-defined params.  If there is an overlap, the route-defined params win
   - IE: /api/user/123?userId=456 => `connection.userId = 123`
-  - this is a change from previous versions
 - routes defined with the "all" method will be duplicated to "get", "put", "post", and "delete"
 - use ":variable" to defined "variable"
 - undefined ":variable" will match
@@ -170,37 +181,21 @@ Web clients (http and https) you can define an optional RESTful mapping to help 
 }
 ```
 
-### Linking URL routes to params
-
-You can extract prams per HTTP(s) request from the route requested by the user via an included utility.
-URL routes remain not being a source of RESTful parameters by default, however, you can opt to parse them: 
-
-```
-	var urlMap = ['userID', 'gameID'];
-	connection.params = api.params.mapParamsFromURL(connection, urlMap);
-```
-
-- this is still left up to the action as the choice of which to choose as the default: query params, post params, or RESTful params is a deeply personal mater.
-- if your connection is TCP or webSockets, `api.params.mapParamsFromURL` will return null
-- map is an array of the param's keys in order (ie: `/:action/:userID/:email/:gameID` => `['userID', 'email', 'gameID']`)
-- the action itself will be omitted from consideration in the mapping
-- these are equivalent: [ `localhost:8080/a/path/and/stuff?action=randomNumber` ] && [ `localhost:8080/randomNumber/a/path/and/stuff` ]
-
-
-
-### Safe Params
+## Safe Params
 
 Params provided by the user (GET, POST, etc for http and https servers, setParam for TCP clients, and passed to action calls from a web socket client) will be checked against a whitelist.  Variables defined in your actions by `action.inputs.required` and `action.inputs.optional` will be aded to your whitelist.  Special params which the api will always accept are: 
 
 ```javascript
-
 	[
-		"callback",
-		"action",
-		"limit",
-		"offset",
-		"outputType"
-	];
+      "file",
+      "callback",
+      "action",
+      "limit",
+      "offset",
+      "outputType",
+      "roomMatchKey",
+      "roomMatchValue"
+    ]
 ```
 	
 Params are loaded in this order GET -> POST (normal) -> POST (multipart).  This means that if you have {url}?key=getValue and you post a variable `key`=`postValue` as well, the postValue will be the one used.  The only exception to this is if you use the URL method of defining your action.  You can add arbitrary params to the whitelist by adding them to the `api.postVariables` array in you initializers. 
@@ -211,7 +206,7 @@ File uploads from forms will also appear in `connection.params`, but will be an 
 
 You may also request XML data rather than JSON from actionHero. To do so, you need to pass `outputType=xml` as a param to your request.  
 
-## Uploading FIles
+## Uploading Files
 
 actionHero uses the [formidable](https://github.com/felixge/node-formidable) form parsing library.  You can set options for it via `api.configData.commonWeb.formOptions`.  You can upload multiple files to an action and they will be available within `connection.params` as formidable response objects containing references to the original file name, where the uploaded file was stored temporarily, etc.   Here's an example:
 

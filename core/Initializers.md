@@ -2,8 +2,6 @@
 
 initializers are run before your server boots.  Here is where you include any new modules or add custom code which you want to be available to all the rest of your actionHero server. 
 
-Initializers are loaded alphabetically on most systems, but by paste-updated on some `*nixes`. 
-
 ## Format
 
 To use a custom initializer, create a `initializers` directory in your project.  Ensure that the file name matches the export, IE:

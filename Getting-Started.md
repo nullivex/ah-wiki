@@ -49,6 +49,9 @@ Actions in /actions will be loaded in automatically, along /initializers and /ta
 	|- public
 	|-- (your static assets to be served by /file)
 	|
+	|- servers
+	|-- (custom servers you may make)
+	|
 	|- tasks
 	|-- (your tasks)
 	|

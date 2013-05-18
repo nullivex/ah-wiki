@@ -1,17 +1,14 @@
 ## General
 
-Tasks are background jobs meant to be run asynchronously from a request.  With actionHero, there is no need to run a separate job processing/queuing process.  Using the node.js event loop, background tasks can be processed in-line with web requests in a non-blocking way.  Tasks are built like actions, but they can be run when called or periodically.  Tasks can be run on every node in the actionCluster or just one.  There is one task which is core to action hero (`runAction`), but there are [a number of example tasks provided](Example-tasks).
+Tasks are background jobs meant to be run asynchronously.  They can be started by a task or by the server itself.  With actionHero, there is no need to run a separate job processing/queuing process.  
 
-You can create you own tasks by placing them in a `./tasks/` folder at the root of your application.  Like actions, all tasks have some required metadata:
+Using the node.js event loop, background tasks can be processed in-line with web requests in a non-blocking way.  Tasks are built like actions, but they can be run when called or periodically.  Tasks can be run on every node in the actionCluster or just one.  There is one task which is core to action hero (`runAction`), but there are [a number of example tasks provided](Example-tasks).
 
-* `task.name`: The unique name of your task
-* `task.description`: a description
-* `task.scope`: "**any**" or "**all**".  Should a single actionCluster server (any) run this task, or should all of them? For example, `pingSocketClients` is run by all peers in the action cluster (because we want all clients to be pinged), but if you had a task to clean old sessions from your database or send an email, you would only want a single node to do that.
-* `task.frequency`: In milliseconds, how often should I run?.  Setting me to 0 will cause me not to run automatically, but I can still be run with `task.run` or `task.enqueue`
+## Enqueuing a Task
 
 When enqueuing a task from your code (perhaps an action spawns a background task), the steps to do so are:
 
-1) create a new task object: `var task = new api.task(data);`.  `data` is a hash which must contain at least the `name` of the task to be run.  A more involved example is:
+create a new task object: `var task = new api.task(data);`.  `data` is a hash which must contain at least the `name` of the task to be run.  A more involved example is:
 
 ```javascript
 var task = new api.task({
@@ -21,12 +18,17 @@ var task = new api.task({
 	toAnnounce: true // to log the run of this task or not
 });
 ```
-	
-Be sure to wrap the constructor in a `try(){ }catch(e){ }` block as if your task is improperly defined, it will throw an exception
-	
-2) you can enqueue the task with `task.enqueue(next(err, enqueued))`.  Enqueuing the task will have it be run the future by a worker.
 
-3) you can run the task directly inline with `task.run(next())`. This will run the task in-line wherever it was called, and bypass the queue system.
+## Creating a Task
+
+You can create you own tasks by placing them in a `./tasks/` folder at the root of your application.  You can use the generator `actionHero generateTask`. Like actions, all tasks have some required metadata:
+
+* `task.name`: The unique name of your task
+* `task.description`: a description
+* `task.scope`: "**any**" or "**all**".  Should a single actionCluster server (any) run this task, or should all of them? For example, `pingSocketClients` is run by all peers in the action cluster (because we want all clients to be pinged), but if you had a task to clean old sessions from your database or send an email, you would only want a single node to do that.
+* `task.frequency`: In milliseconds, how often should I run?.  Setting me to 0 will cause me not to run automatically, but I can still be run with `task.run` or `task.enqueue`
+		
+You can enqueue the task with `task.enqueue(next(err, enqueued))`.  Enqueuing the task will have it be run the future by a worker.  You can run the task directly inline with `task.run(next())`. This will run the task in-line wherever it was called, and bypass the queue system.
 
 
 An example Task:
@@ -53,8 +55,6 @@ An example Task:
 	// exports
 	exports.task = task;
 ```
-	
-This task will be run every ~1 second on the first worker to be available after that one second has elapsed.  
 
 You can also define more than one task in a single file:
 
@@ -83,6 +83,8 @@ You can also define more than one task in a single file:
     };
 
 ```
+	
+This task will be run every ~1 second on the first worker to be available after that one second has elapsed.  Note that the `frequency` of `runAt` times are when a task is "allowed" to run, not when it Will run.  Workers will work tasks in a FIFO manner.
 
 ## Queue Inspection
 actionHero provides 2 methods to inspect the state of your task queue:

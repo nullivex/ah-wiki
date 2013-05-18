@@ -161,3 +161,11 @@ var parseRequest = function(connection, line){
 ## Chat
 
 The `attribute` "canChat" defines if clients of this server can chat.  If clients can chat, they will be added to `defaultRoom` when they join, and removed from their current room when they leave.  They will also be sent messages in their room (and rooms they are listening too) automatically.
+
+## Sending Responses
+
+All servers need to implement the `server.sendMessage = function(connection, message, messageCount)` method so actionHero knows how to talk to each client.  This is likely to make use of `connection.rawConnection`.  If you are writing a server for a persistent connection, it is likely you will need to respond with `messageCount` so that the client knows which request your response is about (as they are not always going to get the responses in order).  
+
+## Sending Files
+
+Servers can optionally implement the `server.sendFile = function(connection, error, fileStream, mime, length)` method.  This method is responsible for any connection-specific file transport (headers, chinking, encoding, etc). Note that fileStream is a `stream` which should be `pipe`d to the client.

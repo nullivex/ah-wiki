@@ -1,8 +1,19 @@
+# WebSocket Server
+
 ## General
 
 actionHero uses [faye](http://faye.jcoglan.com/) for web sockets.  Faye provides an abstraction for web sockets which allow fallback to long-polling and other protocols which should be appropriate for the vast majority of clients. Within actionHero, web sockets are bound to the web server (either http or https).  Also, if you are using a redis backend store (which is required to use actionHero in a cluster), faye will be configured to use this store automatically.  actionHero uses the [faye-node-redis](https://github.com/faye/faye-redis-node) backend to ensure that all the nodes in your ActionCluster can serve content for any client (no need for 'sticky' load balancer sessions)
 
-Just like the additional actions added for TCP connection, web socket connections have access to the chat room methods.  A suggested template which exposes them is [provided in actionHero and you can view it here](https://github.com/evantahler/actionHero/blob/master/examples/clients/web/actionHeroWebSocket.js).  You will note that there are methods provided to use the chat methods and acquire metadata.
+As this is a persistent connection, websocket connections have actionHero's verbs available to them.  These verbs are:
+
+* `quit` disconnect from the session
+* `setIP` inform the server of the client's IP* 
+* `roomChange` - change the `room` you are connected to.  By default all socket connections are in the `api.configData.defaultChatRoom` room.   
+* `roomView` - show you the room you are connected to, and information about the members currently in that room.
+* `listenToRoom` - opt into hearing messages from another chat room
+* `silenceRoom` - stop hearing messages from other chat rooms
+* `detailsView` - show you details about your connection, including your public ID.
+* `say` [message]
 
 `connection.type` for a webSocket client is "webSocket".  This type will not change regardless of if the client has fallen back to another protocol. 
 
@@ -46,7 +57,7 @@ An example web socket session might be the following:
 
 ```
 
-Note that we are using the provided actionHeroWebSocket prototype and requiring the faye library which actionHero provides.
+Note that we are using **both** the provided actionHeroWebSocket prototype and requiring the faye library which actionHero provides.
 
 Methods which the provided actionHeroWebSocket object expose are:
 
@@ -82,15 +93,3 @@ Methods which the provided actionHeroWebSocket object expose are:
 You don't need to use the actionHeroWebSocket client, and can connect to the web socket manually and emit `say` and `action` etc commands as you would expect.
 
 The websocket server will use settings inherited by the `faye` `config.js` block.  If you want to set options on the client (like specific protocols to use), you can read up on the options [here](http://faye.jcoglan.com/browser.html)
- 
-```javascript
-
-	/////////////////
-	// Web Sockets //
-	/////////////////
-	
-	configData.webSockets = {
-	    // You must have the web server enabled as well
-	    "enable": true,
-	};
-```

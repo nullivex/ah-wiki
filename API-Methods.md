@@ -96,13 +96,12 @@ A collection of actionHero's internal methods which may be useful to others.
 
 ## File Server
 
-### api.fileServer.deliver(connection, next)
-- next(connection, false)
-- file is the full path to the file to send
+### api.staticFile.staticFile(file, next)
+- next (exists? boolean)
 
-### api.fileServer.sendFileNotFound(connection, next)
-- next(connection, true)
-
+### api.staticFile.get(connection, next)
+- next(connection, error, fileStream, mime, length)
+- note that fileStream is a stream you can `pipe` to the client, not the file contents
 
 ## Redis
 
