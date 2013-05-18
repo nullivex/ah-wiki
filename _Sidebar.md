@@ -20,12 +20,12 @@
 - [Logging](https://github.com/evantahler/actionHero/wiki/Logging)
 - [Development Mode](https://github.com/evantahler/actionHero/wiki/Development-Mode)
 - [Chat Rooms](https://github.com/evantahler/actionHero/wiki/Chat)
-- [Flat File server](https://github.com/evantahler/actionHero/wiki/File-Server)
+- [File server](https://github.com/evantahler/actionHero/wiki/File-Server)
 
 ## Servers
-- [Web](https://github.com/evantahler/actionHero/wiki/Web-Clients)
-- [TCP](https://github.com/evantahler/actionHero/wiki/TCP-Clients)
-- [WebSockets](https://github.com/evantahler/actionHero/wiki/Web-Socket-Clients)
+- [Web](https://github.com/evantahler/actionHero/wiki/web)
+- [TCP](https://github.com/evantahler/actionHero/wiki/socket)
+- [WebSockets](https://github.com/evantahler/actionHero/wiki/websocket)
 
 ## API Method Documentation
 - **[API Methods](https://github.com/evantahler/actionHero/wiki/API-Methods)**
