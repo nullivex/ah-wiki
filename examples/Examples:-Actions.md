@@ -14,6 +14,8 @@
 
 **[inspectTasks](https://gist.github.com/4399793)**: This action will retrieve the status of the task queue.
 
+**[fileResponder](https://gist.github.com/evantahler/5711399)**: This action serves up a static file from within an action.  This can be useful for authenticating access to a static page, rendering the same page across many routes (for pushState apps), etc
+
 **[oauth](https://gist.github.com/4326070)**: This file is actually 2 actions which are needed to authenticate a user against twitter's API.  Note the use of `api.cache` to save and load the temporary secret tokens, and how to send custom (redirect) headers with actionHero
 
 **[A database-backed user system](http://blog.evantahler.com/blog/authentication-with-actionHero.html)**: This example contains a working user system (auth, login, user creation, sessions, etc) using a mySQL backend and the sequelize ORM. 
