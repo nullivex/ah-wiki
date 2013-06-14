@@ -14,6 +14,7 @@
 - [Cache](https://github.com/evantahler/actionHero/wiki/Cache)
 - [Initializers](https://github.com/evantahler/actionHero/wiki/Initializers)
 - [Stats](https://github.com/evantahler/actionHero/wiki/Stats)
+- [Middleware](https://github.com/evantahler/actionHero/wiki/Middleware)
 - [Cluster](https://github.com/evantahler/actionHero/wiki/actionCluster)
 - [Config](https://github.com/evantahler/actionHero/wiki/Config)
 - [Exceptions](https://github.com/evantahler/actionHero/wiki/Exceptions)
