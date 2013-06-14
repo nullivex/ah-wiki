@@ -88,16 +88,41 @@ You can also define more than one action per file if you would like:
     }
 ```
 
-## Preprocessing
+## Middleware (pre and post processing)
 
-You can overwrite the stub method `api.actionProcessor.prototype.preProcessAction` which will be called before every action.  You can use this to do things like authentication before allowing a connection into an action.  The arguments to `preProcessAction` are:
-`function(api, connection, actionTemplate, callback)`.
+actionHero provides hooks for you to execute custom code both before and after the excecution of all actions.  You do this by adding to the `api.actions.preProcessors` and `api.actions.postProcessors` array.  Functions you add here will be excecuted in order on the connection.  
 
-`actionTemplate` is the literal action definition, so you can inspect `actionTemplate.name`, `actionTemplate.description`, etc.  You can feel free to add additional parameters to your action definitions like `actionTemplate.secure` which you can inspect in the `preProcessAction` method.
+This is a great place to write atutentication logic or custom loggers.
 
-The goal of `preProcessAction` is to return either `true` or `false` to the callback, where `true` will move on to the action proper, and `false` will render the connection types default return to the client.  It would be best to set `connection.error` if you are returning false to `preProcessAction`'s callback so the client has an idea of why they were denied.
+preProcessors, like actions themselves, return the connection and a `toProcess` flag.  Setting `toProcess` to false will block the excecution of an action.  You can operate on `connection.response` and `connection.error`, just like within an action to create messages to the client.
 
-It is best to define `preProcessAction` in an [initializer](https://github.com/evantahler/actionHero/wiki/Initializers). 
+**preProcessors** are provided with `connection`, `actionTemplate`, and `next`.  They are expected to return (connection, toProcess)
+**postProcessors** are provided with `connection`, `actionTemplate`, and `next`.  They are expected to return (connection)
+
+Some Examples:
+
+```javascript
+
+// a preProcessor to check if a userId is provided:
+
+api.actions.preProcessors.push(function(connection, actionTemplate, next){
+  if(connection.params.userId == null){
+    connection.error = "All actions require a userId";
+    next(connection, false);
+  }else{
+    next(connection, true);
+  }
+});
+
+// a postProcessor to append the action's description to the response body
+
+api.actions.postProcessors.push(function(connection, actionTemplate, next){
+  connection.response._description = actionTemplate.description;
+  next(connection);
+});
+
+```
+
 
 ## Notes:
 
