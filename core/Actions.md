@@ -88,6 +88,30 @@ You can also define more than one action per file if you would like:
     }
 ```
 
+## Versions:
+
+ActionHero supports multiple versions of the same action.  This will allow you to support actions/routes of the same name with upgraded functionality.
+
+- actions optionally have the `action.version` attribute
+- a reserverd param, `apiVersion` is used to directly specify the version of an action a client may request
+- if a client doesn't specify an `apiVersion`, they will be directed to the higest numerical version of that action
+- you can optionally create routes to handle your API versioning:
+
+```javascript
+exports.routes = {
+  all: [
+    // creates routes like `/api/myAction/1/` and `/api/myAction/2/`
+    // will also default `/api/myAction` to the latest version
+    { path: "/myAction/:apiVersion", action: "myAction" },
+
+    // creates routes like `/api/1/myAction/` and `/api/2/myAction/`
+    // will also default `/api/myAction` to the latest version
+    { path: "/:apiVersion/myAction", action: "myAction" },
+  ]
+};
+
+```
+
 ## Notes:
 
 * Actions are asynchronous, and require in the API object, the connection object, and the callback function.  Completing an action is as simple as calling `next(connection, toRender)`.  The second param in the callback is a boolean to let the framework know if it needs to render anything else to the client.  There are some actions where you may have already sent the user output (see the `file.js` action for an example) where you would not want to render the default messages.
