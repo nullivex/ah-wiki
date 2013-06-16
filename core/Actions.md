@@ -88,7 +88,7 @@ You can also define more than one action per file if you would like:
     }
 ```
 
-## Versions:
+## Versions
 
 ActionHero supports multiple versions of the same action.  This will allow you to support actions/routes of the same name with upgraded functionality.
 
@@ -112,7 +112,7 @@ exports.routes = {
 
 ```
 
-## Notes:
+## Notes
 
 * Actions are asynchronous, and require in the API object, the connection object, and the callback function.  Completing an action is as simple as calling `next(connection, toRender)`.  The second param in the callback is a boolean to let the framework know if it needs to render anything else to the client.  There are some actions where you may have already sent the user output (see the `file.js` action for an example) where you would not want to render the default messages.
 * The metadata is used in reflexive and self-documenting actions in the API, such as `actionsView`.  
