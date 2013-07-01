@@ -20,4 +20,4 @@
 
 **[A database-backed user system](http://blog.evantahler.com/blog/authentication-with-actionHero.html)**: This example contains a working user system (auth, login, user creation, sessions, etc) using a mySQL backend and the sequelize ORM. 
 
-***[Tic-Tac-Toe API](https://gist.github.com/evantahler/5898472) This advanced example demonstrates how to create actions (and initializers) which will enable you to play tic-tac-toe against an AI Player.
+***[Tic-Tac-Toe API](https://gist.github.com/evantahler/5898472)*** This advanced example demonstrates how to create actions (and initializers) which will enable you to play tic-tac-toe against an AI Player.
