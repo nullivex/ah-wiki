@@ -59,3 +59,8 @@ Actions in /actions will be loaded in automatically, along /initializers and /ta
 	routes.js
 	config.js
 	package.json (be sure to include 'actionHero':'x')
+
+## Tutorial
+Want to see an example application using actionHero?  You can check out the code and follow the detailed guide [here](https://github.com/evantahler/actionHero-tutorial).  This project demonstrates many of the core features of actionHero in a simple project.
+
+Learn more @ https://github.com/evantahler/actionHero-tutorial
