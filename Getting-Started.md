@@ -7,9 +7,11 @@
 
 **Get Started Now:**
 
-	npm install actionHero
-	./node_modules/.bin/actionHero generate
-	./node_modules/.bin/actionHero start
+```bash
+npm install actionHero
+./node_modules/.bin/actionHero generate
+./node_modules/.bin/actionHero start
+```
 
 * Create a new directory `mkdir ~/project && cd ~/project`
 * Checkout the actionHero source `npm install actionHero`
