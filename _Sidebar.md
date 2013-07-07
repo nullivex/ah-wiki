@@ -22,6 +22,7 @@
 - [Development Mode & Debugging](https://github.com/evantahler/actionHero/wiki/Development-Mode)
 - [Chat](https://github.com/evantahler/actionHero/wiki/Chat)
 - [File server](https://github.com/evantahler/actionHero/wiki/File-Server)
+- [Running Commands](https://github.com/evantahler/actionHero/wiki/run)
 
 ## Servers
 - [Web](https://github.com/evantahler/actionHero/wiki/web)
