@@ -118,13 +118,14 @@ actionHero integrates with [jake](https://github.com/mde/jake/) (javascript make
 
 To use jake, you should install jake globally `npm install -g jake` or you can use it locally by adding it to you `package.json`
 
-actionHero will generate a few example jake tasks in `./jakelib/actionHero.jake` to help you save and restore the cache.  Most importantly, the `actionHero:example` task is defined for you.  Require this in all of you tasks so you can have access to the API object within your tasks.  You will have access to all of your initialized, actions, and tasks within the api object.  `api` will represent an initialized sever, but not a started one.  Your initializer's "_start" methods will not be run, not will the servers be started.  For example:
+actionHero will generate a few example jake tasks in `./jakelib/actionHero.jake` to help you save and restore the cache.  Most importantly, the `actionHero:envrionment` task is defined for you.  Require this in all of you tasks so you can have access to the `api` object within your tasks.  You will have access to all of your initialized, actions, and tasks within the api object.  `api` will represent an initialized sever, but not a started one.  Your initializer's "_start" methods will not be run, not will the servers be started.  For example:
 
 ```javascript
-desc("I will load and init an actionHero environment");
-task("environment", {async: true}, function(){
+desc("my actionHero jake task");
+task("myTask", {async: true}, function(){
   var api = jake.Task["actionHero:envrionment"].value;
   // your logic here
+  complete(process.exit());
 });
 ```
 
