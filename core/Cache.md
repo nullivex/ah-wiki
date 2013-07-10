@@ -10,16 +10,16 @@ actionHero ships with the functions needed for a distributed key-value cache.  I
 
 * Invoke: `api.cache.save(key, value, expireTimeMS, next)`
 	* `expireTimeMS` can be null if you never want the object to expire 
-* Callback: `next(bool)`
-	* will be true unless the object could not be saved (perhaps out of ram or a bad object type).
-	* overwriting an existing object will return `true`
+* Callback: `next(error, new)`
+	* `error` will be null unless the object can't be saved (perhaps out of ram or a bad object type).
+	* overwriting an existing object will return `new = true`
 	
 `api.cache.save` is used to both create new entires or update existing cache entires.  If you don't define an expireTimeMS, `null` will be assumed, and using `null` will cause this cached item to not expire.  Expired cache objects will be periodically swept away (but not necessarily exactly when they expire)
 
 ### `api.cache.load`
 
 * Invoke: `api.cache.load(key, next)` | `api.cache.load(key, options, next)`
-* Callback: `next(value, expireTimestamp, createdAt, readAt)`
+* Callback: `next(error, value, expireTimestamp, createdAt, readAt)`
 	* value will be the object which was saved and `null` if the object cannot be found or is expired
 	* expireTimestamp(ms) is when the object is set to expire in system time
 	* createdAt(ms) is when the object was created
@@ -32,7 +32,7 @@ actionHero ships with the functions needed for a distributed key-value cache.  I
 ### `api.cache.destroy`
 
 * Invoke: `api.cache.destroy(key)`
-* Callback: `next(bool)`
+* Callback: `next(error)`
 	* will be false if the object cannot be found, and true if destroyed
 	
 You can see an example of using the cache within an action in `[actions/cacheTest.js](https://github.com/evantahler/actionHero/blob/master/actions/cacheTest.js)`
