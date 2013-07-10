@@ -60,6 +60,7 @@ Actions in /actions will be loaded in automatically, along /initializers and /ta
 	readme.md
 	routes.js
 	config.js
+	Jakefile.js\n\
 	package.json (be sure to include 'actionHero':'x')
 
 ## Tutorial

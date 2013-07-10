@@ -11,7 +11,6 @@ Binary options:
 * help (default)
 * start
 * startCluster
-* run
 * generate
 * generateAction
 * generateTask
@@ -67,12 +66,6 @@ Descriptions:
   [workerTitlePrefix] (optional) default actionHero-worker
   [config] (optional) path to config.js, defaults to `process.cwd() + "/" + config.js`
   [daemon] (optional) to fork and run as a new background process defalts to false
-
-* actionnHero run --command=[method] --args=[args] --log=[log]
-  will run javascipt provided in `command`
-  [method] (required) 
-  [args] (optional) argumets the the method.  comma seperated list
-  [log] (optional) use the logger defaults?
 ```
 
 ## Linking the actionHero binary
@@ -119,7 +112,39 @@ You can programmatically control an actionHero server with `actionHero.start(par
 	});
 ```
 
-## Windows Notes
+## Jake
+
+actionHero integrates with [jake](https://github.com/mde/jake/) (javascript make) to allow you to tun manual jake tasks within actionHero's environment.  Those of you coming from Ruby, jake is very similar to rake.
+
+To use jake, you should install jake globally `npm install -g jake` or you can use it locally by adding it to you `package.json`
+
+actionHero will generate a few example jake tasks in `./jakelib/actionHero.jake` to help you save and restore the cache.  Most importantly, the `actionHero:example` task is defined for you.  Require this in all of you tasks so you can have access to the API object within your tasks.  You will have access to all of your initialized, actions, and tasks within the api object.  `api` will represent an initialized sever, but not a started one.  Your initializer's "_start" methods will not be run, not will the servers be started.  For example:
+
+```javascript
+desc("I will load and init an actionHero environment");
+task("environment", {async: true}, function(){
+  var api = jake.Task["actionHero:envrionment"].value;
+  // your logic here
+});
+```
+
+As always, you can list your project's jake tasks with `jake -T`
+
+```bash
+> jake -T
+
+jake actionHero:environment    # I will load and init an actionHero environment
+jake actionHero:actions:list   # List your actions and metadata
+jake actionHero:redis:flush    # This will clear the entire actionHero redis database
+jake actionHero:cache:clear    # This will clear actionHero's cache
+jake actionHero:cache:dump     # This will save the current cache as a JSON object
+jake actionHero:cache:load     # This will load (and overwrite) the cache from a file
+```
+
+You can [learn more about jake here](https://github.com/mde/jake/).
+You can [view actionHero's default jake tasks here](https://github.com/evantahler/actionHero/blob/master/jakelib/actionHero.jake)
+
+##  Notes
 
 - Sometimes actionHero may require a git-based module (rather than a NPM module).  You will need to have git installed.  Depending on how you installed git, it may not be available to the node shell.  Be sure to have also installed references to git.  You can also run node/npm install from the git shell. 
 - sometimes, npm will not install the actionHero binary @ `/node_modules/.bin/actionHero`, but rather it will attempt to create a windows executable and wrapper.  You can launch actionHero directly with `./node_modules/actionHero/bin/actionHero`
