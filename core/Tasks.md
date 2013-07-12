@@ -12,10 +12,10 @@ create a new task object: `var task = new api.task(data);`.  `data` is a hash wh
 
 ```javascript
 var task = new api.task({
-	name: "myTaskName",
-	runAt: new Date().getTime() + 30000, // run 30 seconds from now
-	params: {email: 'evantahler@gmail.com'}, // any optional params to pass to the task
-	toAnnounce: true // to log the run of this task or not
+  name: "myTaskName",
+  runAt: new Date().getTime() + 30000, // run 30 seconds from now
+  params: {email: 'evantahler@gmail.com'}, // any optional params to pass to the task
+  toAnnounce: true // to log the run of this task or not
 });
 ```
 
