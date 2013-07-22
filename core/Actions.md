@@ -115,7 +115,7 @@ exports.routes = {
 ## Notes
 
 * Actions are asynchronous, and require in the API object, the connection object, and the callback function.  Completing an action is as simple as calling `next(connection, toRender)`.  The second param in the callback is a boolean to let the framework know if it needs to render anything else to the client.  There are some actions where you may have already sent the user output (see the `file.js` action for an example) where you would not want to render the default messages.
-* The metadata is used in reflexive and self-documenting actions in the API, such as `actionsView`.  
+* The metadata is used in reflexive and self-documenting actions in the API, availalbe via the `documentation` verb (and /api/ routes).  
 * You can limit how many actions a persistant client (websocket, tcp, etc) can have pending at once with `api.configData.general.simultaniousActions`
 * `actions.inputs.required` and `actions.inputs.optional` are used for both documentation and for building the whitelist of allowed parameters the API will accept.  Client params not included in these lists will be ignored for security.
 * actionHero strives to keep the `connection` object uniform among various client types.  All connections have the `connection.response` and `connection.error` objects.  You can inspect `connection.type` to learn more about the connection.  The gory details of the connection (which vary on its type) are stored in `connection.rawConnection` which will contain the websoctket, tcp connection, etc.  For web clients, `connection.rawConnection = {req: req, res: res}`  

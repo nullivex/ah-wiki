@@ -35,10 +35,10 @@ Start up node-inspector (both node-inspector and actionHero have the same defaul
   ./node_modules/.bin/node-inspector --web-port=1234
 ```
 
-That's it! Now you can visit `http://0.0.0.0:1234/debug?port=5858` and start debugging.  Remember that the way node-debugger works has you first set a breakpoint in the file view, and then you can use the console to inspect various objects.  IE: I put a breakpoint in the default `actionsView` action in the `run` method:
+That's it! Now you can visit `http://0.0.0.0:1234/debug?port=5858` and start debugging.  Remember that the way node-debugger works has you first set a breakpoint in the file view, and then you can use the console to inspect various objects.  IE: I put a breakpoint in the default `status` action in the `run` method:
 
 `api.bootTime`
 - 1372739939789
 
-`api.actions.actions['actionsView'][1.0].description`
-- "I will return an array of all the action accessable to uses of this API"
+`api.actions.actions['status'][1.0].description`
+- "I will return some basic information about the API"
