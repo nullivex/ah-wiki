@@ -27,7 +27,7 @@ api.actions.preProcessors.push(function(connection, actionTemplate, next){
 
 // a postProcessor to append the action's description to the response body
 
-api.actions.postProcessors.push(function(connection, actionTemplate, next){
+api.actions.postProcessors.push(function(connection, actionTemplate, toRender, next){
   connection.response._description = actionTemplate.description;
   next(connection);
 });
