@@ -12,7 +12,7 @@
 
 **[inspectTasks](https://gist.github.com/4399793)**: This action will retrieve the status of the task queue.
 
-**[fileResponder](https://gist.github.com/evantahler/5711399)**: This action serves up a static file from within an action.  This can be useful for authenticating access to a static page, rendering the same page across many routes (for pushState apps), etc
+**[fileResponder](https://gist.github.com/connanp/6169574)**: This snippet is for rendering Jade templates on the server for pushState single page apps in actionHero. Useful when you need to bootstrap model data on initial page load. It also pre-compiles the templates on server start and will recompile if they change.
 
 **[oauth](https://gist.github.com/4326070)**: This file is actually 2 actions which are needed to authenticate a user against twitter's API.  Note the use of `api.cache` to save and load the temporary secret tokens, and how to send custom (redirect) headers with actionHero
 
