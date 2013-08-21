@@ -4,26 +4,26 @@ actionHero ships with helper functions for you to store and retrieve stats about
 
 Many of the core actionHero features (cache, web/tcp/websocket servers, etc) are instrumented with stats, but you are encouraged to add more!
 
-### api.stats.increment(api, key, count, next)
+### api.stats.increment(key, count, next)
 - next(err, wasSet)
 - key is a string of the form ("thing:stuff")
 - count is a signed integer
 - - this method will work on local and global stats
 
-### api.stats.set(api, key, count, next)
+### api.stats.set(key, count, next)
 - next(err, wasSet)
 - key is a string of the form ("thing:stuff")
 - count is a signed integer
 - this method will only work on local stats
 
-### api.stats.get(api, key, collection, next)
+### api.stats.get(key, collection, next)
 - next(err, data)
 - key is a string of the form ("thing:stuff")
 - collection is either:
   - `api.stats.collections.local`
   - `api.stats.collections.global`
 
-### api.stats.getAll(api, next)
+### api.stats.getAll(next)
 - next(err, stats)
 - stats is a hash of `{global: globalStats, local: localStats}`
 - keys will be collapsed into a hash 
@@ -38,24 +38,24 @@ Many of the core actionHero features (cache, web/tcp/websocket servers, etc) are
 ## Example: 
 normal use:
 
-	api.stats.increment(api, 'myCount', 2);
-	api.stats.increment(api, 'myCount', 3);
-	api.stats.increment(api, 'myCount', -1);
+	api.stats.increment('myCount', 2);
+	api.stats.increment('myCount', 3);
+	api.stats.increment('myCount', -1);
 	
-	api.stats.get(api, 'myCount', api.stats.collections.local, function(err, count){
+	api.stats.get('myCount', api.stats.collections.local, function(err, count){
 		console.log(count)); // count => 4
 	});
-	api.stats.get(api, 'myCount', api.stats.collections.global, function(err, count){
+	api.stats.get('myCount', api.stats.collections.global, function(err, count){
 		console.log(count)); // count => 4
 	});
 
 counts modified by `set`:
 
-	api.stats.set(api, 'myCount', 0, next)
+	api.stats.set('myCount', 0, next)
 	
-	api.stats.get(api, 'myCount', api.stats.collections.local, function(err, count){
+	api.stats.get('myCount', api.stats.collections.local, function(err, count){
 		console.log(count)); // count => 0
 	});
-	api.stats.get(api, 'myCount', api.stats.collections.global, function(err, count){
+	api.stats.get('myCount', api.stats.collections.global, function(err, count){
 		console.log(count)); // count => 4
 	});
