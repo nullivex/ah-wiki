@@ -17,7 +17,16 @@ var task = new api.task({
   params: {email: 'evantahler@gmail.com'}, // any optional params to pass to the task
   toAnnounce: true // to log the run of this task or not
 });
+
+// to enqueue for later
+task.enqueue();
+
+// to run now in-line
+task.run()
 ```
+
+`task.enqueue` can optionally take arguments: `task.enqueue(callback)` or `task.enqueue(queue, callback)`
+`task.run` should always be run with a callback: `task.run(callback)`
 
 ## Creating a Task
 
