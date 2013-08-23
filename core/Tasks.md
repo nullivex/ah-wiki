@@ -26,6 +26,7 @@ task.run()
 ```
 
 `task.enqueue` can optionally take arguments: `task.enqueue(callback)` or `task.enqueue(queue, callback)`
+
 `task.run` should always be run with a callback: `task.run(callback)`
 
 ## Creating a Task
