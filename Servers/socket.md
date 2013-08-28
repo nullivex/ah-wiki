@@ -24,27 +24,27 @@ To help sort out the potential stream of messages a socket user may receive, it 
 Socket Example:
 
 ```javascript
-	> telnet localhost 5000
-	Trying 127.0.0.1...
-	Connected to localhost.
-	Escape character is '^]'.
-	{"welcome":"Hello! Welcome to the actionHero api","room":"defaultRoom","context":"api"}
-	detailsView
-	{"status":"OK","context":"response","data":{"id":"2d68c389-521d-4dc6-b4f1-8292cd6cbde6","remoteIP":"127.0.0.1","remotePort":57393,"params":{"limit":100,"offset":0},"connectedAt":1368918901456,"room":"defaultRoom","totalActions":0,"pendingActions":0},"messageCount":1}
-	randomNumber
-	{"randomNumber":0.4977603426668793,"context":"response","messageCount":2}
-	cacheTest
-	{"error":"Error: key is a required parameter for this action","context":"response","messageCount":3}
-	paramAdd key=myKey
-	{"status":"OK","context":"response","data":null,"messageCount":4}
-	paramAdd value=myValue
-	{"status":"OK","context":"response","data":null,"messageCount":5}
-	paramsView
-	{"status":"OK","context":"response","data":{"limit":100,"offset":0,"action":"cacheTest","key":"myKey","value":"myValue"},"messageCount":6}
-	cacheTest
-	{"cacheTestResults":{"saveResp":true,"sizeResp":1,"loadResp":{"key":"cacheTest_myKey","value":"myValue","expireTimestamp":1368918936984,"createdAt":1368918931984,"readAt":1368918931995},"deleteResp":true},"context":"response","messageCount":7}
-	say hooray!
-	{"status":"OK","context":"response","data":null,"messageCount":8}
+> telnet localhost 5000
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+{"welcome":"Hello! Welcome to the actionHero api","room":"defaultRoom","context":"api"}
+detailsView
+{"status":"OK","context":"response","data":{"id":"2d68c389-521d-4dc6-b4f1-8292cd6cbde6","remoteIP":"127.0.0.1","remotePort":57393,"params":{"limit":100,"offset":0},"connectedAt":1368918901456,"room":"defaultRoom","totalActions":0,"pendingActions":0},"messageCount":1}
+randomNumber
+{"randomNumber":0.4977603426668793,"context":"response","messageCount":2}
+cacheTest
+{"error":"Error: key is a required parameter for this action","context":"response","messageCount":3}
+paramAdd key=myKey
+{"status":"OK","context":"response","data":null,"messageCount":4}
+paramAdd value=myValue
+{"status":"OK","context":"response","data":null,"messageCount":5}
+paramsView
+{"status":"OK","context":"response","data":{"limit":100,"offset":0,"action":"cacheTest","key":"myKey","value":"myValue"},"messageCount":6}
+cacheTest
+{"cacheTestResults":{"saveResp":true,"sizeResp":1,"loadResp":{"key":"cacheTest_myKey","value":"myValue","expireTimestamp":1368918936984,"createdAt":1368918931984,"readAt":1368918931995},"deleteResp":true},"context":"response","messageCount":7}
+say hooray!
+{"status":"OK","context":"response","data":null,"messageCount":8}
 ```
 
 `connection.type` for a TCP/Socket client is "socket"
@@ -53,37 +53,51 @@ Socket Example:
 
 You can switch your TCP server to use TLS encryption if you desire.  Just toggle the settings in `config.json` and provide valid certificates.  You can test this with the openSSL client rather than telnet `openssl s_client -connect 127.0.0.1:5000`
 
-	"socket" : {
-		secure: false,                        // TCP or TLS?
-		port: 5000,                           // Port or Socket
-		bindIP: "0.0.0.0",                    // which IP to listen on (use 0.0.0.0 for all)
-		keyFile: "./certs/server-key.pem",    // only for secure = true
-		certFile: "./certs/server-cert.pem"   // only for secure = true
-	},
-		
+```javascript
+configData.severs.socket = {
+  secure: false,                        // TCP or TLS?
+  serverOptions: {},                    // passed to tls.createServer if secure=ture. Should contain SSL certificates
+  port: 5000,                           // Port or Socket
+  bindIP: "0.0.0.0",                    // which IP to listen on (use 0.0.0.0 for all)
+};
+```
+
+Note that if you wish to create a secure (tls) server, you will be required to complete the serverOptions hash with at least a cert and a keyfile:
+
+```javascript
+configData.server.socket.serverOptions: {
+  key: fs.readFileSync('certs/server-key.pem'),
+  cert: fs.readFileSync('certs/server-cert.pem')
+}
+```
+
 You can connect like:
 
-	openssl s_client -connect 127.0.0.1:5000
-	
+```javascript
+openssl s_client -connect 127.0.0.1:5000
+```
+
 or from node:
 
-	var tls = require('tls');
-	var fs = require('fs');
-	
-	var options = {
-	  key: fs.readFileSync('certs/server-key.pem'),
-	  cert: fs.readFileSync('certs/server-cert.pem')
-	};
-	
-	var cleartextStream = tls.connect(5000, options, function() {
-	  console.log('client connected', cleartextStream.authorized ? 'authorized' : 'unauthorized');
-	  process.stdin.pipe(cleartextStream);
-	  process.stdin.resume();
-	});
-	cleartextStream.setEncoding('utf8');
-	cleartextStream.on('data', function(data) {
-	  console.log(data);
-	});
+```javascript
+var tls = require('tls');
+var fs = require('fs');
+
+var options = {
+  key: fs.readFileSync('certs/server-key.pem'),
+  cert: fs.readFileSync('certs/server-cert.pem')
+};
+
+var cleartextStream = tls.connect(5000, options, function() {
+  console.log('client connected', cleartextStream.authorized ? 'authorized' : 'unauthorized');
+  process.stdin.pipe(cleartextStream);
+  process.stdin.resume();
+});
+cleartextStream.setEncoding('utf8');
+cleartextStream.on('data', function(data) {
+  console.log(data);
+});
+```
 
 ## Files and Routes for TCP clients
 
