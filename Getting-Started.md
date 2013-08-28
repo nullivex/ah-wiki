@@ -1,7 +1,7 @@
 ## Requirements
 * node.js ( >= v0.8.0)
 * npm
-* redis (for actionCluster, cache, stats, and tasks)
+* redis (for cluster support, cache, stats, and tasks)
 
 ## Install & Quickstart
 
@@ -10,13 +10,13 @@
 ```bash
 npm install actionHero
 ./node_modules/.bin/actionHero generate
-./node_modules/.bin/actionHero start
+npm start
 ```
 
 * Create a new directory `mkdir ~/project && cd ~/project`
 * Checkout the actionHero source `npm install actionHero`
 * Use the generator to create a template project `./node_modeules/.bin/actionHero generate`
-* You can now start up the server: `./node_modeules/.bin/actionHero start`
+* You can now start up the server: `npm start`
 
 Visit `http://127.0.0.1:8080/public` in your browser to see the actionHero in action!
 
@@ -38,9 +38,6 @@ Actions in /actions will be loaded in automatically, along /initializers and /ta
 	|
 	|- log
 	|-- (default location for logs)
-	|
-	|- initilizers
-	|-- (your initilizers, loaded in before project boot)
 	|
 	|- node_modules
 	|-- (your modules, actionHero should be npm installed in here)
