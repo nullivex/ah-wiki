@@ -7,7 +7,6 @@ actionHero uses [faye](http://faye.jcoglan.com/) for web sockets.  Faye provides
 As this is a persistent connection, websocket connections have actionHero's verbs available to them.  These verbs are:
 
 * `quit` disconnect from the session
-* `setIP` inform the server of the client's IP* 
 * `roomChange` - change the `room` you are connected to.  By default all socket connections are in the `api.configData.defaultChatRoom` room.   
 * `roomView` - show you the room you are connected to, and information about the members currently in that room.
 * `listenToRoom` - opt into hearing messages from another chat room
@@ -67,8 +66,6 @@ Methods which the provided actionHeroWebSocket object expose are:
 - `actionHeroWebSocket.prototype.send(message, callback)`
   - send a raw message
   - you probability don't want to use this
-- `actionHeroWebSocket.prototype.setIP()`
-  - by default, faye has no notion of the client's IP.  Use this to make an ajax call to set your IP address for the server
 - `actionHeroWebSocket.prototype.action(action, params, callback)`
   - `action` is a string, like "login"
   - `params` is an object
