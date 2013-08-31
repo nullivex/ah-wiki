@@ -123,9 +123,7 @@ allowedVerbs: [
       "listenToRoom",
       "silenceRoom",
       "detailsView",
-      "say",
-      "setIP",
-      "setPort"
+      "say"
     ]
 ```
 
