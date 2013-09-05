@@ -12,30 +12,30 @@ Here's an example of a simple action which will return a random number to the cl
 
 ```javascript
 
-	var action = {};
-	
-	/////////////////////////////////////////////////////////////////////
-	// metadata
-	action.name = "randomNumber";
-	action.description = "I am an API method which will generate a random number";
-	action.inputs = {
-		"required" : [],
-		"optional" : []
-	};
-	action.outputExample = {
-		randomNumber: 123
-	}
-	
-	/////////////////////////////////////////////////////////////////////
-	// functional
-	action.run = function(api, connection, next){
-		connection.response.randomNumber = Math.random();
-		next(connection, true);
-	};
-	
-	/////////////////////////////////////////////////////////////////////
-	// exports
-	exports.action = action;
+  var action = {};
+  
+  /////////////////////////////////////////////////////////////////////
+  // metadata
+  action.name = "randomNumber";
+  action.description = "I am an API method which will generate a random number";
+  action.inputs = {
+    "required" : [],
+    "optional" : []
+  };
+  action.outputExample = {
+    randomNumber: 123
+  }
+  
+  /////////////////////////////////////////////////////////////////////
+  // functional
+  action.run = function(api, connection, next){
+    connection.response.randomNumber = Math.random();
+    next(connection, true);
+  };
+  
+  /////////////////////////////////////////////////////////////////////
+  // exports
+  exports.action = action;
 ```
 
 or more concisely: 
@@ -43,16 +43,16 @@ or more concisely:
 
 ```javascript
 
-	exports.action = {
-	  name: "randomNumber",
-	  description: "I am an API method which will generate a random number",
-	  inputs: { required: [], optional: [] },
-	  outputExample: { randomNumber: 123 },
-	  run:function(api, connection, next){
-		connection.response.randomNumber = Math.random();
-		next(connection, true);
-	  }
-	}
+  exports.action = {
+    name: "randomNumber",
+    description: "I am an API method which will generate a random number",
+    inputs: { required: [], optional: [] },
+    outputExample: { randomNumber: 123 },
+    run:function(api, connection, next){
+    connection.response.randomNumber = Math.random();
+    next(connection, true);
+    }
+  }
 
 ```
 
@@ -61,30 +61,30 @@ You can also define more than one action per file if you would like:
 ```javascript
 
     var commonInputs = {
-    	required: ['email', 'password'],
-    	optional: []
+      required: ['email', 'password'],
+      optional: []
     };
 
     exports.userAdd = {
-    	name: 'userAdd',
-    	description: 'i add a user',
-    	inputs: commonInputs,
-    	outputExample: {},
-    	run: function(api, connection, next){
-    		// your code here
-    		next(connection, true);
-    	}
+      name: 'userAdd',
+      description: 'i add a user',
+      inputs: commonInputs,
+      outputExample: {},
+      run: function(api, connection, next){
+        // your code here
+        next(connection, true);
+      }
     };
     
     exports.userDelete = {
-    	name: 'userDelete',
-    	description: 'i delete a user',
-    	inputs: commonInputs,
-    	outputExample: {},
-    	run: function(api, connection, next){
-    		// your code here
-    		next(connection, true);
-    	}
+      name: 'userDelete',
+      description: 'i delete a user',
+      inputs: commonInputs,
+      outputExample: {},
+      run: function(api, connection, next){
+        // your code here
+        next(connection, true);
+      }
     }
 ```
 
@@ -114,9 +114,24 @@ exports.routes = {
 
 ## Options
 
+The complete set of options an action can have are:
+
 ```javascript
 exports.action = {
-  ""
+  name: "randomNumber",
+  description: "I am an API method which will generate a random number",
+  inputs: { 
+    required: ["userId"], 
+    optional: ["room"] 
+  },
+  outputExample: { randomNumber: 123 },
+  blockedConnectionTypes: ["webSocket"],
+  logLevel: "warning",
+  
+  run: function(api, connection, next){
+    connection.response.randomNumber = Math.random();
+    next(connection, true);
+  }
 }
 ```
 
