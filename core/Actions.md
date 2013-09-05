@@ -112,6 +112,14 @@ exports.routes = {
 
 ```
 
+## Options
+
+```javascript
+exports.action = {
+  ""
+}
+```
+
 ## Notes
 
 * Actions are asynchronous, and require in the API object, the connection object, and the callback function.  Completing an action is as simple as calling `next(connection, toRender)`.  The second param in the callback is a boolean to let the framework know if it needs to render anything else to the client.  There are some actions where you may have already sent the user output (see the `file.js` action for an example) where you would not want to render the default messages.
