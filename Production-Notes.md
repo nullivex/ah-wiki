@@ -32,3 +32,7 @@ It's probably best to avoid installing any global packages.  This way, you won't
 You can add local references to your $PATH like so to use these local binaries:
 
 `export PATH=$PATH:node_modules/.bin`
+
+## Misc
+
+Be sure to change `api.configdata.general.serverToken` to something unique for your application
