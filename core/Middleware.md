@@ -1,5 +1,7 @@
 # Middleware 
-## Middleware (aka action pre and post processing)
+## Middleware (aka pre and post processing)
+
+## Action Middleware
 
 actionHero provides hooks for you to execute custom code both before and after the excecution of all actions.  You do this by adding to the `api.actions.preProcessors` and `api.actions.postProcessors` array.  Functions you add here will be excecuted in order on the connection.  
 
@@ -30,6 +32,26 @@ api.actions.preProcessors.push(function(connection, actionTemplate, next){
 api.actions.postProcessors.push(function(connection, actionTemplate, toRender, next){
   connection.response._description = actionTemplate.description;
   next(connection);
+});
+
+```
+
+### Connection Middleware
+
+Like the action middleware above, you can also create middleware to react to the creation or destruction of all connections.  Unlike action middleware, connection middleware is non-blocking and connection logic will continue as normal regardless of what you do in this type of middleware.  
+
+`api.connections.createCallback` is an array of functions to call on a new connection and `api.connections.destroyCallbacks` will be called on destruction.  Keep in mind that some connections persist (webSocket, socket) and some only exist for the duration of a single request.  You will likely want to inspect `connection.type` in this middleware.
+
+Any modification made to the connection at this stage may happen either before or after an action, and may or may not persist to the connection depending on how the server is implemented.
+
+```javascript
+
+api.connections.createCallbacks.push(function(connection){
+  console.log(connection);
+});
+
+api.connections.destroyCallbacks.push(function(connection){
+  console.log(connection);
 });
 
 ```
