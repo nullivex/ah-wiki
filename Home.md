@@ -13,8 +13,8 @@ Use the SideBar to get around.
 
 Looking for other Languages?
 
-[US English (en_US)](https://github.com/evantahler/actionHero/wiki) maintained by @evantahler
-[Simplified Chinese (zh_HANS)](https://github.com/jacobbubu/actionHero-wiki-zh-hans/wiki) maintained by @jacobbubu
+- [US English (en_US)](https://github.com/evantahler/actionHero/wiki) maintained by @evantahler
+- [Simplified Chinese (zh_HANS)](https://github.com/jacobbubu/actionHero-wiki-zh-hans/wiki) maintained by @jacobbubu
 
 ---
 
