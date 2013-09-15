@@ -9,4 +9,13 @@ actionHero will also serve static files for you, but actionHero is not a 'render
 
 Use the SideBar to get around.
 
+---
+
+Looking for other Languages?
+
+[US English (en_US)](https://github.com/evantahler/actionHero/wiki) maintained by @evantahler
+[Simplified Chinese (zh_HANS)](https://github.com/jacobbubu/actionHero-wiki-zh-hans/wiki) maintained by @jacobbubu
+
+---
+
 ![image](https://raw.github.com/evantahler/actionHero/master/public/logo/actionHero.png)
