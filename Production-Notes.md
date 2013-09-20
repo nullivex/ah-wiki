@@ -10,23 +10,19 @@ You can set a few environment variables to effect how actionHero runs:
 - `ACTIONHERO_CONFIG`: This can be user to set the absolute path to the actionHero config file you wish to use.  This is useful when you might have a `staging.config.json` and a `production.config.json`
 
 
-## Forever
-When deploying your app, it is a good idea to demonize your application with a tool like [forever](https://github.com/nodejitsu/forever).  Forever is a process manager which will:
+## Dameon
 
-- demonize (background) your app
-- collect the output to a file
-- manage log files
-- and more
+When deploying actionHero, you will probably have more than 1 process.  You can user the cluster manager to keep an eye on the workers and manage them
 
-While you can daemonize both the actionHero server and clusterManager, they will not restart automatically if something goes terribly wrong.  Here is a quick guide to handling production deployments:
+- Start the cluster with 2 workers: `./node_modules/.bin/actionHero startCluster --workers=2`
 
-1. install forever globally `npm install forever -g`
-2. instruct forever to manage an actionHero cluster `forever start ./node_modules/actionHero/bin/actionHero start [args]`
-3. when you deploy, you can instruct the actionHero cluster process to gracefully restart (rather than using `forever restart` which will actually stop and start your server) `kill -s USR2 [pid]` (both `actionHero start` and `actionHero startCluster`) respond to the SIGUSR2 signal as a restart.
+When you deploy new code, you can gracefully restart your workers by sending the `USR2` signal to the cluster -manager to signal a reload to all workers.  You don't need to start and stop the cluster-master.  This allows for 0-downtime deployments.  
+
+You may want to set some of the ENV variables above to help with your deployment.
 
 ## Number of workers
 
-When choosing the number of workers for your actionHero cluster, choose at least 1 less than the number of CPUs available.  If you have a "burstable" architecture (like a Joyent smart machine), opt for the highest number of 'consistent' CPUs you can have, meaning a number of CPUs that you will always have available to you.  
+When choosing the number of workers (`--workers=n`) for your actionHero cluster, choose at least 1 less than the number of CPUs available.  If you have a "burstable" architecture (like a Joyent smart machine), opt for the highest number of 'consistent' CPUs you can have, meaning a number of CPUs that you will always have available to you.  
 
 You never want more workers than you can run at a time, or else you will actually be slowing dow the execution of all processes
 
