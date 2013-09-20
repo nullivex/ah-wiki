@@ -1,6 +1,15 @@
 # Production Notes
 A collection of thoughts on deploying actionHero apps
 
+## Paths and Envrionments
+
+You can set a few environment variables to effect how actionHero runs:
+
+- `PROJECT_ROOT`: This is useful when deploying actionHero applications on a server where symlinks will change under a running process.  The cluster will look at your symlink `PROJECT_ROOT=/path/to/current_symlink` rather than the absolute path it was started from
+- `ACTIONHERO_ROOT`: This can used to set the absolute path to the actionHero binaries
+- `ACTIONHERO_CONFIG`: This can be user to set the absolute path to the actionHero config file you wish to use.  This is useful when you might have a `staging.config.json` and a `production.config.json`
+
+
 ## Forever
 When deploying your app, it is a good idea to demonize your application with a tool like [forever](https://github.com/nodejitsu/forever).  Forever is a process manager which will:
 
