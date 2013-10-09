@@ -1,7 +1,5 @@
 ## Example Actions
 
-**[file](https://github.com/evantahler/actionHero/blob/master/actions/file.js)**: An action which uses actionHero's flat file server to render html content.  In this way, TCP and web socket clients can also request files, and you can request file content as an action.
-
 **[cachetest](https://github.com/evantahler/actionHero/blob/master/actions/cacheTest.js)**: This action demonstrates how to handle parameter checking for an actin, and how to use the internal cache methods of actionHero to save and recall data provided from a client.
 
 **[randomNumber](https://github.com/evantahler/actionHero/blob/master/actions/randomNumber.js)**: This example shows how to craft a simple action with no input, but to respond differently to clients based on their HTTP method (if it exists)
