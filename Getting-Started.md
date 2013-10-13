@@ -24,14 +24,11 @@ You can also opt to install actionHero globally `npm install actionHero -g` and 
 	
 ## Application Structure
 
-Actions in /actions will be loaded in automatically, along /initializers and /tasks. /public will become your application's default static asset location.  You can make your own config.json in your application root with only the partial changes you want to use over the default settings.
+Actions in /actions will be loaded in automatically, along /initializers and /tasks. /public will become your application's default static asset location.  The map below describes actionHero's default project layout.  If you wish to customize your project's paths, you can do so within `config.js` in the `api.configData.general.paths` section
 
 	/
 	|- actions
 	|-- (your actions)
-	|
-	|- certs
-	|-- (your https certs for your domain)
 	|
 	|- initializers
 	|-- (any additional initializers you want)
@@ -57,7 +54,7 @@ Actions in /actions will be loaded in automatically, along /initializers and /ta
 	readme.md
 	routes.js
 	config.js
-	Jakefile.js\n\
+	Jakefile.js
 	package.json (be sure to include 'actionHero':'x')
 
 ## Tutorial
