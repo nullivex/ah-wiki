@@ -6,8 +6,9 @@ The main way to run your actionHero server is to use the included `./node_module
 At the time of this writing the actionHero binary's help contains:
 
 ```bash
-Binary options:
+actionHero - a node.js API framework for both tcp sockets, web sockets, and http clients.
 
+Binary options:
 * help (default)
 * start
 * startCluster
@@ -32,7 +33,6 @@ Descriptions:
   [inputsRequired] (optional) should be a comma-sepperated list IE: "userName,password"
   [inputsOptional] (optional) should be a comma-sepperated list IE: "userName,password"
 
-
 * actionHero generateTask --name=[name] --description=[description] --scope=[scope] --frequency=[frequency] 
   will generate a new task in `tasks`
   [name] (required)
@@ -51,21 +51,22 @@ Descriptions:
 * actionHero start --config=[/path/to/config.js] --title=[processTitle]  --daemon
   will start a template actionHero server
   this is the respondant to `npm start`
-  [config] (optional) path to config.js, defaults to `process.cwd() + "/" + config.js`
-  [title] (optional) process title to use for ps and pidFile defaults to (actionHero) Does not work on OSX/Windows
+  [config] (optional) path to config.js, defaults to `process.cwd() + "/" + config.js`. You can also use ENV[ACTIONHERO_CONFIG].
+  [title] (optional) process title to use for actionHero's ID, ps, log, and pidFile defaults. Must be unique for each member of the cluster.  You can also use ENV[ACTIONHERO_TITLE]. Process renaming does not work on OSX/Windows
   [daemon] (optional) to fork and run as a new background process defalts to false
 
-* actionHero startCluster --exec=[command] --workers=[numWorkers] --pidfile=[path] --log=[path] --silent=[silent] --title=[clusterTitle] --workerTitlePrefix=[prefix] --config=[/path/to/config.js]  --daemon
+* actionHero startCluster --exec=[command] --workers=[numWorkers] --pidfile=[path] --log=[path] --title=[clusterTitle] --workerTitlePrefix=[prefix] --config=[/path/to/config.js]  --daemon
   will launch a actionHero cluster (using node's cluster module)
   [exec] (optional) command for the custer-master to run to stat the workers
   [workers] (optional) number of workers (defaults to # CPUs - 2)
   [pidfile] (optional) pidfile localtion (defaults to process.cwd() + /pids)
   [log] (optional) logfile (defaults to process.cwd() + /log/cluster.log)
-  [silent] (optional) should worker stdout be sent to cluster master (default true)
   [title] (optional) default actionHero-master  Does not work on OSX/Windows
   [workerTitlePrefix] (optional) default actionHero-worker
-  [config] (optional) path to config.js, defaults to `process.cwd() + "/" + config.js`
+  [config] (optional) path to config.js for workers, defaults to `process.cwd() + "/" + config.js`. You can also use ENV[ACTIONHERO_CONFIG]
   [daemon] (optional) to fork and run as a new background process defalts to false
+
+More Help & the actionHero wiki can be found @ http://actionherojs.com
 ```
 
 ## Linking the actionHero binary
