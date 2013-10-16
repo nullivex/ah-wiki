@@ -6,8 +6,6 @@ The main way to run your actionHero server is to use the included `./node_module
 At the time of this writing the actionHero binary's help contains:
 
 ```bash
-actionHero - a node.js API framework for both tcp sockets, web sockets, and http clients.
-
 Binary options:
 * help (default)
 * start
@@ -52,11 +50,11 @@ Descriptions:
   will start a template actionHero server
   this is the respondant to `npm start`
   [config] (optional) path to config.js, defaults to `process.cwd() + "/" + config.js`. You can also use ENV[ACTIONHERO_CONFIG].
-  [title] (optional) process title to use for actionHero's ID, ps, log, and pidFile defaults. Must be unique for each member of the cluster.  You can also use ENV[ACTIONHERO_TITLE]. Process renaming does not work on OSX/Windows
+  [title] (optional) process title to use for actionHero-s ID, ps, log, and pidFile defaults. Must be unique for each member of the cluster.  You can also use ENV[ACTIONHERO_TITLE]. Process renaming does not work on OSX/Windows
   [daemon] (optional) to fork and run as a new background process defalts to false
 
 * actionHero startCluster --exec=[command] --workers=[numWorkers] --pidfile=[path] --log=[path] --title=[clusterTitle] --workerTitlePrefix=[prefix] --config=[/path/to/config.js]  --daemon
-  will launch a actionHero cluster (using node's cluster module)
+  will launch a actionHero cluster (using node-s cluster module)
   [exec] (optional) command for the custer-master to run to stat the workers
   [workers] (optional) number of workers (defaults to # CPUs - 2)
   [pidfile] (optional) pidfile localtion (defaults to process.cwd() + /pids)
