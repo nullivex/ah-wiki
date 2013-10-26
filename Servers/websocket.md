@@ -79,10 +79,6 @@ api: function(message){
 welcome: function(message){
   A.log("WELCOME:");
   A.log(message);
-},
-alert: function(message){
-  A.log("ALERT:");
-  A.log(message);
 }
 
 }
