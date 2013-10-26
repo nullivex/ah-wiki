@@ -56,6 +56,40 @@ An example web socket session might be the following:
 
 ```
 
+The whole list of events you can register for are:
+
+```javascript
+A.events = {
+
+disconnect: function(){
+  A.log("DISCONNECTED");
+},
+reconnect: function(){
+  A.log("RECONNECTED");
+  A.log("New ID: " + A.id);
+},
+say: function(message){
+  A.log("SAY:");
+  A.log(message)
+},
+api: function(message){
+  A.log("API:");
+  A.log(message)
+},
+welcome: function(message){
+  A.log("WELCOME:");
+  A.log(message);
+},
+alert: function(message){
+  A.log("ALERT:");
+  A.log(message);
+}
+
+}
+```
+
+You can also inspect `A.state` ('connected', 'disconnected', etc)
+
 Note that we are using **both** the provided actionHeroWebSocket prototype and requiring the faye library which actionHero provides.
 
 Methods which the provided actionHeroWebSocket object expose are:
