@@ -4,131 +4,142 @@
 
 The web server exposes actions and files over http or https.  You can visit the API in a browser, Curl, etc. `{url}?action=actioName` or `{url}/api/{actioName}` is how you would access an action.  For example, using the default ports in `config.js` you could reach the status action with both `http://127.0.0.1:8080/status` or `http://127.0.0.1:8080/?action=status`  
 
-HTTP responses follow the format:
+HTTP responses are always JSON and follow the format:
 
 ```javascript
 
-	{
-		hello: "world"
-		serverInformation: {
-			serverName: "actionHero API",
-			apiVersion: 1,
-			requestDuration: 14
-		},
-		requestorInformation: {
-			remoteAddress: "127.0.0.1",
-			RequestsRemaining: 989,
-			recievedParams: {
-				action: "",
-				limit: 100,
-				offset: 0
-			}
+{
+	hello: "world"
+	serverInformation: {
+		serverName: "actionHero API",
+		apiVersion: 1,
+		requestDuration: 14
+	},
+	requestorInformation: {
+		remoteAddress: "127.0.0.1",
+		RequestsRemaining: 989,
+		recievedParams: {
+			action: "",
+			limit: 100,
+			offset: 0
 		}
 	}
+}
 ```
 
 HTTP Example: 
 
 ```javascript
 
-	> curl 'localhost:8080/api/status' -v | python -mjson.tool
-	* About to connect() to localhost port 8080 (#0)
-	*   Trying 127.0.0.1...
-	* connected
-	* Connected to localhost (127.0.0.1) port 8080 (#0)
-	> GET /api/status HTTP/1.1
-	> User-Agent: curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8r zlib/1.2.5
-	> Host: localhost:8080
-	> Accept: */*
-	> 
-	< HTTP/1.1 200 OK
-	< Content-Type: application/json
-	< X-Powered-By: actionHero API
-	< Date: Sun, 29 Jul 2012 23:25:53 GMT
-	< Connection: keep-alive
-	< Transfer-Encoding: chunked
-	< 
-	{ [data not shown]
-	100   741    0   741    0     0   177k      0 --:--:-- --:--:-- --:--:--  361k
-	* Connection #0 to host localhost left intact
-	* Closing connection #0
-	{
-	    "requestorInformation": {
-	        "recievedParams": {
-	            "action": "status", 
-	            "limit": 100, 
-	            "offset": 0
-	        }, 
-	        "remoteAddress": "127.0.0.1"
-	    }, 
-	    "serverInformation": {
-	        "apiVersion": "3.0.0", 
-	        "currentTime": 1343604353551, 
-	        "requestDuration": 1, 
-	        "serverName": "actionHero API"
-	    }, 
-	    "stats": {
-	        "cache": {
-	            "numberOfObjects": 0
-	        }, 
-	        "id": "10.0.1.12:8080:4443:5000", 
-	        "memoryConsumption": 8421200, 
-	        "peers": [
-	            "10.0.1.12:8080:4443:5000"
-	        ], 
-	        "queue": {
-	            "queueLength": 0, 
-	            "sleepingTasks": []
-	        }, 
-	        "socketServer": {
-	            "numberOfGlobalSocketRequests": 0, 
-	            "numberOfLocalActiveSocketClients": 0, 
-	            "numberOfLocalSocketRequests": 0
-	        }, 
-	        "uptimeSeconds": 34.163, 
-	        "webServer": {
-	            "numberOfGlobalWebRequests": 5, 
-	            "numberOfLocalWebRequests": 3
-	        }, 
-	        "webSocketServer": {
-	            "numberOfGlobalWebSocketRequests": 0, 
-	            "numberOfLocalActiveWebSocketClients": 0
-	        }
-	    }
-	}
+> curl 'localhost:8080/api/status' -v | python -mjson.tool
+* About to connect() to localhost port 8080 (#0)
+*   Trying 127.0.0.1...
+* connected
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /api/status HTTP/1.1
+> User-Agent: curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8r zlib/1.2.5
+> Host: localhost:8080
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< X-Powered-By: actionHero API
+< Date: Sun, 29 Jul 2012 23:25:53 GMT
+< Connection: keep-alive
+< Transfer-Encoding: chunked
+< 
+{ [data not shown]
+100   741    0   741    0     0   177k      0 --:--:-- --:--:-- --:--:--  361k
+* Connection #0 to host localhost left intact
+* Closing connection #0
+{
+    "requestorInformation": {
+        "recievedParams": {
+            "action": "status", 
+            "limit": 100, 
+            "offset": 0
+        }, 
+        "remoteAddress": "127.0.0.1"
+    }, 
+    "serverInformation": {
+        "apiVersion": "3.0.0", 
+        "currentTime": 1343604353551, 
+        "requestDuration": 1, 
+        "serverName": "actionHero API"
+    }, 
+    "stats": {
+        "cache": {
+            "numberOfObjects": 0
+        }, 
+        "id": "10.0.1.12:8080:4443:5000", 
+        "memoryConsumption": 8421200, 
+        "peers": [
+            "10.0.1.12:8080:4443:5000"
+        ], 
+        "queue": {
+            "queueLength": 0, 
+            "sleepingTasks": []
+        }, 
+        "socketServer": {
+            "numberOfGlobalSocketRequests": 0, 
+            "numberOfLocalActiveSocketClients": 0, 
+            "numberOfLocalSocketRequests": 0
+        }, 
+        "uptimeSeconds": 34.163, 
+        "webServer": {
+            "numberOfGlobalWebRequests": 5, 
+            "numberOfLocalWebRequests": 3
+        }, 
+        "webSocketServer": {
+            "numberOfGlobalWebSocketRequests": 0, 
+            "numberOfLocalActiveWebSocketClients": 0
+        }
+    }
+}
 ```
 
 * you can provide the `?callback=myFunc` param to initiate a JSONp response which will wrap the returned JSON in your callback function.  The mime type of the response will change from JSON to Javascript. 
 * unless otherwise provided, the api will set default values of limit and offset to help with paginating long lists of response objects (default: limit=100, offset=0).  These defaults are defined in `config.js`
-* If everything went OK with your request, no error attribute will be set on the response, otherwise, you should set a string error within your action
+* If everything went OK with your request, no error attribute will be set on the response, otherwise, you should see either a string or hash error response within your action
 * to build the response for "hello" above, the action would have set `connection.response.hello = "world";`
 
-You may also enable a HTTPS server with actionHero.  It works exactly the same as the http server. You cannot have the http and https server running at the same time. The following information should be enabled in your `config.js` file:
+`config.js` contains the settings for the web server.  The relevant options are:
 
 ```javascript
-configData.severs.web = {
-  secure: false,                       // HTTP or HTTPS?
-  serverOptions: {},                   // passed to https.createServer if secure=ture. Should contain SSL certificates
-  port: 8080,                          // Port or Socket
-  bindIP: "0.0.0.0",                   // which IP to listen on (use 0.0.0.0 for all)
-  httpHeaders : { },                   // Any additional headers you want actionHero to respond with
-  urlPathForActions : "api",           // route which actions will be served from; secondary route against this route will be treated as actions, IE: /api/?action=test == /api/test/
-  urlPathForFiles : "public",          // route which static files will be served from; path (relitive to your project root) to server static content from
-  rootEndpointType : "api",            // when visiting the root URL, should visitors see "api" or "file"? visitors can always visit /api and /public as normal
-  directoryFileType : "index.html",    // the default filetype to server when a user requests a directory
-  flatFileCacheDuration : 60,          // the header which will be returend for all flat file served from /public; defiend in seconds
-  fingerprintOptions : {               // settings for determining the id of an http(s) requset (browser-fingerprint)
-    cookieKey: "sessionID",
-    toSetCookie: true,
-    onlyStaticElements: false
-  },
-  formOptions: {                       // options to be applied to incomming file uplaods.  more options and details at https://github.com/felixge/node-formidable
-    uploadDir: "/tmp",
-    keepExtensions: false,
-    maxFieldsSize: 1024 * 1024 * 100
-  },
-  returnErrorCodes: false              // when enabled, returnErrorCodes will modify the response header for http(s) clients if connection.error is not null.  You can also set connection.responseHttpCode to specify a code per request.
-};
+configData.servers = {
+  "web" : {
+    secure: false,                       // HTTP or HTTPS?
+    serverOptions: {},                   // Passed to https.createServer if secure=ture. Should contain SSL certificates
+    port: 8080,                          // Port or Socket
+    bindIP: "0.0.0.0",                   // Which IP to listen on (use 0.0.0.0 for all)
+    httpHeaders : {                      // Any additional headers you want actionHero to respond with
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods': 'PUT, GET, POST, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    },    
+    urlPathForActions : "api",           // Route that actions will be served from; secondary route against this route will be treated as actions, IE: /api/?action=test == /api/test/
+    urlPathForFiles : "public",          // Route that static files will be served from; path (relitive to your project root) to server static content from
+    rootEndpointType : "api",            // When visiting the root URL, should visitors see "api" or "file"? Visitors can always visit /api and /public as normal
+    directoryFileType : "index.html",    // The default filetype to server when a user requests a directory
+    flatFileCacheDuration : 60,          // The header which will be returned for all flat file served from /public; defined in seconds
+    matchExtensionMime: true,            // If the URL has an extension (and no connection.error), should the response match the mime-type?
+    fingerprintOptions : {               // Settings for determining the id of an http(s) requset (browser-fingerprint)
+      cookieKey: "sessionID",
+      toSetCookie: true,
+      onlyStaticElements: false
+    },
+    formOptions: {                       // Options to be applied to incomming file uplaods. More options and details at https://github.com/felixge/node-formidable
+      uploadDir: "/tmp",
+      keepExtensions: false,
+      maxFieldsSize: 1024 * 1024 * 100
+    },
+    metadataOptions: {                   // Options to configure metadata in responses
+      serverInformation: true,
+      requestorInformation: true
+    },
+    returnErrorCodes: false              // When true, returnErrorCodes will modify the response header for http(s) clients if connection.error is not null. You can also set connection.responseHttpCode to specify a code per request.
+  }
+}  
 ```
 
 Note that if you wish to create a secure (https) server, you will be required to complete the serverOptions hash with at least a cert and a keyfile:
@@ -149,6 +160,10 @@ when inspecting `connection` in actions from web client, a few additional elemen
 - `connection.rawConnection.cookies`: Hash representation of the connection's cookies
 - `connection.rawConnection.responseHttpCode`: the status code to be rendered to the user.  Defaults to 200
 - `connection.type` for a HTTP client is "web"
+- `connection.extension`.  If are using a route to access an action, and the request path ends in a file extension (IE: `server.com/action/option.jpg`), the extension will be available.  Depending on the server's options, this extension may also be used to modify the response mime-type.
+
+Of course, the generic connection attributes (`connection.error`, `connection.params`, etc) will be present.
+
 
 ## Files
 
@@ -206,7 +221,6 @@ Params provided by the user (GET, POST, etc for http and https servers, setParam
       "action",
       "limit",
       "offset",
-      "outputType",
       "roomMatchKey",
       "roomMatchValue"
     ]
