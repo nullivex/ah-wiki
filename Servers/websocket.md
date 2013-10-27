@@ -123,4 +123,4 @@ Methods which the provided actionHeroWebSocket object expose are:
 
 You don't need to use the actionHeroWebSocket client, and can connect to the web socket manually and emit `say` and `action` etc commands as you would expect.
 
-The websocket server will use settings inherited by the `faye` `config.js` block.  If you want to set options on the client (like specific protocols to use), you can read up on the options [here](http://faye.jcoglan.com/browser.html)
+The websocket server will use settings inherited by the `faye` `config.js` block.  If you want to set options on the client (like specific protocols to use), you can read up on the options [here](http://faye.jcoglan.com/browser.html).  Note that changes to server options may require updates to the client library `actionHeroWebsocket.js` as well.
