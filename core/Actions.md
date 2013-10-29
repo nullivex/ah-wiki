@@ -127,7 +127,8 @@ exports.action = {
   outputExample: { randomNumber: 123 },
   blockedConnectionTypes: ["webSocket"],
   logLevel: "warning",
-  
+  matchExtensionMimeType: true,
+
   run: function(api, connection, next){
     connection.response.randomNumber = Math.random();
     next(connection, true);
@@ -141,6 +142,7 @@ exports.action = {
 * The metadata is used in reflexive and self-documenting actions in the API, available via the `documentation` verb (and /api/ routes).  
 * You can limit how many actions a persistent client (websocket, tcp, etc) can have pending at once with `api.configData.general.simultaniousActions`
 * `actions.inputs.required` and `actions.inputs.optional` are used for both documentation and for building the whitelist of allowed parameters the API will accept.  Client params not included in these lists will be ignored for security.
+* `matchExtensionMimeType` is curently only used by the `web` server, and it indicates that if this action is successfully called by a client with `connection.extension` set, the headers of the response should be changed to match that file type
 * actionHero strives to keep the `connection` object uniform among various client types.  All connections have the `connection.response` and `connection.error` objects.  You can inspect `connection.type` to learn more about the connection.  The gory details of the connection (which vary on its type) are stored in `connection.rawConnection` which will contain the websocket, tcp connection, etc.  For web clients, `connection.rawConnection = {req: req, res: res}` for example.  
 
 [You can learn more about handling HTTP verbs and file uploads here](https://github.com/evantahler/actionHero/wiki/web) and [TCP Clients](https://github.com/evantahler/actionHero/wiki/socket) and [Web-Socket Clients](https://github.com/evantahler/actionHero/wiki/websocket)
