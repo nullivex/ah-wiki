@@ -122,7 +122,6 @@ configData.servers = {
     rootEndpointType : "api",            // When visiting the root URL, should visitors see "api" or "file"? Visitors can always visit /api and /public as normal
     directoryFileType : "index.html",    // The default filetype to server when a user requests a directory
     flatFileCacheDuration : 60,          // The header which will be returned for all flat file served from /public; defined in seconds
-    matchExtensionMime: true,            // If the URL has an extension (and no connection.error), should the response match the mime-type?
     fingerprintOptions : {               // Settings for determining the id of an http(s) requset (browser-fingerprint)
       cookieKey: "sessionID",
       toSetCookie: true,
@@ -160,7 +159,7 @@ when inspecting `connection` in actions from web client, a few additional elemen
 - `connection.rawConnection.cookies`: Hash representation of the connection's cookies
 - `connection.rawConnection.responseHttpCode`: the status code to be rendered to the user.  Defaults to 200
 - `connection.type` for a HTTP client is "web"
-- `connection.extension`.  If are using a route to access an action, and the request path ends in a file extension (IE: `server.com/action/option.jpg`), the extension will be available.  Depending on the server's options, this extension may also be used to modify the response mime-type.
+- `connection.extension`.  If are using a route to access an action, and the request path ends in a file extension (IE: `server.com/action/option.jpg`), the extension will be available.  Depending on the server's options, this extension may also be used to modify the response mime-type by configuring `matchExtensionMimeType` within each action.
 
 Of course, the generic connection attributes (`connection.error`, `connection.params`, etc) will be present.
 
