@@ -144,7 +144,26 @@ jake actionHero:cache:load     # This will load (and overwrite) the cache from a
 You can [learn more about jake here](https://github.com/mde/jake/).
 You can [view actionHero's default jake tasks here](https://github.com/evantahler/actionHero/blob/master/jakelib/actionHero.jake)
 
-##  Notes
+## Signals
+
+actionHero is intended to be run on *nix operating systems.  The `start` and `startCluster` commands provide support for signaling. (There is limited support for some of these commands in windows).
+
+**actionHero start**
+
+- `kill` / `term` / `int` : Process will attempt to "gracefully" shut down.  That is, the worker will close all server connections (possibly sending a shutdown message to clients, depending on server type), stop all task processors, and eventually shut down.  This action may take some time to fully complete.
+- `USR2`: Process will restart itself.  The process will preform the "graceful shutdown" above, and they restart.
+
+**actionHero startCluster**
+
+All signals should be sent to the cluster master process.  You can still signal the termination of a worker, but the cluster manager will start a new one in its place.
+
+- `kill` / `term` / `int`:  Will signal the master to "gracefully terminate" all workers.  Master will terminate once all workers have completed
+- `USR2` / `HUP` : "Hot reload".  Worker will kill off existing workers one-by-one, and start a new worker in their place.  This is used for 0-downtime restarts.  Keep in mind that for a short while, your server will be running both old and new code while the workers are rolling.
+- `WINCH`: "Gracefully terminate" all workers.  Only the master will remain running
+- `TTOU`: remove one worker
+- `TTIN`: add one worker
+
+## Notes
 
 - Sometimes actionHero may require a git-based module (rather than a NPM module).  You will need to have git installed.  Depending on how you installed git, it may not be available to the node shell.  Be sure to have also installed references to git.  You can also run node/npm install from the git shell. 
 - sometimes, npm will not install the actionHero binary @ `/node_modules/.bin/actionHero`, but rather it will attempt to create a windows executable and wrapper.  You can launch actionHero directly with `./node_modules/actionHero/bin/actionHero`
