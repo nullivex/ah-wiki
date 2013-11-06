@@ -11,6 +11,10 @@ Use the SideBar to get around.
 
 ---
 
+**note**: This wiki will always reflect the master branch of actionHero, and therefore may be slightly ahead of the latest release on NPM.
+
+---
+
 #### Looking for other Languages?
 
 - [US English (en_US)](https://github.com/evantahler/actionHero/wiki) maintained by [@evantahler](https://github.com/evantahler)
