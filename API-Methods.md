@@ -129,28 +129,19 @@ A collection of actionHero's internal methods which may be useful to others.
 
 ## Stats
 
-### api.stats.increment(key, count, next)
-- next(err, wasSet)
+### api.stats.increment(key, count)
 - key is a string of the form ("thing:stuff")
 - count is a signed integer
-- - this method will work on local and global stats
-
-### api.stats.set(key, count, next)
-- next(err, wasSet)
-- key is a string of the form ("thing:stuff")
-- count is a signed integer
-- this method will only work on local stats
 
 ### api.stats.get(key, collection, next)
 - next(err, data)
 - key is a string of the form ("thing:stuff")
-- collection is either:
-  - `api.stats.collections.local`
-  - `api.stats.collections.global`
+- collection (optional) is one of the collections used for stats set in `api.configData.stats.keys`
 
-### api.stats.getAll(next)
+### api.stats.getAll(collections, next)
 - next(err, stats)
-- stats is a hash of `{global: globalStats, local: localStats}`
+- collections (optional) is an array of one or more of the keys used for stats set in `api.configData.stats.keys`
+- stats is a hash of `{key1: stats {}, key2: stats {} }`
 - keys will be collapsed into a hash 
 
 
