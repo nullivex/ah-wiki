@@ -112,7 +112,7 @@ exports.routes = {
 };
 ```
 
-**As a note, if a client accessing actionHero via routes does not provide an apiVersion and it is explicitly defined in the route, the highest number will not be assigned automatically, as will be seen as a routing error.**
+*As a note, if a client accessing actionHero via routes does not provide an apiVersion and it is explicitly defined in the route, the highest number will not be assigned automatically, as will be seen as a routing error.*
 
 ## Options
 
