@@ -93,9 +93,10 @@ You can also define more than one action per file if you would like:
 ActionHero supports multiple versions of the same action.  This will allow you to support actions/routes of the same name with upgraded functionality.
 
 - actions optionally have the `action.version` attribute
-- a reserverd param, `apiVersion` is used to directly specify the version of an action a client may request
-- if a client doesn't specify an `apiVersion`, they will be directed to the higest numerical version of that action
-- you can optionally create routes to handle your API versioning:
+- a reserved param, `apiVersion` is used to directly specify the version of an action a client may request
+- if a client doesn't specify an `apiVersion`, they will be directed to the highest numerical version of that action.
+
+You can optionally create routes to handle your API versioning:
 
 ```javascript
 exports.routes = {
@@ -109,6 +110,8 @@ exports.routes = {
     { path: "/:apiVersion/myAction", action: "myAction" },
   ]
 };
+
+**As a note, if a client accessing actionHero via routes does not provide an apiVersion and it is explicitly defined in the route, the highest number will not be assigned automatically, as will be seen as a routing error.**
 
 ```
 
