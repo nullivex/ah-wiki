@@ -47,7 +47,7 @@ If you are enquing delayed or periodic tasks, you also need to enable the schedu
 
 If I wanted to run 2 workers and a scheduler to run the jobs enqueued in the default queues above, I would do the following:
 
-```javaascript
+```javascript
 configData.tasks = {
   scheduler: true,    
   queues: ['default', 'default'],   
@@ -55,14 +55,15 @@ configData.tasks = {
   redis: configData.redis,
 }
 ```
-You can also set workers to work the "*" queue, and process any job they can find.
+You can also set workers to work the `"*"` queue, and process any job they can find.
 
 ## Creating a Task
 
-You can create you own tasks by placing them in a `./tasks/` folder at the root of your application.  You can use the generator `actionHero generateTask`. Like actions, all tasks have some required metadata:
+You can create you own tasks by placing them in a `./tasks/` directory at the root of your application.  You can use the generator `actionHero generateTask --name=myTask`. Like actions, all tasks have some required metadata:
 
 * `task.name`: The unique name of your task
 * `task.description`: a description
+* `task.queue`: the default queue to run this task within (can be overwritten when enqueued)
 * `task.frequency`: In milliseconds, how often should I run?.  A frequency of >0 denotes this task as periodic and actionHero will automatically enqueue it when required.
 * `task.plugins`: You can use resque plugins in your task from the node-resque project.  Plugins modify how your tasks are enqueued.  For example, if you use the `queue-lock` plugin, only one instance of any job (with similar arguments) can be enqueued at a time.
 * `task.pluginOptions`: a hash of options for the plugins
