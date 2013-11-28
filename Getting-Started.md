@@ -24,7 +24,7 @@ You can also opt to install actionHero globally `npm install actionHero -g` and 
 	
 ## Application Structure
 
-Actions in /actions will be loaded in automatically, along /initializers and /tasks. /public will become your application's default static asset location.  The map below describes actionHero's default project layout.  If you wish to customize your project's paths, you can do so within `config.js` in the `api.configData.general.paths` section
+Actions in `/actions` will be loaded in automatically, along `/initializers` and `/tasks`. `/public` will become your application's default static asset location.  The map below describes actionHero's default project layout.  If you wish to customize your project's paths, you can do so within `config.js` in the `api.configData.general.paths` section
 
 	/
 	|- actions
@@ -59,5 +59,3 @@ Actions in /actions will be loaded in automatically, along /initializers and /ta
 
 ## Tutorial
 Want to see an example application using actionHero?  You can check out the code and follow the detailed guide [here](https://github.com/evantahler/actionHero-tutorial).  This project demonstrates many of the core features of actionHero in a simple project.
-
-Learn more @ https://github.com/evantahler/actionHero-tutorial
