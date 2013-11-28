@@ -1,4 +1,4 @@
-# Runnign actionHero in a Cluster
+# Running actionHero in a Cluster
 
 actionHero can be run either as a stand-alone server or as part of a cluster.  The goal of these cluster helpers is to allow you to create a group of servers which will share state and all be able to handle requests and run tasks.  You can also add and remove nodes from the cluster without fear of data loss or task duplication.  You can also run many instances of actionHero on the same saerver using node.js' cluster methods (`actionHero startCluster`).
 
