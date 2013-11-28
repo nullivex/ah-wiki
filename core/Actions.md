@@ -2,11 +2,9 @@
 
 ## General
 
-The core of actionHero is the Action framework, **actions** are the basic units of work.  All connection types from all servers can use them generically.  The goal of an action is to read `connection.params` an set the `connection.response` ( and `connection.error` when needed) values to build the response to the client.
+The core of actionHero is the Action framework, and **actions** are the basic units of work.  All connection types from all servers can use actions.  The goal of an action is to read `connection.params` an set the `connection.response` ( and `connection.error` when needed) values to build the response to the client.
 
 You can create you own actions by placing them in a `./actions/` folder at the root of your application.  You can use the generator with `actionHero generateAction --name=myAction`
-
-Actions are called directly by clients, or by [tasks](https://github.com/evantahler/actionHero/wiki/Tasks) which can invoke them in the background
 
 Here's an example of a simple action which will return a random number to the client:
 

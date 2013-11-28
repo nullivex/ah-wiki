@@ -1,11 +1,11 @@
 ## General
 
-Tasks are background jobs meant to be run seperatly from a client's request.  They can be started by a task or by the server itself.  With actionHero, there is no need to run a separate daemon to process these jobs.  actionHero uses the [node-resque](https://github.com/taskrabbit/node-resque) package to store and process takss in a way compatible with the [resque](https://github.com/resque/resque) ecosystem. There are [a number of example tasks provided](Example-tasks).
+Tasks are background jobs meant to be run seperatly from a client's request.  They can be started by an action or by the server itself.  With actionHero, there is no need to run a separate daemon to process these jobs.  actionHero uses the [node-resque](https://github.com/taskrabbit/node-resque) package to store and process takss in a way compatible with the [resque](https://github.com/resque/resque) ecosystem. There are [a number of example tasks provided](Example-tasks).
 
-There are 3 types of tasks actionHero can process: normal, delayed, and periodic.
-- normal tasks are enqueued and processed one-by-one by the task workers
-- delayed tasks are enqueued in a special 'delayed' queue to only be processed at some time in the future (defined either by a timestamp or seconds-from-now)
-- peroidc tasks are like delayed tasks, but they run on a set frequency (IE: every 5 minutes).  Delayed tasks can take no input parameters.   
+There are 3 types of tasks actionHero can process: `normal`, `delayed`, and `periodic`.
+- `normal` tasks are enqueued and processed one-by-one by the task workers
+- `delayed` tasks are enqueued in a special 'delayed' queue to only be processed at some time in the future (defined either by a timestamp or seconds-from-now)
+- `peroidc` tasks are like delayed tasks, but they run on a set frequency (IE: every 5 minutes).  Delayed tasks can take no input parameters.   
 
 ## Enqueuing a Task
 
@@ -25,9 +25,11 @@ You can also enqueue tasks to be run at some time in the future:
 api.tasks.enqueueAt(1234556, "sendWelcomeEmail", {to: 'evan@evantahler.com'}, 'default', function(err, toRun){
   // done!
 });
+```
 
-// or
+or
 
+```javascript
 api.tasks.enqueueIn(10000, "sendWelcomeEmail", {to: 'evan@evantahler.com'}, 'default', function(err, toRun){
   // done!
 });
