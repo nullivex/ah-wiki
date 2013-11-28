@@ -1,8 +1,6 @@
 # Servers
 
-In actionHero v6 and later, we have introduced a modular server system.  This allows you to create your own servers or extend the build in ones.  
-
-In actionHero, the goal of each server is to ingest a specific type of connection and transform each client into a generic `connection` object which can be operated on by the rest of actionHero.  To help with this, all servers extend `api.genericServer` and fill in the required methods.
+In actionHero v6 and later, we have introduced a modular server system.  This allows you to create your own servers.  Servers should be thought of as type of lister to clients, streams or your OS.  In actionHero, the goal of each server is to ingest a specific type of connection and transform each client into a generic `connection` object which can be operated on by the rest of actionHero.  To help with this, all servers extend `api.genericServer` and fill in the required methods.
 
 To get started, you can use the `generateServer action` (name is required).  This will generate a template server which looks like this:
 
