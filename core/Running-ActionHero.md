@@ -166,7 +166,7 @@ All signals should be sent to the cluster master process.  You can still signal 
 - `TTOU`: remove one worker
 - `TTIN`: add one worker
 
-## Windows-Sepcifc Notes
+## Windows-Specific Notes
 
 - Sometimes actionHero may require a git-based module (rather than a NPM module).  You will need to have git installed.  Depending on how you installed git, it may not be available to the node shell.  Be sure to have also installed references to git.  You can also run node/npm install from the git shell. 
 - Sometimes, npm will not install the actionHero binary @ `/node_modules/.bin/actionHero`, but rather it will attempt to create a windows executable and wrapper.  You can launch actionHero directly with `./node_modules/actionHero/bin/actionHero`
