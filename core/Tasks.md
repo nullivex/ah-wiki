@@ -141,27 +141,27 @@ If you run these 2 tasks, you will see output in your console like this:
 ## Queue Inspection
 actionHero provides some methods to help inspect the state of your queue
 
-### api.tasks.del(queue, taskName, args, count, next)
+#### api.tasks.del(queue, taskName, args, count, next)
 - next(err, count)
 - removes all matching instances of queue + taskName + args from the normal queues
 - count is how many instances of this task were removed
 
-### api.tasks.delDelayed(queue, taskName, args, next)
+#### api.tasks.delDelayed(queue, taskName, args, next)
 - next(err, timestamps)
 - removes all matching instances of queue + taskName + args from the delayed queues
 - timestamps will be an array of the delayed timestamps which the task was removed from
 
-### api.tasks.enqueueRecurrentJob(taskName, next)
+#### api.tasks.enqueueRecurrentJob(taskName, next)
 - next()
 - will enqueue are recurring job
 - might not actually enqueue the job if it is already enqueued due to resque plugins
 
-### api.tasks.stopRecurrentJob(taskName, next)
+#### api.tasks.stopRecurrentJob(taskName, next)
 - next(err, removedCount)
 - will remove all instances of `taskName` from the delayed queues and normal queues
 - removedCount will inform you of how many instances of this job were removed
 
-### api.tasks.details(next)
+#### api.tasks.details(next)
 - next(err, details)
 - details is a hash of all the queues in the system and how long they are
 
