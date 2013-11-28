@@ -35,13 +35,13 @@ api.tasks.enqueueIn(10000, "sendWelcomeEmail", {to: 'evan@evantahler.com'}, 'def
 });
 ```
 
-enqueueAt asks for a timestamp to run at, and enqueueIn asks for the number of ms from now to run.
+`enqueueAt` asks for a timestamp to run at, and `enqueueIn` asks for the number of ms from now to run.
 
 The final type of task, periodic tasks, are defined with a `task.frequency` of greater than 0, and are loaded in by actionHero when it boots.
 
 ## Processing Tasks
 
-To work these tasks, you need to run actionHero with at least one worker.  Workers are defined by the queues they are working in `config.js`.  Workers run in-line with the rest of your server and process jobs.  
+To work these tasks, you need to run actionHero with at least one worker.  Workers are defined by the queues they are to work within `config.js`.  Workers run in-line with the rest of your server and process jobs.  
 
 If you are enquing delayed or periodic tasks, you also need to enable the scheduler.  This is a part of actionHero that will periodically check the delayed queues for jobs that are ready to work now, and pass them to the normal queues.
 
