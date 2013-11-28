@@ -1,6 +1,6 @@
 ## Stats
 
-actionHero ships with stats backend (in redis) to store and retrieve stats about your application.  
+actionHero ships with stats backend (in redis) to store and retrieve metrics about your application.  
 
 Many of the core actionHero features (cache, web/tcp/websocket servers, etc) are instrumented with stats, but you are encouraged to add more!
 
@@ -31,6 +31,8 @@ In order to remain performant, actionHero will buffer stats changes locally, and
 api.stats.increment('myCount', 2);
 api.stats.increment('myCount', 3);
 api.stats.increment('myCount', -1);
+
+// after waiting enough time for the stats to write to redis
 
 api.stats.get('myCount', function(err, count){
 	console.log(count)); // count => 4
