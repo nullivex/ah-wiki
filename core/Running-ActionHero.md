@@ -75,7 +75,7 @@ More Help & the actionHero wiki can be found @ http://actionherojs.com
 
 ## Programatic Use of actionHero
 
-While **NOT** encouraged, you can always instantiate an actionHero server yourself.  Perhaps you wish to combine actionHero with an existing (express?) project.  Here's how!  Take note that using these methods will not work for actionCluster, and only a single instance will be started within your project.  
+While **NOT** encouraged, you can always instantiate an actionHero server yourself.  Perhaps you wish to combine actionHero with an existing project.  Here's how!  Take note that using these methods will not work for actionCluster, and only a single instance will be started within your project.  
 
 Feel free to look at the source of `./node_modules/actionHero/bin/include/start` to see how the main actionHero server is implemented for more information.  Note that actionHero assumes that your project hierarchy is consistent with a stand-alone server, so ensure that `process.cwd()` matches.
 
