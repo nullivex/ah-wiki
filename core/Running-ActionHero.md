@@ -77,7 +77,7 @@ More Help & the actionHero wiki can be found @ http://actionherojs.com
 
 While **NOT** encouraged, you can always instantiate an actionHero server yourself.  Perhaps you wish to combine actionHero with an existing project.  Here's how!  Take note that using these methods will not work for actionCluster, and only a single instance will be started within your project.  
 
-Feel free to look at the source of `./node_modules/actionHero/bin/include/start` to see how the main actionHero server is implemented for more information.  Note that actionHero assumes that your project hierarchy is consistent with a stand-alone server, so ensure that `process.cwd()` matches.
+Feel free to look at the source of `./node_modules/actionHero/bin/include/start` to see how the main actionHero server is implemented for more information.
 
 You can programmatically control an actionHero server with `actionHero.start(params, callback)`, `actionHero.stop(callback)` and `actionHero.restart(callback)`
 
@@ -113,11 +113,11 @@ You can programmatically control an actionHero server with `actionHero.start(par
 
 ## Jake
 
-actionHero integrates with [jake](https://github.com/mde/jake/) (javascript make) to allow you to tun manual jake tasks within actionHero's environment.  Those of you coming from Ruby, jake is very similar to rake.
+actionHero integrates with [jake](https://github.com/mde/jake/) (javascript make) to allow you to tun manual jake tasks within actionHero's environment.  Those of you coming from Ruby, jake is very similar to `rake`.
 
 To use jake, you should install jake globally `npm install -g jake` or you can use it locally by adding it to you `package.json`
 
-actionHero will generate a few example jake tasks in `./jakelib/actionHero.jake` to help you save and restore the cache.  Most importantly, the `actionHero:envrionment` task is defined for you.  Require this in all of you tasks so you can have access to the `api` object within your tasks.  You will have access to all of your initialized, actions, and tasks within the api object.  `api` will represent an initialized sever, but not a started one.  Your initializer's "_start" methods will not be run, not will the servers be started.  For example:
+actionHero will generate a few example jake tasks in `./jakelib/actionHero.jake` to help you save and restore the cache and manage tasks.  Most importantly, the `actionHero:envrionment` task is defined for you.  Require this in all of you tasks so you can have access to the `api` object within your tasks.  You will have access to all of your initializers, actions, and tasks within the api object.  `api` will represent an initialized sever, but not a started one.  Your initializer's "_start" methods will not be run, not will the servers be started.  For example:
 
 ```javascript
 desc("my actionHero jake task");
@@ -133,12 +133,15 @@ As always, you can list your project's jake tasks with `jake -T`
 ```bash
 > jake -T
 
-jake actionHero:environment    # I will load and init an actionHero environment
-jake actionHero:actions:list   # List your actions and metadata
-jake actionHero:redis:flush    # This will clear the entire actionHero redis database
-jake actionHero:cache:clear    # This will clear actionHero's cache
-jake actionHero:cache:dump     # This will save the current cache as a JSON object
-jake actionHero:cache:load     # This will load (and overwrite) the cache from a file
+jake actionHero:environment                     # I will load and init an actionHero environment
+jake actionHero:actions:list                    # List your actions and metadata
+jake actionHero:tasks:enqueueAllPeriodicTasks   # This will enqueue all periodic tasks (could lead to duplicates)
+jake actionHero:tasks:enqueuePeriodicTask       # This will enqueue a periodic task
+jake actionHero:tasks:stopPeriodicTask          # This will remove an enqueued periodic task
+jake actionHero:redis:flush                     # This will clear the entire actionHero redis database
+jake actionHero:cache:clear                     # This will clear actionHero's cache
+jake actionHero:cache:dump                      # This will save the current cache as a JSON object
+jake actionHero:cache:load                      # This will load (and overwrite) the cache from a file
 ```
 
 You can [learn more about jake here](https://github.com/mde/jake/).
@@ -150,7 +153,7 @@ actionHero is intended to be run on *nix operating systems.  The `start` and `st
 
 **actionHero start**
 
-- `kill` / `term` / `int` : Process will attempt to "gracefully" shut down.  That is, the worker will close all server connections (possibly sending a shutdown message to clients, depending on server type), stop all task processors, and eventually shut down.  This action may take some time to fully complete.
+- `kill` / `term` / `int` : Process will attempt to "gracefully" shut down.  That is, the worker will close all server connections (possibly sending a shutdown message to clients, depending on server type), stop all task workers, and eventually shut down.  This action may take some time to fully complete.
 - `USR2`: Process will restart itself.  The process will preform the "graceful shutdown" above, and they restart.
 
 **actionHero startCluster**
@@ -163,7 +166,7 @@ All signals should be sent to the cluster master process.  You can still signal 
 - `TTOU`: remove one worker
 - `TTIN`: add one worker
 
-## Notes
+## Windows-Sepcifc Notes
 
 - Sometimes actionHero may require a git-based module (rather than a NPM module).  You will need to have git installed.  Depending on how you installed git, it may not be available to the node shell.  Be sure to have also installed references to git.  You can also run node/npm install from the git shell. 
-- sometimes, npm will not install the actionHero binary @ `/node_modules/.bin/actionHero`, but rather it will attempt to create a windows executable and wrapper.  You can launch actionHero directly with `./node_modules/actionHero/bin/actionHero`
+- Sometimes, npm will not install the actionHero binary @ `/node_modules/.bin/actionHero`, but rather it will attempt to create a windows executable and wrapper.  You can launch actionHero directly with `./node_modules/actionHero/bin/actionHero`
