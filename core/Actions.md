@@ -130,6 +130,7 @@ exports.action = {
   blockedConnectionTypes: ["webSocket"],
   logLevel: "warning",
   matchExtensionMimeType: true,
+  toDocument: true,
 
   run: function(api, connection, next){
     connection.response.randomNumber = Math.random();
