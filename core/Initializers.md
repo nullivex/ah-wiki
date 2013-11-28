@@ -18,7 +18,7 @@ exports.initStuff = function(api, next){
 }
 ```
 
-You can generate a file of this type with `actionHero generateInitializer`
+You can generate a file of this type with `actionHero generateInitializer --name=initStuff`
 
 ## _start
 
