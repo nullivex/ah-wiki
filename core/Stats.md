@@ -4,6 +4,8 @@ actionHero ships with stats backend (in redis) to store and retrieve stats about
 
 Many of the core actionHero features (cache, web/tcp/websocket servers, etc) are instrumented with stats, but you are encouraged to add more!
 
+In order to remain performant, actionHero will buffer stats changes locally, and only write them to redis at a frequency defined in `api.configData.stats.writeFrequency`.  
+
 ### api.stats.increment(key, count)
 - key is a string of the form ("thing:stuff")
 - count is a signed integer
@@ -21,17 +23,8 @@ Many of the core actionHero features (cache, web/tcp/websocket servers, etc) are
 
 ## Notes
 - in `api.stats.increment`, the count can be negative or positive
-- `api.configData.stats.witeFrequency` is how often the local stats buffer is written to redis.  Faster frequencies will keep your stats up to date faster, but slow down the rest of your server.
-- you can have more than one stats hash.  For example, you might want to keep `global` cluster stats and local stats per actionHero server.  You can do this by:
-
-```javascript
-configData.stats = {
-  witeFrequency: 1000,
-  keys: [    
-    'actionHero:stats',
-    'actionHero:stats:' + api.id
-  ], 
-```
+- `api.configData.stats.witeFrequency` is how often the local stats buffer is written to redis.  Faster frequencies will keep your stats up to date faster, but slow down the rest of your server due to constant writes to redis.
+- You can configure actionHero to store stats changes to more than one redis hash.  You might wish to do this so that you may keep 'local' stats and 'global' stats.  For example, if you set `api.configData.stats.keys = ['actionHero:stats', process.pid + ':stats']`.  All servers in your cluster will contribute to `actionHero:stats` and just this server's information will be logged in `process.pid + ':stats'`
   
 ## Example: 
 ``` javascript

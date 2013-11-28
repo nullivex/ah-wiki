@@ -2,7 +2,7 @@
 
 ## General
 
-actionHero uses [faye](http://faye.jcoglan.com/) for web sockets.  Faye provides an abstraction for web sockets which allow fallback to long-polling and other protocols which should be appropriate for the vast majority of clients. Within actionHero, web sockets are bound to the web server (either http or https).  Also, if you are using a redis backend store (which is required to use actionHero in a cluster), faye will be configured to use this store automatically.  actionHero uses the [faye-node-redis](https://github.com/faye/faye-redis-node) backend to ensure that all the nodes in your ActionCluster can serve content for any client (no need for 'sticky' load balancer sessions)
+actionHero uses [faye](http://faye.jcoglan.com/) for web sockets.  Faye provides an abstraction for web sockets which allow fallback to long-polling and other protocols which should be appropriate for the vast majority of browsers. Within actionHero, web sockets are bound to the web server (either http or https).  Also, if you are using a redis backend store (which is required to use actionHero in a cluster), faye will be configured to use this store automatically.  actionHero uses the [faye-node-redis](https://github.com/faye/faye-redis-node) backend to ensure that all the nodes in your cluster can serve content for any client (no need for 'sticky' load balancer sessions)
 
 As this is a persistent connection, websocket connections have actionHero's verbs available to them.  These verbs are:
 

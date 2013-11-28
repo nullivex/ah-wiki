@@ -147,36 +147,42 @@ A collection of actionHero's internal methods which may be useful to others.
 
 ## Tasks
 
-### new api.task()
-	var task = new api.task({
-		name: "myTaskName",
-		runAt: new Date().getTime() + 30000, // run 30 seconds from now
-		params: {email: 'evantahler@gmail.com'}, // any optional params to pass to the task
-		toAnnounce: true // to log the run of this task or not
-	});
+### api.tasks.enqueue(taskName, params, queue, next)
+- next(err, toRun)
+- enqueues a task to run ASAP
+- toRun will indicate if the task was successfully enqueued or blocked by a resque plugin
 
-### task.enqueue(next)
-- run on a task object
-- next(err, enqueued)
-- adds it to the proper queue
+### api.tasks.enqueueAt(timestamp, taskName, params, queue, next)
+- next()
+- enqueue a task to run at `timestamp`(ms)
 
-### task.run(next())
-- run on a task object
-- runs the task in-line, bypassing the task queue(s)
+### api.tasks.enqueueIn(time, taskName, params, queue, next)
+- next()
+- enqueue a task to run in `time`ms from now
 
+### api.tasks.del(queue, taskName, args, count, next)
+- next(err, count)
+- removes all matching instances of queue + taskName + args from the normal queues
+- count is how many instances of this task were removed
 
-### api.tasks.getAllTasks(nameToMatch, next)
-- next(err, results)
-- returns all the details of all enqueued and processing tasks
+### api.tasks.delDelayed(queue, taskName, args, next)
+- next(err, timestamps)
+- removes all matching instances of queue + taskName + args from the delayed queues
+- timestamps will be an array of the delayed timestamps which the task was removed from
 
-### api.tasks.queueLength(queue, next)
-- next(err, length)
-- length is the length of the queue requested
-- queues include: 
-  - `api.tasks.queues.globalQueue`
-  - `api.tasks.queues.delayedQueue`
-  - `api.tasks.queues.localQueue`
-  - `api.tasks.queues.processingQueue`
+### api.tasks.enqueueRecurrentJob(taskName, next)
+- next()
+- will enqueue are recurring job
+- might not actually enqueue the job if it is already enqueued due to resque plugins
+
+### api.tasks.stopRecurrentJob(taskName, next)
+- next(err, removedCount)
+- will remove all instances of `taskName` from the delayed queues and normal queues
+- removedCount will inform you of how many instances of this job were removed
+
+### api.tasks.details(next)
+- next(err, details)
+- details is a hash of all the queues in the system and how long they are
 
 ## WebServer
 
