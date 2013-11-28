@@ -67,7 +67,7 @@ You can create you own tasks by placing them in a `./tasks/` directory at the ro
 * `task.frequency`: In milliseconds, how often should I run?.  A frequency of >0 denotes this task as periodic and actionHero will automatically enqueue it when required.
 * `task.plugins`: You can use resque plugins in your task from the node-resque project.  Plugins modify how your tasks are enqueued.  For example, if you use the `queue-lock` plugin, only one instance of any job (with similar arguments) can be enqueued at a time.
 * `task.pluginOptions`: a hash of options for the plugins
-		
+    
 
 An example Task:
 
@@ -96,29 +96,29 @@ You can also define more than one task in a single file:
 ```javascript
 
 exports.sayHello = {
-	name:          'sayHello',
-	description:   'I say hello',
-	queue:         "default",
+  name:          'sayHello',
+  description:   'I say hello',
+  queue:         "default",
   plugins:       [], 
   pluginOptions: [],
-	frequency:     1000,
-	run: function(api, params, next){
-		api.log("hello")
-		next(null, true);
-	}
+  frequency:     1000,
+  run: function(api, params, next){
+    api.log("hello")
+    next(null, true);
+  }
 };
 
 exports.sayGoodbye = {
-	name:          'sayGoodbye',
-	description:   'I say goodbye',
-	queue:         "default",
+  name:          'sayGoodbye',
+  description:   'I say goodbye',
+  queue:         "default",
   plugins:       [], 
   pluginOptions: [],
-	frequency:     2000,
-	run: function(api, params, next){
-		api.log("goodbye")
-		next(null, true);
-	}
+  frequency:     2000,
+  run: function(api, params, next){
+    api.log("goodbye")
+    next(null, true);
+  }
 };
 
 ```
