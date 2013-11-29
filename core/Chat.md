@@ -2,11 +2,11 @@
 
 ## General
 
-All persistent connections (socket and websocket) are joined to a chat room upon connection.  This room is defined in `api.configData.general.defaultChatRoom`.  Rooms are used to broadcast messages from the system or other users.  Rooms can be created on the fly and don't require any special setup.  In this way. you can push messages to your users with a special functions. 
+All persistent connections (socket and websocket) are joined to a chat room upon connection.  This room is defined in `api.configData.general.defaultChatRoom`.  Rooms are used to broadcast messages from the system or other users.  Rooms can be created on the fly and don't require any special setup.  
 
-The special action for persistent connections `say` makes use of `api.chatRoom.socketRoomBroadcast` tell a message to all other users in the room, IE: `say Hello World` from a socket clinet.
+The special action for persistent connections `say` makes use of `api.chatRoom.socketRoomBroadcast` tell a message to all other users in the room, IE: `say Hello World` from a socket client.
 
-To create private chat rooms (or peer-to-peer rooms), it is suggested that you create a randomly named room and provide each client with an authentication token.
+To create private chat rooms (or peer-to-peer rooms), it is suggested that you create a randomly named room and provide each client with an authentication token or use the matching functions described below.
 
 Clients can also subscribe to (but not participate in) chatRooms they are not "in" with `listenToRoom ` and `silenceRoom`
 
@@ -14,7 +14,6 @@ Clients can also subscribe to (but not participate in) chatRooms they are not "i
 
 ### `api.chatRoom.socketRoomBroadcast(connection, message)`
 * tell a message to all members in a room.
-* `fromQueue` is an internal optional parameter to indicate if the message has come form a peer connected to this server, or another peer in the cluster.
 * You can provide a `null` connection, and `api.configData.general.serverName` will appear as the sender IE `api.chatRoom.socketRoomBroadcast(null, "Hello.  The time is " + new Date());`.  This message will be sent to folks in the default room.
 * If you don't want to have messages from from the default room (or want to provide more context about the message sender, perhaps the action or server's name), you can mock the connection object: `var mockConnection = {room: "someOtherRoom"};`
 * The `context` of messages sent with `api.chatRoom.socketRoomBroadcast` always be `user` to differentiate these responses from a `response` to a request
