@@ -10,8 +10,8 @@ When this happens:
 
 - clients will be sent `connection.error` as defined in `api.configData.general.serverErrorMessage`
   - Web clients will also be sent the 500 (server error) header 
-- Exceptions created in tasks will also be logged, and the task will return it's callback
-  - If the Exception occurred within a periodic task, the task will be re-enqueued.
+- Exceptions created in tasks will also be logged, and the task will return its callback
+  - If the Exception occurred within a periodic task, the task will not be re-enqueued.
 
 Keep in mind that any application-wide settings which may have been modified in this erroneous action/task will **not** be rolled-back
 
