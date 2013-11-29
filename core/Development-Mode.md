@@ -1,11 +1,11 @@
 ## Development Mode
 
-Development mode, when enabled, will poll for changes in your actions and tasks, and reload them on the fly.
+Development mode, when enabled, will poll for changes in your actions, tasks and initializers, and reload them on the fly.
 
 - this uses fs.watchFile() and will not work on all OSs / file systems.
 - new files won't be loaded in, only existing files when the app was booted will be monitored
 - as deleting a file might crash your application, we will not attempt to re-load deleted files
-- if you have changed the `task.frequency` of a periodic task, you will the old timer value will be in use until the event fires at least once after the change 
+- if you have changed the `task.frequency` of a periodic task, you will continue to use the old value until the task fires at least once after the change 
 - changing `config.js`, initializers, or servers, will attempt to do a "full" reboot the server rather than just reload that component.
 
 #### Don't use this in production!
@@ -14,12 +14,11 @@ Development mode, when enabled, will poll for changes in your actions and tasks,
 
 You can use the awesome [node-inspector](https://github.com/dannycoates/node-inspector) project to help you debug your actionHero application within the familar Chrome Browser's developer tools.
 
-- While not yet in NPM, there is a branch of node-inspector which fixes some issues in node v0.10.x.  You can include it with git in your `package.json`
 
 ```javascript
 "dependencies": {
   "actionHero": "6.1.0",
-  "node-inspector": "git://github.com/dannycoates/node-inspector.git#update-ui"
+  "node-inspector": "x"
 },
 ```
 
