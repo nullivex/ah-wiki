@@ -17,7 +17,7 @@ You can use the awesome [node-inspector](https://github.com/dannycoates/node-ins
 
 ```javascript
 "dependencies": {
-  "actionHero": "6.1.0",
+  "actionHero": "x",
   "node-inspector": "x"
 },
 ```
