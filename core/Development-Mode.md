@@ -38,6 +38,3 @@ That's it! Now you can visit `http://0.0.0.0:1234/debug?port=5858` and start deb
 
 `api.bootTime`
 - 1372739939789
-
-`api.actions.actions['status'][1.0].description`
-- "I will return some basic information about the API"
