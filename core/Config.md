@@ -13,18 +13,8 @@ You can overwrite these settings when you start your actionHero worker progamati
 	// if there is no config.js file in the application's root, then actionHero will load in a collection of default params.  You can overwrite them with params.configChanges
 	var params = {};
 	params.configChanges = {
-		general: {},
-		log: {
-			logFile: "api_peer_2.log",
-		},
-		httpServer: {
-			port: 8081,
-		},
-		httpsServer: {
-			port: 4444,
-		},
-		tcpServer: {
-			port: 5001
+		general: {
+			developmentMode: true
 		}
 	}
 	
