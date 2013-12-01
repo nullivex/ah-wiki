@@ -1,4 +1,20 @@
-## Development Mode
+To enable development mode simply set `developmentMode: true` in your `config.js`.
+
+```js
+configData.general = {
+  developmentMode: true
+}
+```
+
+To do this with an environment variable try something like in your `config.js` which follows the same NODE_ENV that express and friends use.
+
+```js
+//disable development mode in production
+if("production" === process.env.NODE_ENV)
+  configData.general.developmentMode = false
+```
+
+## Effects of Development Mode
 
 Development mode, when enabled, will poll for changes in your actions, tasks and initializers, and reload them on the fly.
 
