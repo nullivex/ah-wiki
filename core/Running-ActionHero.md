@@ -71,7 +71,7 @@ More Help & the actionHero wiki can be found @ http://actionherojs.com
 
 * If you installed actionHero globally (`npm install actionHero -g`) you should have the `actionHero` binary available to you within your shell at all times.
 * Otherwise, you can reference the binary from either `./node_modules/.bin/actionHero` or `./node_modules/actionHero/bin/actionHero`.
-* If you installed actionHero locally, you can add a reference to your path (OSX and Linux): `export PATH=$PATH:node_modules/.bin` to be able to use simpler commands, IE `actionHero start`
+* If you installed actionHero locally, you can add a reference to your path (OSX and Linux): `export PATH=$PATH:node_modules/.bin` to be able to use simpler commands, IE `actionHero start`. On windows this can be done by running `set PATH=%PATH%;%cd%\node_modules\.bin` at command prompt (not powershell).
 
 ## Programatic Use of actionHero
 
