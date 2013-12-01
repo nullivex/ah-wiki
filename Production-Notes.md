@@ -3,7 +3,7 @@ A collection of thoughts on deploying actionHero apps
 
 ## Paths and Envrionments
 
-You can set a few environment variables to effect how actionHero runs:
+You can set a few environment variables to affect how actionHero runs:
 
 - `PROJECT_ROOT`: This is useful when deploying actionHero applications on a server where symlinks will change under a running process.  The cluster will look at your symlink `PROJECT_ROOT=/path/to/current_symlink` rather than the absolute path it was started from
 - `ACTIONHERO_ROOT`: This can used to set the absolute path to the actionHero binaries
@@ -12,11 +12,11 @@ You can set a few environment variables to effect how actionHero runs:
 
 ## Dameon
 
-When deploying actionHero, you will probably have more than 1 process.  You can user the cluster manager to keep an eye on the workers and manage them
+When deploying actionHero, you will probably have more than 1 process.  You can use the cluster manager to keep an eye on the workers and manage them
 
 - Start the cluster with 2 workers: `./node_modules/.bin/actionHero startCluster --workers=2`
 
-When you deploy new code, you can gracefully restart your workers by sending the `USR2` signal to the cluster -manager to signal a reload to all workers.  You don't need to start and stop the cluster-master.  This allows for 0-downtime deployments.  
+When deploying new code, you can gracefully restart your workers by sending the `USR2` signal to the cluster manager to signal a reload to all workers.  You don't need to start and stop the cluster-master.  This allows for 0-downtime deployments.  
 
 You may want to set some of the ENV variables above to help with your deployment.
 
@@ -30,12 +30,12 @@ Of course, not going in to swap memory is more important than utilizing all of y
 
 ## Global Packages
 
-It's probably best to avoid installing any global packages.  This way, you won't have to worry about conflicts, and your project can be kept up to date more simply.  When you use npm to install a local package the package's binaries are always copied into `./node_modules/.bin`. 
+It's probably best to avoid installing any global packages.  This way, you won't have to worry about conflicts, and your project can be kept up to date more easily.  When using npm to install a local package the package's binaries are always copied into `./node_modules/.bin`. 
 
 You can add local references to your $PATH like so to use these local binaries:
 
 `export PATH=$PATH:node_modules/.bin`
 
-## Misc
+## Security
 
 Be sure to change `api.configdata.general.serverToken` to something unique for your application
