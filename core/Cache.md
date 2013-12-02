@@ -16,7 +16,7 @@ The cache's redis server is defined by `api.configData.redis`.  Note that if `ap
 	* `error` will be null unless the object can't be saved (perhaps out of ram or a bad object type).
 	* overwriting an existing object will return `new = true`
 	
-`api.cache.save` is used to both create new entires or update existing cache entires.  If you don't define an expireTimeMS, `null` will be assumed, and using `null` will cause this cached item to not expire.  Expired cache objects will be periodically swept away (but not necessarily exactly when they expire)
+`api.cache.save` is used to both create new entires or update existing cache entires.  If you don't define an expireTimeMS, `null` will be assumed, and using `null` will cause this cached item to never expire.  Expired cache objects will be periodically swept away (but not necessarily exactly when they expire)
 
 ### `api.cache.load`
 
@@ -43,4 +43,4 @@ You can see an example of using the cache within an action in `[actions/cacheTes
 
 The timestamps regarding `api.cahce.load` are to help clients understand if they are working with data which has been modified by another peer (when running in a cluster).
 
-Keep in mind that many clients/servers can access a cache's value simultaneously, so build your actions carefully not to have conflicting state.
+Keep in mind that many clients/servers can access a cached value simultaneously, so build your actions carefully not to have conflicting state.
