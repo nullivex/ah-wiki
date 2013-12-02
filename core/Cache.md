@@ -2,7 +2,9 @@
 
 ## General Cache Notes
 
-actionHero ships with the functions needed for a distributed key-value cache.  If you are running a stand-alone version of actionHero, this cache will be in memory of the actionHero process, otherwise this data will be stored in redis.  You can cache strings, numbers, arrays and objects (anything that responds to `JSON.stringify`).
+actionHero ships with the functions needed for a distributed key-value cache.  You can cache strings, numbers, arrays and objects (anything that responds to `JSON.stringify`).  
+
+The cache's redis server is defined by `api.configData.redis`.  Note that if `api.configData.redis.fake = true`, you will be using an in-memory redis server rather than a real redis process.
 
 ## Methods
 
