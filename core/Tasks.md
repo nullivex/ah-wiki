@@ -1,6 +1,6 @@
 ## General
 
-Tasks are background jobs meant to be run seperatly from a client's request.  They can be started by an action or by the server itself.  With actionHero, there is no need to run a separate daemon to process these jobs.  actionHero uses the [node-resque](https://github.com/taskrabbit/node-resque) package to store and process takss in a way compatible with the [resque](https://github.com/resque/resque) ecosystem. There are [a number of example tasks provided](Example-tasks).
+Tasks are background jobs meant to be run separately from a client's request.  They can be started by an action or by the server itself.  With actionHero, there is no need to run a separate daemon to process these jobs.  actionHero uses the [node-resque](https://github.com/taskrabbit/node-resque) package to store and process tasks in a way compatible with the [resque](https://github.com/resque/resque) ecosystem. There are [a number of example tasks provided](Example-tasks).
 
 There are 3 types of tasks actionHero can process: `normal`, `delayed`, and `periodic`.
 - `normal` tasks are enqueued and processed one-by-one by the task workers
@@ -17,7 +17,7 @@ api.tasks.enqueue("sendWelcomeEmail", {to: 'evan@evantahler.com'}, 'default', fu
 });
 ```
 
-"sendWelcomeEmail" should be a task defined in the project, and `{to: 'evan@evantahler.com'}` are arguments to that task.  This task will be processed by workers on the 'default queue'.
+"sendWelcomeEmail" should be a task defined in the project, and `{to: 'evan@evantahler.com'}` are arguments to that task.  This task will be processed by workers assigned to the 'default queue'.
 
 You can also enqueue tasks to be run at some time in the future:
 
@@ -43,7 +43,7 @@ The final type of task, periodic tasks, are defined with a `task.frequency` of g
 
 To work these tasks, you need to run actionHero with at least one worker.  Workers are defined by the queues they are to work within `config.js`.  Workers run in-line with the rest of your server and process jobs.  
 
-If you are enquing delayed or periodic tasks, you also need to enable the scheduler.  This is a part of actionHero that will periodically check the delayed queues for jobs that are ready to work now, and pass them to the normal queues.
+If you are enqueuing delayed or periodic tasks, you also need to enable the scheduler.  This is a part of actionHero that will periodically check the delayed queues for jobs that are ready to work now, and pass them to the normal queues.
 
 If I wanted to run 2 workers and a scheduler to run the jobs enqueued in the default queues above, I would do the following:
 
