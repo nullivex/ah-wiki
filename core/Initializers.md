@@ -1,6 +1,6 @@
 # Initializers
 
-initializers are run before your server boots.  Here is where you include any new modules or add custom code which you want to be available to all the rest of your actionHero server. 
+Initializers are run before your server boots.  Here is where you include any new modules or add custom code which you want to be available to all the rest of your actionHero server.
 
 ## Format
 
@@ -22,7 +22,7 @@ You can generate a file of this type with `actionHero generateInitializer --name
 
 ## _start
 
-If you have something you need to do at server boot (rather than load time), you can define a `_start(api, next)` method in your object which will be called just before the server boots.
+If you have something you need to do at server boot (rather than at load time), you can define a `_start(api, next)` method in your object which will be called just before the server boots.
 
 For Example:
 
@@ -39,7 +39,7 @@ exports.initStuff = function(api, next){
 
 ## _teardown
 
-If you append an object to `api` (for example `api.stuff`), you can optionally add a `_teardown` method to it which will be called when the server is restart or shutdown.  actionHero uses this internally to turn off the servers and handle pidfiles, but there are many uses.  
+If you append an object to `api` (for example `api.stuff`), you can optionally add a `_teardown` method to it which will be called when the server is restarted or shutdown.  actionHero uses this internally to turn off the servers and handle pid files, but there are many uses.
 
 `api.{namespace}._teardown = function(api, next)`
 
