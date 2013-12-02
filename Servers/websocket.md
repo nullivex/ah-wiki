@@ -4,6 +4,16 @@
 
 actionHero uses [faye](http://faye.jcoglan.com/) for web sockets.  Faye provides an abstraction for web sockets which allow fallback to long-polling and other protocols which should be appropriate for the vast majority of browsers. Within actionHero, web sockets are bound to the web server (either http or https).  Also, if you are using a redis backend store (which is required to use actionHero in a cluster), faye will be configured to use this store automatically.  actionHero uses the [faye-node-redis](https://github.com/faye/faye-redis-node) backend to ensure that all the nodes in your cluster can serve content for any client (no need for 'sticky' load balancer sessions)
 
+### Why not Socket.IO :(
+
+Originally, **actionHero** did use Socket.IO however, Socket.IO was failing us when used in a cluster. See #128
+
+Faye is lighter and more graceful with failures.
+
+Faye still maintains fallbacks to other protocols like long polling.
+
+### Connection Details
+
 As this is a persistent connection, websocket connections have actionHero's verbs available to them.  These verbs are:
 
 * `quit` disconnect from the session
