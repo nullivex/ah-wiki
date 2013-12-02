@@ -1,7 +1,7 @@
 # Running actionHero
 
 ## The actionHero Binary
-The main way to run your actionHero server is to use the included `./node_modules/.bin/actionHero` binary.  Note that there is no `main.js` or specific start script your project needs.  actionHero handles this for you.  Your actionHero project simply needs to follow the proper directory convert ions and it will be runable.
+The main way to run your actionHero server is to use the included `./node_modules/.bin/actionHero` binary.  Note that there is no `main.js` or specific start script your project needs.  actionHero handles this for you.  Your actionHero project simply needs to follow the proper directory conventions and it will be runnable.
 
 At the time of this writing the actionHero binary's help contains:
 
@@ -55,7 +55,7 @@ Descriptions:
 
 * actionHero startCluster --exec=[command] --workers=[numWorkers] --pidfile=[path] --log=[path] --title=[clusterTitle] --workerTitlePrefix=[prefix] --config=[/path/to/config.js]  --daemon
   will launch a actionHero cluster (using node-s cluster module)
-  [exec] (optional) command for the custer-master to run to stat the workers
+  [exec] (optional) command for the cluster-master to run to stat the workers
   [workers] (optional) number of workers (defaults to # CPUs - 2)
   [pidfile] (optional) pidfile localtion (defaults to process.cwd() + /pids)
   [log] (optional) logfile (defaults to process.cwd() + /log/cluster.log)
@@ -115,9 +115,9 @@ You can programmatically control an actionHero server with `actionHero.start(par
 
 actionHero integrates with [jake](https://github.com/mde/jake/) (javascript make) to allow you to tun manual jake tasks within actionHero's environment.  Those of you coming from Ruby, jake is very similar to `rake`.
 
-To use jake, you should install jake globally `npm install -g jake` or you can use it locally by adding it to you `package.json`
+To use jake, you should install jake globally `npm install -g jake` or you can use it locally by adding it to your `package.json`
 
-actionHero will generate a few example jake tasks in `./jakelib/actionHero.jake` to help you save and restore the cache and manage tasks.  Most importantly, the `actionHero:envrionment` task is defined for you.  Require this in all of you tasks so you can have access to the `api` object within your tasks.  You will have access to all of your initializers, actions, and tasks within the api object.  `api` will represent an initialized sever, but not a started one.  Your initializer's "_start" methods will not be run, not will the servers be started.  For example:
+actionHero will generate a few example jake tasks in `./jakelib/actionHero.jake` to help you save and restore the cache and manage tasks.  Most importantly, the `actionHero:envrionment` task is defined for you.  Require this in all of you tasks so you can have access to the `api` object within your tasks.  You will have access to all of your initializers, actions, and tasks within the api object.  `api` will represent an initialized sever, but not a started one.  Your initializer's "_start" methods will not be run, nor will the servers be started.  For example:
 
 ```javascript
 desc("my actionHero jake task");
