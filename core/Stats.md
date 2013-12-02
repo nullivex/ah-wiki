@@ -1,10 +1,10 @@
 ## Stats
 
-actionHero ships with stats backend (in redis) to store and retrieve metrics about your application.  
+actionHero ships with stats backend (in redis) to store and retrieve metrics about the server, cluster, and your application.
 
 Many of the core actionHero features (cache, web/tcp/websocket servers, etc) are instrumented with stats, but you are encouraged to add more!
 
-In order to remain performant, actionHero will buffer stats changes locally, and only write them to redis at a frequency defined in `api.configData.stats.writeFrequency`.  
+In order to maintain high performance, actionHero will buffer stats changes locally, and only write them to redis at a frequency defined in `api.configData.stats.writeFrequency`.
 
 The Stats redis server is defined by `api.configData.redis`. Note that if `api.configData.redis.fake = true`, you will be using an in-memory redis server rather than a real redis process.
 
