@@ -10,6 +10,8 @@ To create private chat rooms (or peer-to-peer rooms), it is suggested that you c
 
 Clients can also subscribe to (but not participate in) chatRooms they are not "in" with `listenToRoom ` and `silenceRoom`
 
+Chat relies on redis connections for both Faye (`api.configData.faye`) and to a key store defined by `api.configData.redis`. Note that if `api.configData.redis.fake = true`, you will be using an in-memory redis server rather than a real redis process.  The faye redis store and the key store don't need to be the same instance of redis, but they do need to be the same for all actionHero servers you are running in parallel. 
+
 ## Methods
 
 ### `api.chatRoom.socketRoomBroadcast(connection, message)`
