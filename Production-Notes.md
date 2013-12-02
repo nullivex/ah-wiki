@@ -1,7 +1,7 @@
 # Production Notes
 A collection of thoughts on deploying actionHero apps
 
-## Paths and Envrionments
+## Paths and Environments
 
 You can set a few environment variables to affect how actionHero runs:
 
@@ -10,7 +10,7 @@ You can set a few environment variables to affect how actionHero runs:
 - `ACTIONHERO_CONFIG`: This can be user to set the absolute path to the actionHero config file you wish to use.  This is useful when you might have a `staging.config.json` and a `production.config.json`
 
 
-## Dameon
+## Daemon
 
 When deploying actionHero, you will probably have more than 1 process.  You can use the cluster manager to keep an eye on the workers and manage them
 
