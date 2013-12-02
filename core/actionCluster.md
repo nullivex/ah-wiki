@@ -1,10 +1,10 @@
 # Running actionHero in a Cluster
 
-actionHero can be run either as a stand-alone server or as part of a cluster.  The goal of these cluster helpers is to allow you to create a group of servers which will share state and all be able to handle requests and run tasks.  You can also add and remove nodes from the cluster without fear of data loss or task duplication.  You can also run many instances of actionHero on the same saerver using node.js' cluster methods (`actionHero startCluster`).
+actionHero can be run either as a stand-alone server or as part of a cluster.  The goal of these cluster helpers is to allow you to create a group of servers which will share state and all be able to handle requests and run tasks.  You can also add and remove nodes from the cluster without fear of data loss or task duplication.  You can also run many instances of actionHero on the same server using node.js' cluster methods (`actionHero startCluster`).
 
 ## Cache
 
-Using a [redis](http://redis.io/) backend, actionHero nodes share memory objects (using the api.cache methods) and have a common queue for tasks. This means that all peers will have access to all data stored in the cache.  The task system also becomes a common queue which all peers will work on draining.  There should be no changes needed to your use of the api to enable the benefits of cluster deployment and synchronization.  Keep in mind that many clients/server can access a cache's value simultaneously, so build your actions carefully not to have conflicting state.
+Using a [redis](http://redis.io/) backend, actionHero nodes share memory objects (using the api.cache methods) and have a common queue for tasks. This means that all peers will have access to all data stored in the cache.  The task system also becomes a common queue which all peers will work on draining.  There should be no changes needed to your use of the api to enable the benefits of cluster deployment and synchronization.  Keep in mind that many clients/server can access a cached value simultaneously, so build your actions carefully not to have conflicting state.
 
 ## Pub/Sub (Faye)
 
