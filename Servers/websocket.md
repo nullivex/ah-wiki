@@ -6,7 +6,7 @@ actionHero uses [faye](http://faye.jcoglan.com/) for web sockets.  Faye provides
 
 ### Why not Socket.IO :(
 
-Originally, **actionHero** did use Socket.IO however, Socket.IO was failing us when used in a cluster. See #128
+Originally, **actionHero** did use Socket.IO however, Socket.IO was failing us when used in a cluster. See [#128](https://github.com/evantahler/actionHero/pull/128)
 
 Faye is lighter and more graceful with failures.
 
