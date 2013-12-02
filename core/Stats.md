@@ -6,6 +6,8 @@ Many of the core actionHero features (cache, web/tcp/websocket servers, etc) are
 
 In order to remain performant, actionHero will buffer stats changes locally, and only write them to redis at a frequency defined in `api.configData.stats.writeFrequency`.  
 
+The Stats redis server is defined by `api.configData.redis`. Note that if `api.configData.redis.fake = true`, you will be using an in-memory redis server rather than a real redis process.
+
 ### api.stats.increment(key, count)
 - key is a string of the form ("thing:stuff")
 - count is a signed integer
